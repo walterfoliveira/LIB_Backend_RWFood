@@ -7,8 +7,8 @@ namespace rwfood.domain.Interfaces.Services
     {
         int Add(T Obj);
         int Update(T Obj);
-        bool Remove(int Id);
-        IEnumerable<T> GetAll(int? _offset, ushort? _limit);
-        T GetById(int Id);
+        bool Remove(int _idCompany, int Id);
+        IEnumerable<T> GetAll(int _idCompany, int? _offset, ushort? _limit);
+        T GetById(int _idCompany, int Id);
     }
 }

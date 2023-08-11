@@ -8,7 +8,6 @@ namespace rwfood.domain.Entities
 {
     public class Product: BaseEntity
     {
-        public int IdCompany { get; set; }
         public int IdCategory { get; set; }
         public int Status { get; set; }
         public string Code1 { get; set; }

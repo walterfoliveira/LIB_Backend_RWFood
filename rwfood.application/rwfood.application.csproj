@@ -7,10 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Swagger.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Swagger.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\rwfood.data\rwfood.data.csproj" />
     <ProjectReference Include="..\rwfood.domain\rwfood.domain.csproj" />
     <ProjectReference Include="..\rwfood.service\rwfood.service.csproj" />
   </ItemGroup>

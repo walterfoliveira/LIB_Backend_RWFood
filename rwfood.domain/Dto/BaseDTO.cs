@@ -9,5 +9,6 @@ namespace rwfood.domain.Dto
     public class BaseDTO
     {
         public virtual int Id { get; set; } = 0;
+        public virtual int IdCompany { get; set; } = 0;
     }
 }

@@ -29,9 +29,10 @@ namespace rwfood.data.Repository
             };
         }
 
-        public virtual IEnumerable<D> GetAll(int? _offset, ushort? _limit)
+        public virtual IEnumerable<D> GetAll(int _idCompany, int? _offset, ushort? _limit)
         {
             var query = (from r in this.context.Set<E>()
+                         where r.IdCompany == _idCompany
                          orderby r.Id
                          select r);
             //if (_offset == null)
@@ -45,11 +46,11 @@ namespace rwfood.data.Repository
             return JsonConvert.DeserializeObject<IEnumerable<D>>(JsonConvert.SerializeObject(query.AsEnumerable()));
         }
 
-        public virtual D GetById(int id)
+        public virtual D GetById(int idCompany, int id)
         {
             var entity = (from e in this.context.Set<E>()
                               //where id.Equals(e.Id)
-                          where e.Id == (int)id
+                          where e.IdCompany == (int)idCompany && e.Id == (int)id
                           select e).FirstOrDefault();
 
             return JsonConvert.DeserializeObject<D>(JsonConvert.SerializeObject(entity));
@@ -77,15 +78,22 @@ namespace rwfood.data.Repository
             return Obj.Id;
         }
 
-        public bool Remove(int id)
+        public bool Remove(int idCompany, int id)
         {
             var entity = this.context.Find<E>(id);
-            var deleteEntity = this.context.Set<E>().Remove(entity);
-            var result = deleteEntity.State == EntityState.Deleted;
+            if (entity != null && idCompany == entity.IdCompany) 
+            {
+                var deleteEntity = this.context.Set<E>().Remove(entity);
+                var result = deleteEntity.State == EntityState.Deleted;
 
-            this.context.SaveChanges();
+                this.context.SaveChanges();
 
-            return result;
+                return result;
+            }
+
+            return false;
+
         }
+ 
     }
 }

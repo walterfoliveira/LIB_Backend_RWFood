@@ -37,8 +37,8 @@ namespace rwfood.data.Context
                 //optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddDebug()));
                 optionsBuilder.EnableSensitiveDataLogging().EnableDetailedErrors();
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=localhost;port=3307;user=walter;password=Done@2020;Database=rwfood");
-                //optionsBuilder.UseMySQL("server=rwconsultoria.ddns.net;port=3307;user=walter;password=Done@2020;Database=rwfood");
+                //optionsBuilder.UseMySQL("server=localhost;port=3307;user=walter;password=Done@2020;Database=rwfood");
+                optionsBuilder.UseMySQL("server=rwconsultoria.ddns.net;port=3307;user=walter;password=Done@2020;Database=rwfood");
             }
         }
 
@@ -145,7 +145,7 @@ namespace rwfood.data.Context
 
                 entity.Property(e => e.Cell)
                     .HasMaxLength(20)
-                    .HasColumnName("name");
+                    .HasColumnName("cell");
 
             });
 

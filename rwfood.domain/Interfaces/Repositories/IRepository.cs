@@ -7,8 +7,8 @@ namespace rwfood.domain.Interfaces.Repositories
     {
         int Add(D Obj);
         int Update(D Obj);
-        bool Remove(int id);
-        IEnumerable<D> GetAll(int? _offset, ushort? _limit);
-        D GetById(int id);
+        bool Remove(int _idCompany, int id);
+        IEnumerable<D> GetAll(int _idCompany, int? _offset, ushort? _limit);
+        D GetById(int _idCompany, int id);
     }
 }
