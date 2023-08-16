@@ -65,6 +65,18 @@ namespace rwfood.data.Context
                     .HasMaxLength(100)
                     .HasColumnName("name");
 
+                entity.Property(e => e.Telefone)
+                    .HasMaxLength(100)
+                    .HasColumnName("telefone");
+
+                entity.Property(e => e.Site)
+                    .HasMaxLength(100)
+                    .HasColumnName("site");
+
+                entity.Property(e => e.Funcionamento)
+                    .HasMaxLength(100)
+                    .HasColumnName("funcionamento");
+
             });
 
             modelBuilder.Entity<Category>(entity =>

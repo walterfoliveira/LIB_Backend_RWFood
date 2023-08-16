@@ -4,6 +4,9 @@
     {        
         public int Status { get; set; }
         public string Name { get; set; }
+        public string Funcionamento { get; set; }
+        public string Telefone { get; set; }
+        public string Site { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

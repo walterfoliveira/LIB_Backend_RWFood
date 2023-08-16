@@ -15,9 +15,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rwfood.application", "rwfoo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rwfood.service", "rwfood.service\rwfood.service.csproj", "{5F20C56E-B309-4D8D-A6CF-05DEBADDAB50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rwfood.domain", "rwfood.domain\rwfood.domain.csproj", "{87477916-0F33-4A16-B23F-2D68DE0F6B0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rwfood.domain", "rwfood.domain\rwfood.domain.csproj", "{87477916-0F33-4A16-B23F-2D68DE0F6B0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rwfood.data", "rwfood.data\rwfood.data.csproj", "{844695AD-73A2-484D-8554-33E2E3BB588B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rwfood.data", "rwfood.data\rwfood.data.csproj", "{844695AD-73A2-484D-8554-33E2E3BB588B}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "rwfood", "rwfood\", "{1C53411D-85D2-41A3-A957-FCE98DE5E1D6}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_63988"
+		Debug.AspNetCompiler.PhysicalPath = "rwfood\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63988\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_63988"
+		Release.AspNetCompiler.PhysicalPath = "rwfood\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63988\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "63988"
+		SlnRelativePath = "rwfood\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +62,10 @@ Global
 		{844695AD-73A2-484D-8554-33E2E3BB588B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{844695AD-73A2-484D-8554-33E2E3BB588B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{844695AD-73A2-484D-8554-33E2E3BB588B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C53411D-85D2-41A3-A957-FCE98DE5E1D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C53411D-85D2-41A3-A957-FCE98DE5E1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C53411D-85D2-41A3-A957-FCE98DE5E1D6}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C53411D-85D2-41A3-A957-FCE98DE5E1D6}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

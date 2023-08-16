@@ -27,7 +27,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<D>>> Get([Required] int _idCompany, [FromQuery] int? offset, [FromQuery] ushort? limit)
+        public virtual async Task<ActionResult<IEnumerable<D>>> Get([Required] int idCompany, [FromQuery] int? offset, [FromQuery] ushort? limit)
         {
             if (limit == null || limit == 0)
                 limit = this.recordsPerRequest;
@@ -38,29 +38,29 @@ namespace rwfood.application.Controllers
             return await Task.Run(() =>
             {
                 //var registros = this.genericService.GetAll(_idCompany, null, null).Count();
-                var response = this.genericService.GetAll(_idCompany, null, null);
+                var response = this.genericService.GetAll(idCompany, null, null);
                 //var response = this.genericService.GetAll(offset, limit);
                 return new ActionResult<IEnumerable<D>>(response);
             });
         }
 
         [HttpGet("{id}")]
-        public virtual D GetById([Required] int _idCompany, int id)
+        public virtual D GetById([Required] int idCompany, int id)
         {
-            return this.genericService.GetById(_idCompany, id);
+            return this.genericService.GetById(idCompany, id);
         }
 
         [HttpPut]
-        public virtual async Task<ActionResult<int>> Put([FromBody] D _dtoObject)
+        public virtual async Task<ActionResult<int>> Put([FromBody] D dtoObject)
         {
-            if (_dtoObject == null)
+            if (dtoObject == null)
                 return NotFound();
 
             return await Task.Run(() =>
             {
                 try
                 {
-                    var id = this.genericService.Update(_dtoObject);
+                    var id = this.genericService.Update(dtoObject);
                     return new ActionResult<int>(id);
                 }
                 catch (Exception ex)
@@ -72,16 +72,16 @@ namespace rwfood.application.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult<int>> Post([FromBody] D _dtoObject)
+        public virtual async Task<ActionResult<int>> Post([FromBody] D dtoObject)
         {
-            if (_dtoObject == null)
+            if (dtoObject == null)
                 return NotFound();
 
             return await Task.Run(() =>
             {
                 try
                 {
-                    var id = this.genericService.Add(_dtoObject);
+                    var id = this.genericService.Add(dtoObject);
                     return new ActionResult<int>(id);
                 }
                 catch (Exception ex)
@@ -93,7 +93,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task<ActionResult<bool>> Delete([Required] int _idCompany, int id)
+        public virtual async Task<ActionResult<bool>> Delete([Required] int idCompany, int id)
         {
             if (id == 0)
                 return NotFound();
@@ -102,7 +102,7 @@ namespace rwfood.application.Controllers
             {
                 try
                 {
-                    return new ActionResult<bool>(this.genericService.Remove(_idCompany, id));
+                    return new ActionResult<bool>(this.genericService.Remove(idCompany, id));
                 }
                 catch (Exception ex)
                 {
