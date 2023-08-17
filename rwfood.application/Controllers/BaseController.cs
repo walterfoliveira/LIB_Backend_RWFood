@@ -26,14 +26,14 @@ namespace rwfood.application.Controllers
             this.genericService = _genericService;
         }
 
-        [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<D>>> Get([Required] int idCompany, [FromQuery] int? offset, [FromQuery] ushort? limit)
+        [HttpGet("{idCompany}")]
+        public virtual async Task<ActionResult<IEnumerable<D>>> Get(int idCompany)
         {
-            if (limit == null || limit == 0)
-                limit = this.recordsPerRequest;
+            //if (limit == null || limit == 0)
+            //    limit = this.recordsPerRequest;
 
-            if (offset == null)
-                offset = 0;
+            //if (offset == null)
+            //    offset = 0;
 
             return await Task.Run(() =>
             {
@@ -44,8 +44,8 @@ namespace rwfood.application.Controllers
             });
         }
 
-        [HttpGet("{id}")]
-        public virtual D GetById([Required] int idCompany, int id)
+        [HttpGet("{idCompany}/id/{id}")]
+        public virtual D GetById(int idCompany, int id)
         {
             return this.genericService.GetById(idCompany, id);
         }
@@ -92,8 +92,8 @@ namespace rwfood.application.Controllers
             });
         }
 
-        [HttpDelete("{id}")]
-        public virtual async Task<ActionResult<bool>> Delete([Required] int idCompany, int id)
+        [HttpDelete("{idCompany}/id/{id}")]
+        public virtual async Task<ActionResult<bool>> Delete(int idCompany, int id)
         {
             if (id == 0)
                 return NotFound();

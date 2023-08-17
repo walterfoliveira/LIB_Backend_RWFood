@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { GetAll, GetById, DeleteById } from '../api/company'
 import Card from '../components/Card'
 import Loading from '../components/Loading'
-import CustomButton from '../components/CustomButton'
+//import apiService, { ApiService } from '../services/api'
+
+import companyService from '../services/company'
 
 export default function Company() {
     const [empresaList, setEmpresaList] = useState([])
@@ -10,26 +11,28 @@ export default function Company() {
     const [loading, setLoading] = useState(true)
 
     const handleGetCompanyById = async () => {
-        var response = await GetById(1)
-        if (response.status === 400) {
-            console.log('Erro:', response.statusText)
-            return
-        }
-        setEmpresa(response.data)
-        console.log('dados', response.data)
-        setLoading(false)
+        // var response = await GetById(1)
+        // if (response.status === 400) {
+        //     console.log('Erro:', response.statusText)
+        //     return
+        // }
+        // setEmpresa(response.data)
+        // console.log('dados', response.data)
+        // setLoading(false)
     }
 
     const handleGetCompanyAll = async () => {
         setLoading(true)
 
-        var responseAll = await GetAll(1)
-        if (responseAll.status === 400) {
-            console.log('Erro:', responseAll.statusText)
+        var response = await companyService.getAllCompany()
+        // var response = await api.get(`/Company?idCompany=${1}`)
+
+        if (response.status === 400) {
+            console.log('Erro:', response.statusText)
             return
         }
-        setEmpresaList(responseAll.data)
-        console.log('dados', responseAll.data)
+        setEmpresaList(response)
+        console.log('dados', response)
         setLoading(false)
     }
 
@@ -41,7 +44,7 @@ export default function Company() {
         <div>
             <div className="flex flex-col gap-2 w-full">
                 <div className="flex flex-row">
-                    <div class="flex flex-row text-xl font-bold text-gray-700 font-semibold ml-10">
+                    <div className="flex flex-row text-2xl font-bold text-gray-700 font-semibold ml-10">
                         Lista de Empresas
                     </div>
                     {/* <div>

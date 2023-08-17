@@ -29,7 +29,7 @@ const Card = ({ item }: Props) => {
     const formatDate2 = localLocale.format('DD/MMM/YYYY')
 
     return (
-        <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl shadow-md hover:scale-105 transition transform duration-500 cursor-pointer">
+        <div className="max-w-md mx-auto space-x-8 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl shadow-md hover:scale-105 transition transform duration-500 cursor-pointer">
             <div className="rounded-full z-30 p-1 inline-block absolute mx-8 mt-0">
                 <img
                     alt="user 1"
