@@ -1,10 +1,23 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
-import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt } from 'react-icons/hi'
 import { FaRegAddressCard } from 'react-icons/fa'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { DASHBOARD_SIDEBAR_LINKS } from '../../lib/constants'
+
+import {
+    HiOutlineBell,
+    HiOutlineSearch,
+    HiOutlineChatAlt,
+    HiOutlineViewGrid,
+    HiOutlineCube,
+    HiOutlineShoppingCart,
+    HiOutlineUsers,
+    HiOutlineDocumentText,
+    HiOutlineAnnotation,
+    HiOutlineQuestionMarkCircle,
+    HiOutlineCog
+} from 'react-icons/hi'
 
 import classNames from 'classnames'
 import Inputsearch from './Inputsearch'
@@ -18,16 +31,14 @@ export default function Header() {
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const [rota, setRota] = useState('')
+    const [icon, setIcon] = useState('')
 
     const pathName = pathname.replace('/', '') === '' ? 'dashboard' : pathname.replace('/', '')
 
     useEffect(() => {
-        console.log('KeyName', pathName)
-
         DASHBOARD_SIDEBAR_LINKS.map((item) => {
-            //console.log(item.key)
-
             if (item.key === pathName) {
+                setIcon(item.icon)
                 setRota(item.label)
             }
         })
@@ -39,10 +50,7 @@ export default function Header() {
                 {/* <Inputsearch /> */}
 
                 <div className="flex flex-row text-2xl font-bold text-gray-700 font-semibold">
-                    {<FaRegAddressCard size={28} className="mr-2" />}
-                    {/* {pathname === '/' && <>DashBoard</>}
-                    {pathname !== '/' && <>Lista de {pathname.replace('/', '')}</>} */}
-
+                    {<div className="mr-2">{icon}</div>}
                     {rota}
                 </div>
             </div>

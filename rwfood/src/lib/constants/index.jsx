@@ -16,43 +16,43 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         key: 'dashboard',
         label: 'Dashboard',
         path: '/',
-        icon: <HiOutlineViewGrid />
+        icon: <HiOutlineViewGrid size={28} />
     },
     {
         key: 'products',
-        label: 'Lista de Produtos',
+        label: 'Produtos',
         path: '/products',
-        icon: <HiOutlineCube />
+        icon: <HiOutlineCube size={28} />
     },
     {
         key: 'orders',
-        label: 'Lista de Pedidos',
+        label: 'Pedidos',
         path: '/orders',
-        icon: <HiOutlineShoppingCart />
+        icon: <HiOutlineShoppingCart size={28} />
     },
     {
         key: 'customers',
         label: 'Customers',
         path: '/customers',
-        icon: <HiOutlineUsers />
+        icon: <HiOutlineUsers size={28} />
     },
     {
         key: 'transactions',
         label: 'Transactions',
         path: '/transactions',
-        icon: <HiOutlineDocumentText />
+        icon: <HiOutlineDocumentText size={28} />
     },
     {
         key: 'messages',
-        label: 'Lista de Menssagens',
+        label: 'Menssagens',
         path: '/messages',
-        icon: <HiOutlineAnnotation />
+        icon: <HiOutlineAnnotation size={28} />
     },
     {
         key: 'company',
-        label: 'Lista de Empresas',
+        label: 'Empresas',
         path: '/company',
-        icon: <HiOutlineUsers />
+        icon: <HiOutlineUsers size={28} />
     }
 ]
 
@@ -61,12 +61,12 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
         key: 'settings',
         label: 'Settings',
         path: '/settings',
-        icon: <HiOutlineCog />
+        icon: <HiOutlineCog size={28} />
     },
     {
         key: 'support',
         label: 'Help & Support',
         path: '/support',
-        icon: <HiOutlineQuestionMarkCircle />
+        icon: <HiOutlineQuestionMarkCircle size={28} />
     }
 ]

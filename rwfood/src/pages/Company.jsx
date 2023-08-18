@@ -11,6 +11,7 @@ import toast from 'react-hot-toast'
 
 export default function Company() {
     const [empresaList, setEmpresaList] = useState([])
+    const [empresaListFilter, setEmpresaListFilter] = useState([])
     const [empresa, setEmpresa] = useState([])
     const [loading, setLoading] = useState(true)
     const [seekList, setSeekList] = useState('')
@@ -38,6 +39,7 @@ export default function Company() {
     }
 
     const handleGetCompanyAll = async () => {
+        setSeekList('')
         setLoading(true)
 
         var response = await companyService.getAllCompany(1)
@@ -47,12 +49,29 @@ export default function Company() {
             return
         }
         setEmpresaList(response)
+        setEmpresaListFilter(response)
         setLoading(false)
     }
 
     useEffect(() => {
         handleGetCompanyAll()
+        filterCompanyAll()
     }, [])
+
+    const filterCompanyAll = () => {
+        if (seekList !== '') {
+            const res = empresaList.filter((item) => item.name.toLowerCase().includes(seekList.toLowerCase()))
+            setEmpresaListFilter(res)
+            return
+        }
+
+        setEmpresaListFilter(empresaList)
+    }
+
+    useEffect(() => {
+        //console.log('Buscando por: ', seekList)
+        filterCompanyAll()
+    }, [seekList])
 
     return (
         <div>
@@ -111,7 +130,7 @@ export default function Company() {
 
                 {!loading && (
                     <div className="grid grid-cols-4 gap-4">
-                        {empresaList.map((item) => (
+                        {empresaListFilter.map((item) => (
                             <Card onRequestOpen={openModal} item={item} />
                         ))}
                     </div>
