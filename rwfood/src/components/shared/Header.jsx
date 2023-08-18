@@ -1,16 +1,51 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { HiOutlineBell, HiOutlineSearch, HiOutlineChatAlt } from 'react-icons/hi'
-import { useNavigate } from 'react-router-dom'
+import { FaRegAddressCard } from 'react-icons/fa'
+import { useNavigate, useLocation } from 'react-router-dom'
+
+import { DASHBOARD_SIDEBAR_LINKS } from '../../lib/constants'
+
 import classNames from 'classnames'
 import Inputsearch from './Inputsearch'
 
+// key: 'dashboard',
+// label: 'Dashboard',
+// path: '/',
+// icon: <HiOutlineViewGrid />
+
 export default function Header() {
     const navigate = useNavigate()
+    const { pathname } = useLocation()
+    const [rota, setRota] = useState('')
+
+    const pathName = pathname.replace('/', '') === '' ? 'dashboard' : pathname.replace('/', '')
+
+    useEffect(() => {
+        console.log('KeyName', pathName)
+
+        DASHBOARD_SIDEBAR_LINKS.map((item) => {
+            //console.log(item.key)
+
+            if (item.key === pathName) {
+                setRota(item.label)
+            }
+        })
+    }, [pathName])
 
     return (
         <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between">
-            <div className="relative">{/* <Inputsearch /> */}</div>
+            <div className="relative ml-5">
+                {/* <Inputsearch /> */}
+
+                <div className="flex flex-row text-2xl font-bold text-gray-700 font-semibold">
+                    {<FaRegAddressCard size={28} className="mr-2" />}
+                    {/* {pathname === '/' && <>DashBoard</>}
+                    {pathname !== '/' && <>Lista de {pathname.replace('/', '')}</>} */}
+
+                    {rota}
+                </div>
+            </div>
 
             <div className="flex items-center gap-2 mr-2">
                 <Popover className="relative">

@@ -12,12 +12,16 @@ import {
 import { Empresa } from '../types/Empresa'
 
 //https://react-icons.github.io/react-icons/icons?name=hi
+//https://tailwindcss.com/docs/customizing-colors
+//https://tailwindcss.com/docs/background-color
 
 type Props = {
-    item: Empresa
+    item: Empresa;
+    onRequestOpen: () => void;
+    //onRequestClose: () => void;
 }
 
-const Card = ({ item }: Props) => {
+const Card = ({ item, onRequestOpen }: Props) => {
     //moment.locale('pt-br')
     //const formatDate = Moment().locale('pt-br').format('MMM Do YY')
     const formatDate = Moment().locale('pt-br').format('LL')
@@ -29,8 +33,8 @@ const Card = ({ item }: Props) => {
     const formatDate2 = localLocale.format('DD/MMM/YYYY')
 
     return (
-        <div className="max-w-md mx-auto space-x-8 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl shadow-md hover:scale-105 transition transform duration-500 cursor-pointer">
-            <div className="rounded-full z-30 p-1 inline-block absolute mx-8 mt-0">
+        <div onClick={onRequestOpen} className="max-w-md mx-auto space-x-0 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
+            <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">
                 <img
                     alt="user 1"
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
@@ -42,7 +46,7 @@ const Card = ({ item }: Props) => {
                 <span className="text-xs text-gray-500 font-semibold tracking-widest uppercase">{formatDate2}</span>
             </div>
 
-            <div className="border-t border-gray-200 z-20 w-full"></div>
+            <div className="border-t border-gray-200 z-20 w-full mt-2"></div>
 
             <div className="md:flex">
                 {/* <div className="md:shrink-0">
@@ -52,7 +56,7 @@ const Card = ({ item }: Props) => {
                         alt="Modern building architecture"
                     />
                 </div> */}
-                <div className="p-8">
+                <div className="p-5">
                     {/* <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{item.name}</div> */}
                     <h1 className="flex flex-row text-xl font-bold text-gray-700 font-semibold mb-2">{item.name}</h1>
 
@@ -70,7 +74,7 @@ const Card = ({ item }: Props) => {
                         <div className="ml-1">{item.funcionamento}</div>
                     </div>
 
-                    <div className="flex flex-row text-slate-500 mb-1">
+                    <div className="flex flex-row text-slate-500 mb-5">
                         <div>
                             <HiMail fontSize={23} />
                         </div>

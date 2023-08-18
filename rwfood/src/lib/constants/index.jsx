@@ -20,13 +20,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     },
     {
         key: 'products',
-        label: 'Products',
+        label: 'Lista de Produtos',
         path: '/products',
         icon: <HiOutlineCube />
     },
     {
         key: 'orders',
-        label: 'Orders',
+        label: 'Lista de Pedidos',
         path: '/orders',
         icon: <HiOutlineShoppingCart />
     },
@@ -44,13 +44,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     },
     {
         key: 'messages',
-        label: 'Messages',
+        label: 'Lista de Menssagens',
         path: '/messages',
         icon: <HiOutlineAnnotation />
     },
     {
         key: 'company',
-        label: 'Company',
+        label: 'Lista de Empresas',
         path: '/company',
         icon: <HiOutlineUsers />
     }

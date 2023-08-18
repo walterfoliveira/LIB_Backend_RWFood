@@ -3,6 +3,10 @@ import axios, { AxiosError, AxiosResponse, Method } from 'axios'
 import { formatErrorMessage } from '../facades/errorFormater'
 //import { getToken } from '../facades/localStorage';
 
+//BaseURL: http://bkend.rwconsultoria.com.br:20021/api/v1/api/
+//Resource: //ListAll: Users/1 -->> 1ºparametro : Company
+//Details: Users/1/id/3 -->> 1ºparametro : Company 2º ID: resorce
+
 declare module 'axios' {
     export interface AxiosResponse<T = any> extends Promise<T> {}
 }

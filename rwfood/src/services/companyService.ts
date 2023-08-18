@@ -11,12 +11,12 @@ export class CompanyService {
         this.apiService = apiService
     }
 
-    public getCompany() {
-        return this.apiService.get<ICompany>('Company/1/id/3')
+    public getCompany(idCompany: number, id: number) {
+        return this.apiService.get<ICompany>(`Company/${idCompany}/id/${id}`)
     }
 
-    public getAllCompany() {
-        return this.apiService.get<ICompany[]>('Company/1')
+    public getAllCompany(id: number) {
+        return this.apiService.get<ICompany[]>(`Company/${id}`)
     }
 
     // public create(model: IUserCreate) {
