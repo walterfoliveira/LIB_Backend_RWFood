@@ -60,7 +60,12 @@ export default function Company() {
 
     const filterCompanyAll = () => {
         if (seekList !== '') {
-            const res = empresaList.filter((item) => item.name.toLowerCase().includes(seekList.toLowerCase()))
+            const res = empresaList.filter(
+                (item) =>
+                    item.name.toLowerCase().includes(seekList.toLowerCase()) ||
+                    item.site.toLowerCase().includes(seekList.toLowerCase()) ||
+                    item.telefone.toLowerCase().includes(seekList.toLowerCase())
+            )
             setEmpresaListFilter(res)
             return
         }
@@ -86,7 +91,7 @@ export default function Company() {
                                 <CustomButton
                                     icon={<FaFilter size={18} />}
                                     title=""
-                                    onClick={() => alert('Search')}
+                                    onClick={() => filterCompanyAll()}
                                     classcss="p-1 text-slate-500 focus:outline-none focus:shadow-outline flex justify-center"
                                 />
                             </span>
