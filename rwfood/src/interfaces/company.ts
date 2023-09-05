@@ -1,8 +1,15 @@
 export interface ICompany {
-  id: number;
-  name: string;
-  telefone: string;
-  site: string;
-  funcionamento: string;
-  createdAt: Date;
+    id: number
+    idCompany: number
+    status: number
+    name: string
+    telefone: string
+    site: string
+    funcionamento: string
+    createdAt: string
+}
+
+export interface IItem {
+    id: number | string
+    name: string
 }

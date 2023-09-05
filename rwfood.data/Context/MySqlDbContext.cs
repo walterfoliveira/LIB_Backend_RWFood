@@ -23,7 +23,6 @@ namespace rwfood.data.Context
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Complement> Complement { get; set; }
-        public virtual DbSet<DeliveryMan> DeliveryMan { get; set; }
         public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Users> Users { get; set; }
@@ -131,36 +130,6 @@ namespace rwfood.data.Context
 
             });
 
-            modelBuilder.Entity<DeliveryMan>(entity =>
-            {
-                entity.ToTable("deliveryman", "rwfood");
-
-                entity.Property(e => e.Id)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("id");
-
-                entity.Property(e => e.IdCompany)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("idCompany");
-
-                entity.Property(e => e.Status)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("status");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdAt");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(100)
-                    .HasColumnName("name");
-
-                entity.Property(e => e.Cell)
-                    .HasMaxLength(20)
-                    .HasColumnName("cell");
-
-            });
-
             modelBuilder.Entity<Person>(entity =>
             {
                 entity.ToTable("person", "rwfood");
@@ -176,6 +145,10 @@ namespace rwfood.data.Context
                 entity.Property(e => e.Status)
                     .HasColumnType("int(11)")
                     .HasColumnName("status");
+
+                entity.Property(e => e.Type)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("type");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")

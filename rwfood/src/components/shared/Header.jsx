@@ -45,11 +45,11 @@ export default function Header() {
     }, [pathName])
 
     return (
-        <div className="bg-white h-16 px-4 flex items-center border-b border-gray-200 justify-between">
-            <div className="relative ml-5">
+        <div className="bg-gray-200 h-16 px-4 flex items-center justify-between border-1 border-slate-100">
+            <div className="relative ml-0">
                 {/* <Inputsearch /> */}
 
-                <div className="flex flex-row text-2xl font-bold text-gray-700 font-semibold">
+                <div className="flex flex-row text-2xl font-bold text-gray-700 font-bold">
                     {<div className="mr-2">{icon}</div>}
                     {rota}
                 </div>

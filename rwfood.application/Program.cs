@@ -46,7 +46,6 @@ builder.Services.AddDbContext<MySqlDbContext>(options =>
 builder.Services.AddScoped<IRepositoryCompany, RepositoryCompany>();
 builder.Services.AddScoped<IRepositoryCategory, RepositoryCategory>();
 builder.Services.AddScoped<IRepositoryComplement, RepositoryComplement>();
-builder.Services.AddScoped<IRepositoryDeliveryMan, RepositoryDeliveryMan>();
 builder.Services.AddScoped<IRepositoryPerson, RepositoryPerson>();
 builder.Services.AddScoped<IRepositoryProduct, RepositoryProduct>();
 builder.Services.AddScoped<IRepositoryUsers, RepositoryUsers>();
@@ -55,7 +54,6 @@ builder.Services.AddScoped<IRepositoryUsers, RepositoryUsers>();
 builder.Services.AddScoped<IServiceCompany, ServiceCompany>();
 builder.Services.AddScoped<IServiceCategory, ServiceCategory>();
 builder.Services.AddScoped<IServiceComplement, ServiceComplement>();
-builder.Services.AddScoped<IServiceDeliveryMan, ServiceDeliveryMan>();
 builder.Services.AddScoped<IServicePerson, ServicePerson>();
 builder.Services.AddScoped<IServiceProduct, ServiceProduct>();
 builder.Services.AddScoped<IServiceUsers, ServiceUsers>();
