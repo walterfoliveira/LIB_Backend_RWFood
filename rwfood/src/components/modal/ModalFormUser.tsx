@@ -1,30 +1,50 @@
 import React, { useState } from "react";
 import ReactModal from 'react-modal';
-import { IItem } from "../../interfaces/company";
+import { IUser } from "../../interfaces/user";
 import { FaPlusCircle, FaPencilAlt } from 'react-icons/fa'
 import Input from "../shared/Input";
+import Select from "../shared/Select";
 
 interface ModalCrudProps {
   isOpen: boolean;
-  dataSource: IItem;
+  dataSource: IUser;
   isItem: number;
   isCloseEsc: boolean;
   isCloseOnOverlay: boolean;
   //setItemData: React.Dispatch<React.SetStateAction<ICompany>>
   onRequestClose: () => void;
-  onConfirmed: (confimado: boolean, data: IItem) => void
+  onConfirmed: (confimado: boolean, data: IUser) => void
   title: string;
 }
 
 
-const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay, isItem }: ModalCrudProps) => {
+const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay, isItem }: ModalCrudProps) => {
 
+  const [levelSt, setLevelSt] = useState('');
   const [idSt, setIdSt] = useState(dataSource.id);
   const [nameSt, setNameSt] = useState(dataSource.name);
+  const [surnameSt, setSurnameSt] = useState(dataSource.surname);
+  const [cellSt, setCellSt] = useState(dataSource.cell);
+  const [documentSt, setDocumentSt] = useState(dataSource.document);
+  const [mailSt, setMailSt] = useState(dataSource.mail);
+  const [passSt, setPassSt] = useState(dataSource.pass);
+  const [createdAtSt, setCreatedAtSt] = useState(dataSource.createdAt.toString());
 
-  const [state, setState] = useState(() => ({
+
+
+  const [state, setState] = useState<IUser>(() => ({
     id: idSt,
+    idCompany: dataSource.idCompany,
+    status: dataSource.status,
+    level: dataSource.level,
     name: nameSt,
+    surname: surnameSt,
+    document: documentSt,
+    cell: cellSt,
+    mail: mailSt,
+    pass: passSt,
+    createdAt: createdAtSt,
+    updated: createdAtSt,
   }));
 
 
@@ -32,7 +52,7 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
     //event.preventDefault();
 
     //console.log("[onConfirmed] : " + true)
-    const newState: IItem = { ...state, name: nameSt }
+    const newState: IUser = { ...state, name: nameSt, surname: surnameSt, document: documentSt, cell: cellSt, mail: mailSt, pass: passSt }
     //console.log('newState: ' + JSON.stringify(newState));
     onConfirmed(true, newState)
   };
@@ -83,10 +103,7 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
             {nameSt === '' && <FaPlusCircle size={21} className="mr-2 text-2xl text-gray-600" />}
             {nameSt !== '' && <FaPencilAlt size={21} className="mr-2 text-2xl text-gray-600" />}
 
-            {isItem === 1 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Complemento' : 'Novo Complemento'}</h2>}
-            {isItem === 2 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Categoria' : 'Nova Categoria'}</h2>}
-            {isItem === 3 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Entregador' : 'Novo Entregador'}</h2>}
-            {isItem === 4 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Garçon' : 'Novo Garçon'}</h2>}
+            <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Usuário' : 'Novo Usuário'}</h2>
 
           </div>
           <div className="mb-4"> {/*Content */}
@@ -114,6 +131,63 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
+            <Input
+              type='text'
+              id='surname'
+              label='Sobre Nome'
+              place='Sobre Nome'
+              value={surnameSt}
+              setValue={setSurnameSt}
+              disabled={false}
+              className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            />
+
+            <Input
+              type='text'
+              id='document'
+              label='CPF'
+              place='CPF'
+              value={documentSt}
+              setValue={setDocumentSt}
+              disabled={false}
+              className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            />
+
+            <Input
+              type='tel'
+              id='cell'
+              label='Celular'
+              place='Celular'
+              value={cellSt}
+              setValue={setCellSt}
+              disabled={false}
+              className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            />
+
+            <Input
+              type='email'
+              id='mail'
+              label='E-mail'
+              place='E-mail'
+              value={mailSt}
+              setValue={setMailSt}
+              disabled={false}
+              className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            />
+
+            <Input
+              type='password'
+              id='pass'
+              label='Senha'
+              place='Senha'
+              value={passSt}
+              setValue={setPassSt}
+              disabled={false}
+              className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            />
+
+            <Select id="level" label="Nivel" options={["Atendente", "Gerente", "Administrador", "Power"]} value={levelSt} setValue={setLevelSt} />
+
           </div>
 
         </form>
@@ -133,4 +207,4 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
   );
 };
 
-export default ModalFormItem;
+export default ModalFormUser;

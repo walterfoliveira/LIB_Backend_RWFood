@@ -8,8 +8,8 @@ import toast from 'react-hot-toast'
 
 import { IUser } from '../interfaces/user'
 import userService from '../services/userService'
-import ModalForm from '../components/modal/ModalForm'
 import CardUser from '../components/card/CardUser'
+import ModalFormUser from '../components/modal/ModalFormUser'
 
 const Users = () => {
 
@@ -189,16 +189,16 @@ const Users = () => {
         </div>
       )}
 
-      {/* <ModalForm
-        title="Empresa"
+      <ModalFormUser
+        title="Usuário"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleInsert}
         dataSource={dataSource}
-        children={""}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-      ></ModalForm> */}
+        isItem={1}
+      ></ModalFormUser>
     </>
   )
 }

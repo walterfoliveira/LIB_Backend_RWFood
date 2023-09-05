@@ -30,12 +30,15 @@ export class UsersService {
         const today = new Date()
         today.setHours(today.getHours() - 3) // Remove 3 horas
         model.createdAt = today.toISOString()
+        model.updated = today.toISOString()
+
+        console.log('[IUser]: ' + JSON.stringify(model))
 
         return this.apiService.post<number>('Users', model)
     }
 
     public updateUser(model: IUser) {
-        //console.log('[IUser]: ' + JSON.stringify(model))
+        console.log('[IUser]: ' + JSON.stringify(model))
         return this.apiService.put<number>('Users', model)
     }
 

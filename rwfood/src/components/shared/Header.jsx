@@ -3,7 +3,7 @@ import { Menu, Popover, Transition } from '@headlessui/react'
 import { FaRegAddressCard } from 'react-icons/fa'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import { DASHBOARD_SIDEBAR_LINKS } from '../../lib/constants'
+import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../../lib/constants'
 
 import {
     HiOutlineBell,
@@ -37,6 +37,13 @@ export default function Header() {
 
     useEffect(() => {
         DASHBOARD_SIDEBAR_LINKS.map((item) => {
+            if (item.key === pathName) {
+                setIcon(item.icon)
+                setRota(item.label)
+            }
+        })
+
+        DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => {
             if (item.key === pathName) {
                 setIcon(item.icon)
                 setRota(item.label)
