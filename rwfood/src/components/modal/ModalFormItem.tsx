@@ -96,9 +96,11 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               id='id'
               label='Identificador'
               place='Identificador'
-              value={idSt.toString()}
+              value={idSt.toString().padStart(3, '0')}
               setValue={setIdSt.toString}
               disabled={true}
+              required={true}
+              focused={false}
               //inputRef={inputRef}
               className='disabled bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
@@ -111,6 +113,8 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               value={nameSt}
               setValue={setNameSt}
               disabled={false}
+              required={true}
+              focused={true}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 

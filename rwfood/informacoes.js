@@ -1,5 +1,8 @@
 /*
 INFORMAÇÕES IMPORTANTES
+
+FORM Validação: https://formik.org/docs/examples/typescript
+
 SVG: https://flowbite.com/icons/
 
 https://tailwind-elements.com/docs/standard/components/tooltip/

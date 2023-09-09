@@ -28,6 +28,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
   const [documentSt, setDocumentSt] = useState(dataSource.document);
   const [mailSt, setMailSt] = useState(dataSource.mail);
   const [passSt, setPassSt] = useState(dataSource.pass);
+  const [passConfirmSt, setPassConfirmSt] = useState('');
   const [createdAtSt, setCreatedAtSt] = useState(dataSource.createdAt.toString());
 
 
@@ -108,17 +109,29 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
           </div>
           <div className="mb-4"> {/*Content */}
 
-            <Input
-              type='text'
-              id='id'
-              label='Identificador'
-              place='Identificador'
-              value={idSt.toString()}
-              setValue={setIdSt.toString}
-              disabled={true}
-              //inputRef={inputRef}
-              className='disabled bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-            />
+            <div className="flex flex-row items-center text-slate-500 mb-1">
+              <div>
+                <Input
+                  type='text'
+                  id='id'
+                  label='Identificador'
+                  place='Identificador'
+                  value={idSt.toString()}
+                  setValue={setIdSt.toString}
+                  disabled={true}
+                  required={false}
+                  focused={false}
+                  //inputRef={inputRef}
+                  className='disabled bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 mr-5 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                />
+
+              </div>
+              <div>
+                <Select id="level" label="Nivel" options={["Atendente", "Gerente", "Administrador", "Power"]} value={levelSt} setValue={setLevelSt} />
+              </div>
+            </div>
+
+
 
             <Input
               type='text'
@@ -128,6 +141,8 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               value={nameSt}
               setValue={setNameSt}
               disabled={false}
+              required={true}
+              focused={true}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -139,6 +154,8 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               value={surnameSt}
               setValue={setSurnameSt}
               disabled={false}
+              required={true}
+              focused={false}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -150,6 +167,8 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               value={documentSt}
               setValue={setDocumentSt}
               disabled={false}
+              required={true}
+              focused={false}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -161,6 +180,8 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               value={cellSt}
               setValue={setCellSt}
               disabled={false}
+              required={true}
+              focused={false}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -172,21 +193,44 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               value={mailSt}
               setValue={setMailSt}
               disabled={false}
+              required={true}
+              focused={false}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
-            <Input
-              type='password'
-              id='pass'
-              label='Senha'
-              place='Senha'
-              value={passSt}
-              setValue={setPassSt}
-              disabled={false}
-              className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-            />
 
-            <Select id="level" label="Nivel" options={["Atendente", "Gerente", "Administrador", "Power"]} value={levelSt} setValue={setLevelSt} />
+
+            <div className="flex flex-row items-center text-slate-500 mb-1">
+              <div className="mr-10">
+                <Input
+                  type='password'
+                  id='pass'
+                  label='Senha'
+                  place='Senha'
+                  value={passSt}
+                  setValue={setPassSt}
+                  disabled={false}
+                  required={true}
+                  focused={false}
+                  className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                />
+              </div>
+              <div>
+                <Input
+                  type='password'
+                  id='passConfirmSt'
+                  label='Confirma Senha'
+                  place='Confirma Senha'
+                  value={passConfirmSt}
+                  setValue={setPassConfirmSt}
+                  disabled={false}
+                  required={true}
+                  focused={false}
+                  className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                />
+              </div>
+            </div>
+
 
           </div>
 

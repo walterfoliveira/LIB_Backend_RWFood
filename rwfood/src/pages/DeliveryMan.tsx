@@ -189,7 +189,7 @@ const DeliveryMan = ({ typePage }: Props) => {
         <div className="flex flex-col w-full justify-between mb-5">
           <div className="grid grid-cols-4 gap-4">
             {itemListFilter.map((item) => (
-              <CardPerson key={item.id} item={item} itemList={itemList} setItemList={setItemList} isItem={2} />
+              <CardPerson key={item.id} item={item} itemList={itemList} setItemList={setItemList} isItem={3} />
             ))}
           </div>
         </div>

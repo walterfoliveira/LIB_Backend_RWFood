@@ -85,12 +85,18 @@ const Form = ({ type, idItem, item }: Props) => {
             type='text'
             id='id'
             label='Identificador'
-            place='Identificador'
-            value={id}
+
+            value={id.toString().padStart(3, '0')}
             setValue={setId}
             disabled={true}
+            required={true}
+            focused={false}
             className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            place="Username"
+
           />
+
+
         </div>
         <div className="mb-4">
           <Input
@@ -101,6 +107,8 @@ const Form = ({ type, idItem, item }: Props) => {
             value={name}
             setValue={setName}
             disabled={false}
+            required={true}
+            focused={true}
             className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           />
         </div>

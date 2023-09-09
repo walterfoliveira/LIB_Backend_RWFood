@@ -104,6 +104,8 @@ const ModalForm = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, chi
               value={nameSt}
               setValue={setNameSt}
               disabled={false}
+              required={true}
+              focused={false}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -115,6 +117,8 @@ const ModalForm = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, chi
               value={siteSt}
               setValue={setSiteSt}
               disabled={false}
+              required={true}
+              focused={false}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -126,6 +130,8 @@ const ModalForm = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, chi
               value={telefoneSt}
               setValue={setTelefoneSt}
               disabled={false}
+              required={true}
+              focused={true}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -137,6 +143,8 @@ const ModalForm = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, chi
               value={funcionamentoSt}
               setValue={setFuncionamentoSt}
               disabled={false}
+              required={true}
+              focused={false}
               className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
