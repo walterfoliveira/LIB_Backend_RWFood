@@ -28,19 +28,22 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
   }));
 
 
-  const handleSave = () => {
-    //event.preventDefault();
+  const handleSave = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
 
     //console.log("[onConfirmed] : " + true)
     const newState: IItem = { ...state, name: nameSt }
-    //console.log('newState: ' + JSON.stringify(newState));
+    console.log('newState: ' + JSON.stringify(newState));
     onConfirmed(true, newState)
   };
 
   //console.log(state);
   function onCloseModal() {
-    //console.log(false);
-    onConfirmed(false, state)
+    // event.preventDefault();
+    console.log(false);
+    //onConfirmed(false, state)
+    onRequestClose()
   }
 
   return (
@@ -101,7 +104,6 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               disabled={true}
               required={true}
               focused={false}
-              //inputRef={inputRef}
               className='disabled bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
             />
 
@@ -120,17 +122,19 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
 
           </div>
 
+
+          <div className="flex justify-end items-center">{/*footer */}
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
+              Confirmar
+            </button>
+            <button onClick={onCloseModal} className="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-2">
+              Fechar
+            </button>
+
+          </div>
+
+
         </form>
-
-        <div className="flex justify-end items-center">{/*footer */}
-          <button onClick={handleSave} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
-            Confirmar
-          </button>
-          <button onClick={onCloseModal} className="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-2">
-            Fechar
-          </button>
-
-        </div>
 
       </div>
     </ReactModal>

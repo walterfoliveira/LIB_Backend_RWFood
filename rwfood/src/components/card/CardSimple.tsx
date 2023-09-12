@@ -104,7 +104,7 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
 
   const handleEdit = async (confimado: boolean, data: IItem) => {
     setRespModal(!respModal);
-
+    console.log('handleEdit[confimado]', confimado)
     if (confimado) {
       //console.log('data: ' + JSON.stringify(data));
 
