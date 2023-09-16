@@ -211,15 +211,15 @@ const Card = ({ item, empresaList, setEmpresaList }: Props) => {
                 <div className="grid grid-flow-row auto-rows-max">
                     <div className="flex items-baseline">
                         <span className="font-bold text-gray-500 text-xl font-semibold">Identificador: </span>
-                        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{item.id.toString().padStart(3, '0')}</span>
+                        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{dataSource.id.toString().padStart(3, '0')}</span>
                     </div>
                     <div className="flex items-baseline">
                         <span className="font-bold text-gray-500 text-xl font-semibold">Empresa: </span>
-                        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{item.name}</span>
+                        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{dataSource.name}</span>
                     </div>
                     <div className="flex items-baseline">
                         <span className="font-bold text-gray-500 text-xl font-semibold">Telefone: </span>
-                        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{item.telefone}</span>
+                        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{dataSource.telefone}</span>
                     </div>
 
                     <div><h2 className="text-xl font-semibold font-bold text-gray-700 mt-4 mb-2">Deseja mesmo excluir está Empresa?</h2></div>

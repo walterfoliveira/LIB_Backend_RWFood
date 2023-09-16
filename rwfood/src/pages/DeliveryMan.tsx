@@ -196,14 +196,13 @@ const DeliveryMan = ({ typePage }: Props) => {
       )}
 
       <ModalFormItem
-        title="Categoria"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleInsert}
         dataSource={dataSource}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-        isItem={2}
+        isItem={typePage === 1 ? 3 : 4} //1-Complemento 2-Categoria 3-Entregador 4-Garcon 
       ></ModalFormItem>
     </>
   )

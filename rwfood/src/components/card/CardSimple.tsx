@@ -124,7 +124,7 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
       //console.log('response: ' + response);
       if (response === dataSource.id) {
         //atualiza o State: dataSource
-        setDataSource(data as IComplement | ICategory);
+        setDataSource(editModel as IComplement | ICategory);
 
         //console.log('Operação realizada com sucesso!');
         toast.success('Operação realizada com sucesso!')
@@ -146,37 +146,8 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
   return (
     <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
       <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-2">
-
         {isItem === 1 && <HiClipboardList size={36} className="text-2x1 text-gray-400" />}
         {isItem === 2 && <HiDocumentText size={36} className="text-2x1 text-gray-400" />}
-
-        {/* https://flowbite.com/icons/ */}
-        {/* <img
-          alt="user 1"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-          className="relative inline-block h-12 w-12 rounded-full border-2 border-blue object-cover object-center hover:z-10 focus:z-10"
-        /> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M15.045.007 9.31 0a1.965 1.965 0 0 0-1.4.585L.58 7.979a2 2 0 0 0 0 2.805l6.573 6.631a1.956 1.956 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 18 8.479v-5.5A2.972 2.972 0 0 0 15.045.007Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1M1 9h14M2 5h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.905 1.316 15.633 6M18 10h-5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h5m0-5a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1m0-5V7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-3m-6.367-9L7.905 1.316 2.352 6h9.281Z" />
-        </svg> */}
-
       </div>
 
       <div className="text-right p-4">
@@ -230,14 +201,13 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
       </ModalForm> */}
 
       <ModalFormItem
-        title="Complemento"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleEdit}
         dataSource={dataSource}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-        isItem={1}
+        isItem={isItem}
       ></ModalFormItem>
 
       <ModalDialog
@@ -259,7 +229,7 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
         <div className="grid grid-flow-row auto-rows-max">
           <div className="flex items-baseline">
             <span className="font-bold text-gray-500 text-xl font-semibold">Identificador: </span>
-            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{item.id.toString().padStart(3, '0')}</span>
+            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{dataSource.id.toString().padStart(3, '0')}</span>
           </div>
           <div className="flex items-baseline">
             <span className="font-bold text-gray-500 text-xl font-semibold">
@@ -268,7 +238,7 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
               {isItem === 3 && 'Entregador:'}
               {isItem === 4 && 'Garçon:'}
             </span>
-            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{item.name}</span>
+            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{dataSource.name}</span>
           </div>
 
           <div>

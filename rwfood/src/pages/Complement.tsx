@@ -185,14 +185,13 @@ const Complement = () => {
       )}
 
       <ModalFormItem
-        title="Complemento"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleInsert}
         dataSource={dataSource}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-        isItem={1}
+        isItem={1} //1-Complemento 2-Categoria 3-Entregador 4-Garcon 
       ></ModalFormItem>
     </>
   )

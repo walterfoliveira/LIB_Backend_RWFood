@@ -1,50 +1,57 @@
 import React, { useState } from "react";
 import ReactModal from 'react-modal';
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+
 import { IItem } from "../../interfaces/company";
 import { FaPlusCircle, FaPencilAlt } from 'react-icons/fa'
-import Input from "../shared/Input";
 
 interface ModalCrudProps {
   isOpen: boolean;
   dataSource: IItem;
-  isItem: number;
+  isItem: number; //1-Complemento 2-Categoria 3-Entregador 4-Garcon 
   isCloseEsc: boolean;
   isCloseOnOverlay: boolean;
-  //setItemData: React.Dispatch<React.SetStateAction<ICompany>>
   onRequestClose: () => void;
   onConfirmed: (confimado: boolean, data: IItem) => void
-  title: string;
+
 }
 
 
-const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay, isItem }: ModalCrudProps) => {
-
-  const [idSt, setIdSt] = useState(dataSource.id);
-  const [nameSt, setNameSt] = useState(dataSource.name);
+const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay, isItem }: ModalCrudProps) => {
 
   const [state, setState] = useState(() => ({
-    id: idSt,
-    name: nameSt,
+    id: dataSource.id,
+    name: dataSource.name,
   }));
 
-
-  const handleSave = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-
-    //console.log("[onConfirmed] : " + true)
-    const newState: IItem = { ...state, name: nameSt }
-    console.log('newState: ' + JSON.stringify(newState));
-    onConfirmed(true, newState)
-  };
-
-  //console.log(state);
   function onCloseModal() {
-    // event.preventDefault();
     console.log(false);
-    //onConfirmed(false, state)
     onRequestClose()
   }
+
+
+  const formik = useFormik({
+    initialValues: {
+      id: dataSource.id,
+      name: dataSource.name,
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .min(3, 'Minimo de caracteres aceitável é 3')
+        .max(50, 'Máximo de caracteres aceitável é 50')
+        .required('O campo Nome é obrigatório')
+    }),
+    onSubmit: (values) => {
+      //alert(JSON.stringify(values, null, 2))
+
+      const newState: IItem = { ...state, name: values.name }
+      //console.log('newState: ' + JSON.stringify(newState));
+      onConfirmed(true, newState)
+
+    }
+  })
+
 
   return (
     <ReactModal
@@ -81,44 +88,51 @@ const ModalFormItem = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
 
     >
       <div className="max-w-lg-[70%] min-w-[30%] bg-white p-4 rounded-lg focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300">
-        <form className="bg-white rounded px-1 pt-6" onSubmit={handleSave}>
+        <form className="bg-white rounded px-1 pt-6" onSubmit={formik.handleSubmit}>
+          {/* <form className="bg-white rounded px-1 pt-6"  onSubmit={handleSave}> */}
           <div className="flex flex-row items-center mb-4">{/*header */}
-            {nameSt === '' && <FaPlusCircle size={21} className="mr-2 text-2xl text-gray-600" />}
-            {nameSt !== '' && <FaPencilAlt size={21} className="mr-2 text-2xl text-gray-600" />}
+            {dataSource.id === 0 && <FaPlusCircle size={21} className="mr-2 text-2xl text-gray-600" />}
+            {dataSource.id !== 0 && <FaPencilAlt size={21} className="mr-2 text-2xl text-gray-600" />}
 
-            {isItem === 1 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Complemento' : 'Novo Complemento'}</h2>}
-            {isItem === 2 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Categoria' : 'Nova Categoria'}</h2>}
-            {isItem === 3 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Entregador' : 'Novo Entregador'}</h2>}
-            {isItem === 4 && <h2 className="text-xl font-semibold">{nameSt !== '' ? 'Editar Garçon' : 'Novo Garçon'}</h2>}
+            {/* 1-Complemento 2-Categoria 3-Entregador 4-Garcon  */}
+            {isItem === 1 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Novo Complemento' : 'Editar Complemento'}</h2>}
+            {isItem === 2 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Nova Categoria' : 'Editar Categoria'}</h2>}
+            {isItem === 3 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Novo Entregador' : 'Editar Entregador'}</h2>}
+            {isItem === 4 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Novo Garçon' : 'Editar Garçon'}</h2>}
+
 
           </div>
           <div className="mb-4"> {/*Content */}
 
-            <Input
-              type='text'
-              id='id'
-              label='Identificador'
-              place='Identificador'
-              value={idSt.toString().padStart(3, '0')}
-              setValue={setIdSt.toString}
-              disabled={true}
-              required={true}
-              focused={false}
-              className='disabled bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            <label htmlFor="id" className="block text-gray-700 text-slate-500 font-bold">
+              Identificador
+            </label>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+              id="id"
+              name="id"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.id}
+            // value={formik.values.id.toString().padStart(3, '0')}
             />
 
-            <Input
-              type='text'
-              id='name'
-              label='Nome'
-              place='Nome'
-              value={nameSt}
-              setValue={setNameSt}
-              disabled={false}
-              required={true}
-              focused={true}
-              className='bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+            <label htmlFor="name" className="block text-gray-700 text-slate-500 font-bold">
+              Nome
+            </label>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              id="name"
+              name="name"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
             />
+            {formik.touched.name && formik.errors.name ? (
+              <div className="text-orange-400 font-semibold">{formik.errors.name}</div>
+            ) : null}
 
           </div>
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import Input from '../components/shared/Input'
 
 const Customers = () => {
     const formik = useFormik({
@@ -51,8 +50,11 @@ const Customers = () => {
                 className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             /> */}
 
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="firstName" className="block text-gray-700 text-slate-500 font-bold mb-2">
+                First Name
+            </label>
             <input
+                className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="firstName"
                 name="firstName"
                 type="text"
@@ -64,8 +66,11 @@ const Customers = () => {
                 <div className="text-orange-400 font-semibold">{formik.errors.firstName}</div>
             ) : null}
 
-            <label htmlFor="lastName">Last Name</label>
+            <label htmlFor="lastName" className="block text-gray-700 text-slate-500 font-bold mb-2">
+                Last Name
+            </label>
             <input
+                className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="lastName"
                 name="lastName"
                 type="text"
@@ -77,8 +82,12 @@ const Customers = () => {
                 <div className="text-orange-400 font-semibold">{formik.errors.lastName}</div>
             ) : null}
 
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email" className="block text-gray-700 text-slate-500 font-bold mb-2">
+                Email Address
+            </label>
+
             <input
+                className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="email"
                 name="email"
                 type="email"
@@ -90,7 +99,9 @@ const Customers = () => {
                 <div className="text-orange-400 font-semibold">{formik.errors.email}</div>
             ) : null}
 
-            <button type="submit">Submit</button>
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
+                Submit
+            </button>
         </form>
     )
 }

@@ -32,7 +32,7 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
 
   //moment.locale('pt-br')
   //const formatDate = Moment().locale('pt-br').format('MMM Do YY')
-  const formatDate = Moment().locale('pt-br').format('LL')
+  //const formatDate = Moment().locale('pt-br').format('LL')
   var localLocale = Moment().locale('pt-br')
   localLocale.format('LL') // dimanche 15 juillet 2012 11:01
   const formatDate2 = localLocale.format('DD/MMM/YYYY')
@@ -223,14 +223,13 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
       </ModalForm> */}
 
       <ModalFormItem
-        title="Complemento"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleEdit}
         dataSource={dataSource}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-        isItem={1}
+        isItem={item.type === 1 ? 3 : 4} //1-Complemento 2-Categoria 3-Entregador 4-Garcon 
       ></ModalFormItem>
 
       <ModalDialog
@@ -252,7 +251,7 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
         <div className="grid grid-flow-row auto-rows-max">
           <div className="flex items-baseline">
             <span className="font-bold text-gray-500 text-xl font-semibold">Identificador: </span>
-            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{item.id.toString().padStart(3, '0')}</span>
+            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{dataSource.id.toString().padStart(3, '0')}</span>
           </div>
           <div className="flex items-baseline">
             <span className="font-bold text-gray-500 text-xl font-semibold">
@@ -261,7 +260,7 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
               {isItem === 3 && 'Entregador:'}
               {isItem === 4 && 'Garçon:'}
             </span>
-            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{item.name}</span>
+            <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{dataSource.name}</span>
           </div>
 
           <div>

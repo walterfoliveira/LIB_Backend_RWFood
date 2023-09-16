@@ -26,22 +26,6 @@ const ModalDialog = ({ title, titleButton1, titleButton2, isOpen, onConfirmed, s
   }
 
   const onConfirmSubmit = () => {
-    //event.preventDefault();
-
-    console.log("[onConfirmed] : " + true)
-
-    //const newState = { ...state, name: nameSt, site: siteSt, telefone: telefoneSt }
-    //newState.name = nameSt
-    // setState({
-    //   id: idSt,
-    //   name: nameSt,
-    //   site: siteSt,
-    //   telefone: telefoneSt,
-    //   funcionamento: funcionamentoSt,
-    //   createdAt: createdAtSt,
-    // });
-    //setState(newState)
-    //console.log(newState);
     onRequestClose()
     onConfirmed(true)
   };
@@ -54,22 +38,11 @@ const ModalDialog = ({ title, titleButton1, titleButton2, isOpen, onConfirmed, s
       <ReactModal
         isOpen={isOpen}
         onRequestClose={onRequestClose}
-        /*onRequestClose={() => {
-          setIsOpen(false);
-        }}*/
-
         closeTimeoutMS={200}
         className="bg-slate-900/50 fixed inset-0 flex items-center justify-center z-10 focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300"
 
         overlayClassName={'fixed w-full h-screen top-0 left-0 z-[1000] backdrop-blur-sm flex justify-center items-center hover:shadow-none transition-all duration-300'}
-
-        // overlayClassName="focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300"
-
-        //className={'inline-flex'}
-
-
         ariaHideApp={false}
-
         shouldCloseOnOverlayClick={
           isCloseOnOverlay
       /* Boolean indicating if the overlay should close the modal */}
