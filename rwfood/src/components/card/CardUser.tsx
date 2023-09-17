@@ -8,6 +8,7 @@ import { HiOutlinePhone, HiMail, HiOutlineIdentification } from 'react-icons/hi'
 import userService from '../../services/userService'
 
 import { IUser } from '../../interfaces/user'
+import ModalFormUser from '../modal/ModalFormUser'
 
 
 //https://react-icons.github.io/react-icons/icons?name=hi
@@ -104,9 +105,6 @@ const CardUser = ({ item, empresaList, setEmpresaList }: Props) => {
     closeModal()
   }, [respModal, dataSource])
 
-  // useEffect(() => {
-  //     //console.log('card atualizado: ' + dataSource.name);
-  // }, [dataSource]);
 
   return (
     <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
@@ -116,7 +114,14 @@ const CardUser = ({ item, empresaList, setEmpresaList }: Props) => {
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
           className="relative inline-block h-12 w-12 rounded-full border-2 border-blue object-cover object-center hover:z-10 focus:z-10"
         /> */}
-        <FaUserFriends size={36} className="text-2x1 text-gray-400" />
+        {/* <FaUserFriends size={36} className="text-2x1 text-gray-400" /> */}
+
+        {/* //0=Atendente, 1=Gerente, 2=Admin, 3=SuperAdmin */}
+        {dataSource.level === 3 && <FaUserSecret fontSize={36} className="text-2x1 text-gray-400" />}
+        {dataSource.level === 2 && <FaUserTie fontSize={36} className="text-2x1 text-gray-400" />}
+        {dataSource.level === 1 && <FaUserTag fontSize={36} className="text-2x1 text-gray-400" />}
+        {dataSource.level === 0 && <FaHeadset fontSize={36} className="text-2x1 text-gray-400" />}
+
       </div>
 
       <div className="text-right p-4">
@@ -137,15 +142,7 @@ const CardUser = ({ item, empresaList, setEmpresaList }: Props) => {
           <div >
 
             <div className="flex flex-row items-center text-slate-500 mb-1">
-              <div>
-                {/* //0=Atendente, 1=Gerente, 2=Admin, 3=SuperAdmin */}
-                {dataSource.level === 3 && <FaUserSecret fontSize={23} />}
-                {dataSource.level === 2 && <FaUserTie fontSize={23} />}
-                {dataSource.level === 1 && <FaUserTag fontSize={23} />}
-                {dataSource.level === 0 && <FaHeadset fontSize={23} />}
-
-              </div>
-              <div className="ml-1"><h1 className="flex flex-row text-xl font-bold text-gray-700 font-semibold mb-0">{dataSource.name}</h1></div>
+              <h1 className="flex flex-row text-xl font-bold text-slate-700 font-semibold mb-0">{dataSource.name}</h1>
             </div>
 
             <div className="flex flex-row items-center text-slate-500 mb-1">
@@ -192,17 +189,17 @@ const CardUser = ({ item, empresaList, setEmpresaList }: Props) => {
 
       </div>
 
-
-      {/* <ModalForm
-        title="Empresa"
+      <ModalFormUser
+        title="Usuário"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleEdit}
         dataSource={dataSource}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-      >
-      </ModalForm> */}
+        isItem={1}
+      ></ModalFormUser>
+
 
       <ModalDialog
         title="Aviso de Sistema"

@@ -30,18 +30,9 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
   const [modalDialogIsOpen, setModalDialogIsOpen] = useState(false)
   const [dataSource, setDataSource] = useState(item)
 
-  //moment.locale('pt-br')
-  //const formatDate = Moment().locale('pt-br').format('MMM Do YY')
-  //const formatDate = Moment().locale('pt-br').format('LL')
   var localLocale = Moment().locale('pt-br')
   localLocale.format('LL') // dimanche 15 juillet 2012 11:01
   const formatDate2 = localLocale.format('DD/MMM/YYYY')
-
-  //Para formatar Valor
-  // totalPago.toLocaleString('pt-BR', {
-  //     style: 'currency',
-  //     currency: 'BRL',
-  //   })
 
   const openModalDialog = () => {
     setModalDialogIsOpen(true)
@@ -88,21 +79,14 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
     setRespModal(!respModal);
 
     if (confimado) {
-      //console.log('data: ' + JSON.stringify(data));
-
       //Edita Model Complement
-      const editModel: IPerson = { ...dataSource, name: data.name }
-      //setDataSource({ ...dataSource, name: data.name })
+      const editModel: IPerson = { ...dataSource, name: data.name, cell: data.cell as string, document: data.document as string }
 
       //faz requisicao de Update (PUT) 
       var response = await personService.updatePerson(editModel)
 
-      //console.log('response: ' + response);
       if (response === dataSource.id) {
-        //atualiza o State: dataSource
         setDataSource(data as IPerson);
-
-        //console.log('Operação realizada com sucesso!');
         toast.success('Operação realizada com sucesso!')
         return
       }
@@ -114,10 +98,6 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
   useEffect(() => {
     closeModal()
   }, [respModal, dataSource])
-
-  // useEffect(() => {
-  //     //console.log('card atualizado: ' + dataSource.name);
-  // }, [dataSource]);
 
   return (
     <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
@@ -131,31 +111,6 @@ const CardPerson = ({ item, itemList, setItemList, isItem }: Props) => {
 
         {item.type === 1 && <HiTruck size={36} className="text-2x1 text-gray-400" />}
         {item.type === 2 && <HiUser size={36} className="text-2x1 text-gray-400" />}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-          <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
-        </svg> */}
-
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M15.045.007 9.31 0a1.965 1.965 0 0 0-1.4.585L.58 7.979a2 2 0 0 0 0 2.805l6.573 6.631a1.956 1.956 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 18 8.479v-5.5A2.972 2.972 0 0 0 15.045.007Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1M1 9h14M2 5h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z" />
-        </svg> */}
-
-        {/* <svg className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.905 1.316 15.633 6M18 10h-5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h5m0-5a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1m0-5V7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-3m-6.367-9L7.905 1.316 2.352 6h9.281Z" />
-        </svg> */}
 
       </div>
 

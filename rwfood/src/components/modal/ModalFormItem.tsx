@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactModal from 'react-modal';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { IItem } from "../../interfaces/company";
 import { FaPlusCircle, FaPencilAlt } from 'react-icons/fa'
+
 
 interface ModalCrudProps {
   isOpen: boolean;
@@ -16,7 +17,6 @@ interface ModalCrudProps {
   onConfirmed: (confimado: boolean, data: IItem) => void
 
 }
-
 
 const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay, isItem }: ModalCrudProps) => {
 
@@ -30,28 +30,36 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
     onRequestClose()
   }
 
-
   const formik = useFormik({
     initialValues: {
       id: dataSource.id,
       name: dataSource.name,
+      cell: dataSource.cell,
+      document: dataSource.document,
     },
     validationSchema: Yup.object({
       name: Yup.string()
         .min(3, 'Minimo de caracteres aceitável é 3')
         .max(50, 'Máximo de caracteres aceitável é 50')
-        .required('O campo Nome é obrigatório')
+        .required('O campo Nome é obrigatório'),
+      //cell: Yup.string().max(20, 'Must be 20 characters or less').required('Required')
+
     }),
     onSubmit: (values) => {
       //alert(JSON.stringify(values, null, 2))
+      //console.log('values: ' + JSON.stringify(values, null, 2));
 
-      const newState: IItem = { ...state, name: values.name }
+      const newState: IItem = { ...dataSource, name: values.name, cell: values.cell, document: values.document }
       //console.log('newState: ' + JSON.stringify(newState));
       onConfirmed(true, newState)
 
     }
   })
 
+
+  // useEffect(() => {
+  //   console.log('[dataSource]: ' + JSON.stringify(dataSource))
+  // }, [])
 
   return (
     <ReactModal
@@ -115,6 +123,7 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.id}
+
             // value={formik.values.id.toString().padStart(3, '0')}
             />
 
@@ -133,6 +142,46 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
             {formik.touched.name && formik.errors.name ? (
               <div className="text-orange-400 font-semibold">{formik.errors.name}</div>
             ) : null}
+
+            {/* Caso seja entrega / garçon   */}
+            {isItem >= 3 && (
+              <>
+                <label htmlFor="cell" className="block text-gray-700 text-slate-500 font-bold">
+                  Celular
+                </label>
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+                  id="cell"
+                  name="cell"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.cell}
+                />
+                {formik.touched.cell && formik.errors.cell ? (
+                  <div className="text-orange-400 font-semibold">{formik.errors.cell}</div>
+                ) : null}
+
+
+                <label htmlFor="document" className="block text-gray-700 text-slate-500 font-bold">
+                  Doc. CPF
+                </label>
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+                  id="document"
+                  name="document"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.document}
+                />
+                {formik.touched.document && formik.errors.document ? (
+                  <div className="text-orange-400 font-semibold">{formik.errors.document}</div>
+                ) : null}
+
+              </>
+            )}
+
 
           </div>
 

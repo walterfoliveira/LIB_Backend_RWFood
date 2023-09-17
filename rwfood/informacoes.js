@@ -1,4 +1,32 @@
 /*
+https://stackoverflow.com/questions/64451600/react-formik-yup-how-to-format-the-phone-input
+https://codesandbox.io/s/formik-antd-wreact-input-mask-and-setfieldvalue-vtb8t?fontsize=14&file=/src/form.js:189-205
+https://stackblitz.com/edit/react-e3xu5d?file=src%2FApp.js
+
+export const step1Scehma = Yup.object({
+firstName: Yup.string()
+            .required("This field is required"),
+lastName: Yup.string()
+           .required("This field is required"),
+email: Yup.string()
+           .email()
+           .required("Email is required"),
+password: Yup.string()
+             .required("This field is required")
+             .matches(
+              "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$",
+              "Must Contain at least 8 Characters: One Uppercase, One Lowercase, One Number and one 
+               special case Character"
+              ),
+phone: Yup.string()
+           .required("This field is required")
+});
+
+
+
+
+
+
 INFORMAÇÕES IMPORTANTES
 
 FORM Validação: https://formik.org/docs/examples/typescript

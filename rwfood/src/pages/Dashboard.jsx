@@ -6,10 +6,22 @@ import BuyerProfilePieChart from '../components/BuyerProfilePieChart'
 import PopularProducts from '../components/PopularProducts'
 import toast from 'react-hot-toast'
 
+import personService from '../services/personService'
+
 export default function Dashboard() {
     useEffect(() => {
-        toast.success('Seja Bem-vido(a).')
+        getEntregadorAll()
     }, [])
+
+    const getEntregadorAll = async () => {
+        var response = await personService.getAllPerson(1)
+
+        //Filtro pelo Type: Entregador, Garçon ...
+        const respFilterByType = response.filter((item) => item.type === 1) //Entregador
+        console.log('[getEntregadorAll]: ' + JSON.stringify(respFilterByType))
+
+        toast.success('Seja Bem-vido(a).')
+    }
 
     return (
         <div className="flex flex-col gap-4">

@@ -68,21 +68,17 @@ const DeliveryMan = ({ typePage }: Props) => {
     setRespModal(!respModal)
 
     if (confimado) {
-
       //criar Model Complement
-      const newModel: IPerson = { ...initState, name: data.name }
+      const newModel: IPerson = { ...initState, name: data.name, cell: data.cell as string, document: data.document as string }
 
       //faz requisicao de Insert (POST)      
       var response = await personService.insertPerson(newModel)
-      //console.log('response: ' + response);
       if (response > 0) {
-
         //Ajusta o model
         newModel.id = response;
 
         //Adiciono o card na LISTA
         setItemList([...itemList, newModel])
-        //console.log('Operação realizada com sucesso!');
         toast.success('Operação realizada com sucesso!')
         return
       }

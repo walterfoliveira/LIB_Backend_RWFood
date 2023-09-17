@@ -12,4 +12,6 @@ export interface ICompany {
 export interface IItem {
     id: number | string
     name: string
+    cell?: string
+    document?: string
 }

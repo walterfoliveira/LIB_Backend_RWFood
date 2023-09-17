@@ -28,11 +28,12 @@ export class PersonService {
         today.setHours(today.getHours() - 3) // Remove 3 horas
         model.createdAt = today.toISOString()
 
+        //console.log('[insertPerson]: ' + JSON.stringify(model))
         return this.apiService.post<number>('Person', model)
     }
 
     public updatePerson(model: IPerson) {
-        console.log('[IPerson]: ' + JSON.stringify(model))
+        console.log('[updatePerson]: ' + JSON.stringify(model))
         return this.apiService.put<number>('Person', model)
     }
 }
