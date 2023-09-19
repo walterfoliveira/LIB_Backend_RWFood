@@ -18,7 +18,7 @@ export default function Dashboard() {
 
         //Filtro pelo Type: Entregador, Garçon ...
         const respFilterByType = response.filter((item) => item.type === 1) //Entregador
-        console.log('[getEntregadorAll]: ' + JSON.stringify(respFilterByType))
+        //console.log('[getEntregadorAll]: ' + JSON.stringify(respFilterByType))
 
         toast.success('Seja Bem-vido(a).')
     }

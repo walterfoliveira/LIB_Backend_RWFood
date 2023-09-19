@@ -1,7 +1,9 @@
 /*
+https://react-demo.tailadmin.com/profile
+
+
+
 https://stackoverflow.com/questions/64451600/react-formik-yup-how-to-format-the-phone-input
-https://codesandbox.io/s/formik-antd-wreact-input-mask-and-setfieldvalue-vtb8t?fontsize=14&file=/src/form.js:189-205
-https://stackblitz.com/edit/react-e3xu5d?file=src%2FApp.js
 
 export const step1Scehma = Yup.object({
 firstName: Yup.string()
@@ -24,10 +26,10 @@ phone: Yup.string()
 
 
 
-
-
-
 INFORMAÇÕES IMPORTANTES
+
+FORM Mascara: https://github.com/lucas-marquisio/biblioteca-mascaras/blob/main/src/index.ts#L92
+              https://www.npmjs.com/package/biblioteca-mascaras?activeTab=readme
 
 FORM Validação: https://formik.org/docs/examples/typescript
 

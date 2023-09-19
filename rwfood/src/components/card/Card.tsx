@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Moment from 'moment'
 import toast from 'react-hot-toast'
-import ModalForm from '../modal/ModalForm'
+import ModalForm from '../modal/ModalFormCompany'
 import ModalDialog from '../modal/ModalDialog'
 import { FaInfoCircle, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import { HiOutlinePhone, HiMail, HiOutlineIdentification } from 'react-icons/hi'

@@ -1,28 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactModal from 'react-modal';
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-
-import { IItem } from "../../interfaces/company";
+import { ICompany } from "../../interfaces/company";
 import { FaPlusCircle, FaPencilAlt } from 'react-icons/fa'
-
-import mask from 'biblioteca-mascaras'
-
+import Input from "../shared/Input";
 
 interface ModalCrudProps {
   isOpen: boolean;
-  dataSource: IItem;
-  isItem: number; //1-Complemento 2-Categoria 3-Entregador 4-Garcon 
+  dataSource: ICompany;
   isCloseEsc: boolean;
   isCloseOnOverlay: boolean;
+  //setItemData: React.Dispatch<React.SetStateAction<ICompany>>
   onRequestClose: () => void;
-  onConfirmed: (confimado: boolean, data: IItem) => void
+  onConfirmed: (confimado: boolean, data: ICompany) => void
+  title: string;
+  children: string | JSX.Element | JSX.Element[]
 }
 
-const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay, isItem }: ModalCrudProps) => {
+const ModalForm = ({ title, isOpen, dataSource, onRequestClose, onConfirmed, children, isCloseEsc, isCloseOnOverlay }: ModalCrudProps) => {
 
+  // const [idSt, setIdSt] = useState(dataSource.id);
+  // const [nameSt, setNameSt] = useState(dataSource.name);
+  // const [siteSt, setSiteSt] = useState(dataSource.site);
+  // const [telefoneSt, setTelefoneSt] = useState(dataSource.telefone);
+  // const [funcionamentoSt, setFuncionamentoSt] = useState(dataSource.funcionamento);
+  // const [createdAtSt, setCreatedAtSt] = useState(dataSource.createdAt.toString());
+
+  // const [state, setState] = useState(() => ({
+  //   id: idSt,
+  //   name: nameSt,
+  //   site: siteSt,
+  //   telefone: telefoneSt,
+  //   funcionamento: funcionamentoSt,
+  //   createdAt: createdAtSt,
+  //   idCompany: dataSource.idCompany,
+  //   status: dataSource.status,
+  // }));
+
+  //console.log(state);
   function onCloseModal() {
-    //console.log(false);
     onRequestClose()
   }
 
@@ -30,33 +47,29 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
     initialValues: {
       id: dataSource.id,
       name: dataSource.name,
-      cell: dataSource.cell,
-      document: dataSource.document,
+      site: dataSource.site,
+      telefone: dataSource.telefone,
+      funcionamento: dataSource.funcionamento,
     },
     validationSchema: Yup.object({
       name: Yup.string()
         .min(3, 'Minimo de caracteres aceitável é 3')
         .max(50, 'Máximo de caracteres aceitável é 50')
         .required('O campo Nome é obrigatório'),
-      cell: isItem >= 3 ? Yup.string()
-        .min(15, 'Minimo de caracteres aceitável é 15')
-        .max(20, 'Must be 20 characters or less').required('Required') :
-        Yup.string(),
-      document: isItem >= 3 ? Yup.string()
-        .min(14, 'Minimo de caracteres aceitável é 14')
-        .required('Required') :
-        Yup.string(),
-
+      site: Yup.string().max(100, 'Máximo de caracteres aceitável é 100').required('Required'),
+      telefone: Yup.string().required("Campo é obrigatório"),
+      funcionamento: Yup.string().required("Campo é obrigatório"),
     }),
     onSubmit: (values) => {
       //alert(JSON.stringify(values, null, 2))
       //console.log('values: ' + JSON.stringify(values, null, 2));
 
-      const newState: IItem = { ...dataSource, name: values.name, cell: values.cell, document: values.document }
+      const newState: ICompany = { ...dataSource, idCompany: values.id, name: values.name, site: values.site, telefone: values.telefone, funcionamento: values.funcionamento }
       //console.log('newState: ' + JSON.stringify(newState));
       onConfirmed(true, newState)
     }
   })
+
 
   return (
     <ReactModal
@@ -94,18 +107,11 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
     >
       <div className="max-w-lg-[70%] min-w-[30%] bg-white p-4 rounded-lg focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300">
         <form className="bg-white rounded px-1 pt-6" onSubmit={formik.handleSubmit}>
-          {/* <form className="bg-white rounded px-1 pt-6"  onSubmit={handleSave}> */}
           <div className="flex flex-row items-center mb-4">{/*header */}
             {dataSource.id === 0 && <FaPlusCircle size={21} className="mr-2 text-2xl text-gray-600" />}
             {dataSource.id !== 0 && <FaPencilAlt size={21} className="mr-2 text-2xl text-gray-600" />}
 
-            {/* 1-Complemento 2-Categoria 3-Entregador 4-Garcon  */}
-            {isItem === 1 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Novo Complemento' : 'Editar Complemento'}</h2>}
-            {isItem === 2 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Nova Categoria' : 'Editar Categoria'}</h2>}
-            {isItem === 3 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Novo Entregador' : 'Editar Entregador'}</h2>}
-            {isItem === 4 && <h2 className="text-xl font-semibold">{dataSource.id === 0 ? 'Novo Garçon' : 'Editar Garçon'}</h2>}
-
-
+            <h2 className="text-xl font-semibold">{dataSource.id !== 0 ? `Editar ${title}` : `Nova ${title}`}</h2>
           </div>
           <div className="mb-4"> {/*Content */}
 
@@ -119,9 +125,7 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.id}
-
-            // value={formik.values.id.toString().padStart(3, '0')}
+              value={formik.values.id > 0 ? formik.values.id.toString().padStart(3, '0') : formik.values.id}
             />
 
             <label htmlFor="name" className="block text-gray-700 text-slate-500 font-bold">
@@ -140,49 +144,57 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
               <div className="text-orange-400 font-semibold">{formik.errors.name}</div>
             ) : null}
 
-            {/* Caso seja entrega / garçon   */}
-            {isItem >= 3 && (
-              <>
-                <label htmlFor="cell" className="block text-gray-700 text-slate-500 font-bold">
-                  Celular
-                </label>
-                <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
-                  id="cell"
-                  name="cell"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={mask.Phone(formik.values.cell as string)}
 
-                />
-                {formik.touched.cell && formik.errors.cell ? (
-                  <div className="text-orange-400 font-semibold">{formik.errors.cell}</div>
-                ) : null}
+            <label htmlFor="site" className="block text-gray-700 text-slate-500 font-bold">
+              Email
+            </label>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              id="site"
+              name="site"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.site}
+            />
+            {formik.touched.site && formik.errors.site ? (
+              <div className="text-orange-400 font-semibold">{formik.errors.site}</div>
+            ) : null}
 
+            <label htmlFor="telefone" className="block text-gray-700 text-slate-500 font-bold">
+              Telefone
+            </label>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              id="telefone"
+              name="telefone"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.telefone}
+            />
+            {formik.touched.telefone && formik.errors.telefone ? (
+              <div className="text-orange-400 font-semibold">{formik.errors.telefone}</div>
+            ) : null}
 
-                <label htmlFor="document" className="block text-gray-700 text-slate-500 font-bold">
-                  Doc. CPF
-                </label>
-                <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
-                  id="document"
-                  name="document"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={mask.Cpf(formik.values.document as string)}
-                />
-                {formik.touched.document && formik.errors.document ? (
-                  <div className="text-orange-400 font-semibold">{formik.errors.document}</div>
-                ) : null}
-
-              </>
-            )}
+            <label htmlFor="funcionamento" className="block text-gray-700 text-slate-500 font-bold">
+              Funcionamento
+            </label>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              id="funcionamento"
+              name="funcionamento"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.funcionamento}
+            />
+            {formik.touched.funcionamento && formik.errors.funcionamento ? (
+              <div className="text-orange-400 font-semibold">{formik.errors.funcionamento}</div>
+            ) : null}
 
 
           </div>
-
 
           <div className="flex justify-end items-center">{/*footer */}
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
@@ -194,7 +206,6 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
 
           </div>
 
-
         </form>
 
       </div>
@@ -202,4 +213,4 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
   );
 };
 
-export default ModalFormItem;
+export default ModalForm;

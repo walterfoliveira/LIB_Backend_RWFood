@@ -25,7 +25,8 @@ const Category = () => {
 
   //Trata o Modal
   const openModal = () => {
-    setDataSource(initState)
+    //setDataSource(initState)
+    setDataSource((dataSource) => initState)
     setModalIsOpen(true)
   }
 

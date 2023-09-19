@@ -8,7 +8,7 @@ import { FaSync, FaFolderPlus, FaFilter } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 import companyService from '../services/companyService'
-import ModalForm from '../components/modal/ModalForm'
+import ModalForm from '../components/modal/ModalFormCompany'
 
 const Company = () => {
 

@@ -18,14 +18,15 @@ const Complement = () => {
     idCompany: 1,
     status: 1,
     name: '',
-    createdAt: ''
+    createdAt: '',
+
   }
 
-  const [dataSource, setDataSource] = useState<IItem>({ id: initState.id, name: initState.name });
+  const [dataSource, setDataSource] = useState<IItem>({ id: initState.id, name: initState.name, cell: '' });
 
   //Trata o Modal
   const openModal = () => {
-    setDataSource(initState)
+    setDataSource({ ...initState, cell: '' })
     setModalIsOpen(true)
   }
 
@@ -85,7 +86,7 @@ const Complement = () => {
 
 
   const closeModal = () => {
-    setDataSource((dataSource) => initState)
+    //setDataSource((dataSource) => initState)
     setModalIsOpen(false)
   }
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Moment from 'moment'
 import toast from 'react-hot-toast'
-import ModalForm from '../modal/ModalForm'
+import ModalForm from '../modal/ModalFormCompany'
 import ModalDialog from '../modal/ModalDialog'
 import { FaUserFriends, FaUserSecret, FaUserTie, FaUser, FaUserTag, FaHeadset, FaHeadphones, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import { HiOutlinePhone, HiMail, HiOutlineIdentification } from 'react-icons/hi'
@@ -108,7 +108,7 @@ const CardUser = ({ item, empresaList, setEmpresaList }: Props) => {
 
   return (
     <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
-      <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-2">
+      <div className="has-tooltip rounded-full z-30 p-1 inline-block absolute mx-4 mt-2">
         {/* <img
           alt="user 1"
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
@@ -121,6 +121,12 @@ const CardUser = ({ item, empresaList, setEmpresaList }: Props) => {
         {dataSource.level === 2 && <FaUserTie fontSize={36} className="text-2x1 text-gray-400" />}
         {dataSource.level === 1 && <FaUserTag fontSize={36} className="text-2x1 text-gray-400" />}
         {dataSource.level === 0 && <FaHeadset fontSize={36} className="text-2x1 text-gray-400" />}
+        <span className='tooltip rounded transition duration-150 ease-in-out shadow-lg p-1 bg-gray-100 text-gray-500 absolute z-45 invisible inline-block px-6 py-1 mt-2 ml-0'>
+          {dataSource.level === 3 && "Usuário: Master"}
+          {dataSource.level === 2 && "Usuário: Administrador"}
+          {dataSource.level === 1 && "Usuário: Gerente"}
+          {dataSource.level === 0 && "Usuário: Atendente"}
+        </span>
 
       </div>
 
