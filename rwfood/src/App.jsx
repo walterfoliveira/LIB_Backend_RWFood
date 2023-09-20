@@ -5,6 +5,7 @@ import Products from './pages/Products'
 import Company from './pages/Company'
 import Complement from './pages/Complement'
 import Category from './pages/Category'
+import Person from './pages/Person'
 import DeliveryMan from './pages/DeliveryMan'
 import Users from './pages/Users'
 
@@ -27,7 +28,7 @@ function App() {
                     <Route path="complement" element={<Complement />} />
                     <Route path="category" element={<Category />} />
                     <Route path="deliveryman" element={<DeliveryMan typePage={1} />} />
-                    <Route path="waiter" element={<DeliveryMan typePage={2} />} />
+                    <Route path="waiter" element={<Person typePage={2} />} />
                     <Route path="users" element={<Users />} />
                     <Route path="customers" element={<Customers />} />
                 </Route>

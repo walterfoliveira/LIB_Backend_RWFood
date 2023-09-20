@@ -103,10 +103,6 @@ const Card = ({ item, empresaList, setEmpresaList }: Props) => {
         closeModal()
     }, [respModal, dataSource])
 
-    // useEffect(() => {
-    //     //console.log('card atualizado: ' + dataSource.name);
-    // }, [dataSource]);
-
     return (
         <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
             <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">

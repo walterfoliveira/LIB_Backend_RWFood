@@ -7,10 +7,13 @@ import PopularProducts from '../components/PopularProducts'
 import toast from 'react-hot-toast'
 
 import personService from '../services/personService'
+import productService from '../services/productService'
 
 export default function Dashboard() {
     useEffect(() => {
         getEntregadorAll()
+        getProductAll()
+        toast.success('Seja Bem-vido(a).')
     }, [])
 
     const getEntregadorAll = async () => {
@@ -19,8 +22,11 @@ export default function Dashboard() {
         //Filtro pelo Type: Entregador, Garçon ...
         const respFilterByType = response.filter((item) => item.type === 1) //Entregador
         //console.log('[getEntregadorAll]: ' + JSON.stringify(respFilterByType))
+    }
 
-        toast.success('Seja Bem-vido(a).')
+    const getProductAll = async () => {
+        var response = await productService.getAllProduct(1)
+        console.log('[getProductAll]: ' + JSON.stringify(response))
     }
 
     return (
