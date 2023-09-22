@@ -31,11 +31,14 @@ namespace rwfood.data.Repository
                                           Description = item.Description,
                                           Code1 = item.Code1,
                                           Code2 = item.Code2,
+                                          Image1 = item.Image1,
+                                          Image2 = item.Image2,
                                           Category = cat.Name,
                                           Amount1 = item.Amount1,
                                           Amount2 = item.Amount2,   
                                           Amount3 = item.Amount3,
                                           Amount4 = item.Amount4,
+                                          Stock = item.Stock,
                                           CreatedAt = item.CreatedAt,                                          
                                       }).ToList();
 

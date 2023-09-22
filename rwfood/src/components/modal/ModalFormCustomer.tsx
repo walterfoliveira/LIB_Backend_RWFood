@@ -3,63 +3,70 @@ import ReactModal from 'react-modal';
 import mask from 'biblioteca-mascaras'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { IProductCategory } from "../../interfaces/product";
+import { ICustomer } from "../../interfaces/customer";
 import { FaPlusCircle, FaPencilAlt } from 'react-icons/fa'
 
 interface ModalCrudProps {
   isOpen: boolean;
-  dataSource: IProductCategory;
+  dataSource: ICustomer;
   isCloseEsc: boolean;
   isCloseOnOverlay: boolean;
   onRequestClose: () => void;
-  onConfirmed: (confimado: boolean, data: IProductCategory) => void;
+  onConfirmed: (confimado: boolean, data: ICustomer) => void;
 }
 
 
-const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay }: ModalCrudProps) => {
+const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay }: ModalCrudProps) => {
 
   function onCloseModal() {
     onRequestClose()
   }
 
+  // : string
+  // : string
+
   const formik = useFormik({
     initialValues: {
       id: dataSource.id,
       idCompany: dataSource.idCompany,
-      idCategory: dataSource.idCategory,
       status: dataSource.status,
-      stock: dataSource.stock,
+      lastSale: dataSource.lastSale,
+      impost: dataSource.lastSale,
       name: dataSource.name,
-      description: dataSource.description,
-      code1: dataSource.code1,
-      code2: dataSource.code2,
-      image1: dataSource.image1,
-      image2: dataSource.image2,
-      amount1: dataSource.amount1,
-      amount2: dataSource.amount2,
-      amount3: dataSource.amount3,
-      amount4: dataSource.amount4,
+      document: dataSource.document,
+      cell1: dataSource.cell1,
+      cell2: dataSource.cell2,
+      address: dataSource.address,
+      district: dataSource.district,
+      complement: dataSource.complement,
+      city: dataSource.city,
+      postalCode: dataSource.postalCode,
       createdAt: dataSource.createdAt,
-      category: dataSource.category,
+      updated: dataSource.updated,
+      birthday: dataSource.birthday,
     },
     validationSchema: Yup.object({
       name: Yup.string()
         .min(3, 'Minimo de caracteres aceitável é 3')
         .max(50, 'Máximo de caracteres aceitável é 50')
         .required('O campo é obrigatório'),
-      description: Yup.string()
+      district: Yup.string()
         .min(3, 'Minimo de caracteres aceitável é 3')
         .max(50, 'Máximo de caracteres aceitável é 50')
         .required('O campo é obrigatório'),
-      code1: Yup.string().required("Campo é obrigatório"),
-      amount1: Yup.string().required("Campo é obrigatório"),
-      amount2: Yup.string().required("Campo é obrigatório"),
+      city: Yup.string()
+        .min(3, 'Minimo de caracteres aceitável é 3')
+        .max(50, 'Máximo de caracteres aceitável é 50')
+        .required('O campo é obrigatório'),
+
+      cell1: Yup.string().required("Campo é obrigatório"),
+      //complement: Yup.string().required("Campo é obrigatório"),
     }),
     onSubmit: (values) => {
       //alert(JSON.stringify(values, null, 2))
       //console.log('values: ' + JSON.stringify(values, null, 2));
 
-      const newState: IProductCategory = { ...dataSource, name: values.name, description: values.description, code1: values.code1, code2: values.code2, amount1: values.amount1, amount2: values.amount2, amount3: values.amount3, amount4: values.amount4, }
+      const newState: ICustomer = { ...dataSource, name: values.name, document: values.document, cell1: values.cell1, cell2: values.cell2, address: values.address, district: values.district, complement: values.complement, city: values.city, postalCode: values.postalCode, birthday: values.birthday }
       //console.log('newState: ' + JSON.stringify(newState));
       onConfirmed(true, newState)
     }
@@ -144,50 +151,26 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
 
               </div>
 
-              <div>
-
-                {/* <label htmlFor="id" className="block text-gray-700 text-slate-500 font-bold mt-4">
-                  Identificador
-                </label> */}
-
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox"
-
-                    // className="form-checkbox text-indigo-600 h-5 w-5"
-                    className="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out rounded-full border-2 border-indigo-600 focus:outline-none "
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.stock}
-                    checked={formik.values.stock === 1 ? true : false}
-
-                    id="flexCheckIndeterminate" />
-
-
-                  <span className="text-gray-700">Estoque</span>
-                </label>
-
-
-              </div>
 
             </div>
 
             <div className="flex flex-row items-center text-slate-500 mb-0">
               <div>
 
-                <label htmlFor="code1" className="block text-gray-700 text-slate-500 font-bold mt-4">
-                  Codigo 1
+                <label htmlFor="cell1" className="block text-gray-700 text-slate-500 font-bold mt-4">
+                  Telefone 1
                 </label>
                 <input
                   className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
-                  id="code1"
-                  name="code1"
+                  id="cell1"
+                  name="cell1"
                   type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.code1}
+                  value={formik.values.cell1}
                 />
-                {formik.touched.code1 && formik.errors.code1 ? (
-                  <div className="text-orange-400 font-semibold">{formik.errors.code1}</div>
+                {formik.touched.cell1 && formik.errors.cell1 ? (
+                  <div className="text-orange-400 font-semibold">{formik.errors.cell1}</div>
                 ) : null}
 
 
@@ -195,17 +178,17 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
 
               <div className="ml-4">
 
-                <label htmlFor="code2" className="block text-gray-700 text-slate-500 font-bold mt-4">
-                  Codigo 2
+                <label htmlFor="cell2" className="block text-gray-700 text-slate-500 font-bold mt-4">
+                  Telefone 2
                 </label>
                 <input
                   className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
-                  id="code2"
-                  name="code2"
+                  id="cell2"
+                  name="cell2"
                   type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.code2}
+                  value={formik.values.cell2}
                 />
 
 
@@ -228,62 +211,79 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
               <div className="text-orange-400 font-semibold">{formik.errors.name}</div>
             ) : null}
 
-            <label htmlFor="description" className="block text-gray-700 text-slate-500 font-bold mt-4">
-              Composição do Produto
+            <label htmlFor="address" className="block text-gray-700 text-slate-500 font-bold mt-4">
+              Endereço
             </label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
-              id="description"
-              name="description"
+              id="address"
+              name="address"
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.description}
+              value={formik.values.address}
             />
-            {formik.touched.description && formik.errors.description ? (
-              <div className="text-orange-400 font-semibold">{formik.errors.description}</div>
+            {formik.touched.address && formik.errors.address ? (
+              <div className="text-orange-400 font-semibold">{formik.errors.address}</div>
             ) : null}
 
             <div className="flex flex-row items-center text-slate-500 mb-0">
               <div className="mr-10">
 
-                <label htmlFor="amount1" className="block text-gray-700 text-slate-500 font-bold mt-4">
-                  Valor Grande
+                <label htmlFor="district" className="block text-gray-700 text-slate-500 font-bold mt-4">
+                  Bairro
                 </label>
                 <input
                   className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
-                  id="amount1"
-                  name="amount1"
-                  type="number"
+                  id="district"
+                  name="district"
+                  type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.amount1}
+                  value={formik.values.district}
                 />
-                {formik.touched.amount1 && formik.errors.amount1 ? (
-                  <div className="text-orange-400 font-semibold">{formik.errors.amount1}</div>
+                {formik.touched.district && formik.errors.district ? (
+                  <div className="text-orange-400 font-semibold">{formik.errors.district}</div>
                 ) : null}
 
               </div>
               <div>
 
-                <label htmlFor="amount2" className="block text-gray-700 text-slate-500 font-bold mt-4">
-                  Valor Grande
+                <label htmlFor="city" className="block text-gray-700 text-slate-500 font-bold mt-4">
+                  Cidade
                 </label>
                 <input
                   className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
-                  id="amount2"
-                  name="amount2"
-                  type="number"
+                  id="city"
+                  name="city"
+                  type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.amount2}
+                  value={formik.values.city}
                 />
-                {formik.touched.amount2 && formik.errors.amount2 ? (
-                  <div className="text-orange-400 font-semibold">{formik.errors.amount2}</div>
+                {formik.touched.city && formik.errors.city ? (
+                  <div className="text-orange-400 font-semibold">{formik.errors.city}</div>
                 ) : null}
 
               </div>
             </div>
+
+            <label htmlFor="complement" className="block text-gray-700 text-slate-500 font-bold mt-4">
+              Ponto de Referência
+            </label>
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+              id="complement"
+              name="complement"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.complement}
+            />
+            {formik.touched.complement && formik.errors.complement ? (
+              <div className="text-orange-400 font-semibold">{formik.errors.complement}</div>
+            ) : null}
+
 
 
             <div className="flex justify-end items-center">{/*footer */}
@@ -311,4 +311,4 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
   );
 };
 
-export default ModalFormProduct;
+export default ModalFormCustomer;

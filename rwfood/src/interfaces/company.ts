@@ -5,6 +5,7 @@ export interface ICompany {
     name: string
     telefone: string
     site: string
+    image1: string
     funcionamento: string
     createdAt: string
 }

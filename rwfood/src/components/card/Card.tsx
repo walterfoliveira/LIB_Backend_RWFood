@@ -105,10 +105,18 @@ const Card = ({ item, empresaList, setEmpresaList }: Props) => {
 
     return (
         <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
-            <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">
+            {/* <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">
                 <img
                     alt="user 1"
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+                    className="relative inline-block h-12 w-12 rounded-full border-2 border-blue object-cover object-center hover:z-10 focus:z-10"
+                />
+            </div> */}
+
+            <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">
+                <img
+                    alt="company 1"
+                    src={`http://bkend.rwconsultoria.com.br:7171/rwfood/company/${dataSource.image1}`}
                     className="relative inline-block h-12 w-12 rounded-full border-2 border-blue object-cover object-center hover:z-10 focus:z-10"
                 />
             </div>

@@ -76,6 +76,10 @@ namespace rwfood.data.Context
                     .HasMaxLength(100)
                     .HasColumnName("funcionamento");
 
+                entity.Property(e => e.Image1)
+                    .HasMaxLength(100)
+                    .HasColumnName("image1");
+
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -187,9 +191,13 @@ namespace rwfood.data.Context
                     .HasColumnType("int(11)")
                     .HasColumnName("status");
 
+                entity.Property(e => e.Stock)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("stock");
+
                 entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdAt");
+                            .HasColumnType("datetime")
+                            .HasColumnName("createdAt");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(100)
@@ -206,6 +214,14 @@ namespace rwfood.data.Context
                 entity.Property(e => e.Code2)
                     .HasMaxLength(50)
                     .HasColumnName("code2");
+
+                entity.Property(e => e.Image1)
+                    .HasMaxLength(100)
+                    .HasColumnName("image1");
+
+                entity.Property(e => e.Image2)
+                    .HasMaxLength(100)
+                    .HasColumnName("image2");
 
                 entity.Property(e => e.Amount1)
                     .HasColumnType("decimal(10,2)")

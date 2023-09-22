@@ -3,6 +3,7 @@ export interface IProduct {
     idCompany: number
     idCategory: number
     status: number
+    stock: number
     createdAt: string
     name: string
     code1: string
@@ -21,6 +22,7 @@ export interface IProductCategory {
     idCompany: number
     idCategory: number
     status: number
+    stock: number
     createdAt: string
     name: string
     code1: string

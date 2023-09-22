@@ -10,6 +10,7 @@ namespace rwfood.domain.Entities
     {
         public int Impost { get; set; }
         public int Status { get; set; }
+        public int? LastSale { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
         public string Cell1 { get; set; }

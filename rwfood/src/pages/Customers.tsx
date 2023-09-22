@@ -1,30 +1,37 @@
 import React, { useEffect, useState, useRef } from 'react'
-import Card from '../components/card/Card'
-
-import { ICompany } from '../interfaces/company'
 import Loading from '../components/Loading'
 import CustomButton from '../components/CustomButton'
 import { FaSync, FaFolderPlus, FaFilter } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
-import companyService from '../services/companyService'
-import ModalForm from '../components/modal/ModalFormCompany'
+import CardCustomer from '../components/card/CardCustomer'
+import customerService from '../services/customerService'
+import { ICustomer } from '../interfaces/customer'
+import ModalFormCustomer from '../components/modal/ModalFormCustomer'
 
-const Company = () => {
+const Customers = () => {
 
-    const initState: ICompany = {
+    const initState: ICustomer = {
         id: 0,
         idCompany: 1,
         status: 1,
+        impost: 18,
+        lastSale: 0,
+        createdAt: '',
+        updated: '',
+        birthday: '',
         name: '',
-        site: '',
-        telefone: '',
-        funcionamento: '',
-        image1: '',
-        createdAt: ''
+        cell1: '',
+        cell2: '',
+        document: '',
+        address: '',
+        district: '',
+        complement: '',
+        city: '',
+        postalCode: '',
     }
 
-    const [dataSource, setDataSource] = useState<ICompany>(initState);
+    const [dataSource, setDataSource] = useState<ICustomer>(initState);
 
     //Trata o Modal
     const openModal = () => {
@@ -34,8 +41,8 @@ const Company = () => {
 
     const inputRef = useRef(null)
 
-    const [empresaList, setEmpresaList] = useState<ICompany[]>([])
-    const [empresaListFilter, setEmpresaListFilter] = useState<ICompany[]>([])
+    const [customerList, setCustomerList] = useState<ICustomer[]>([])
+    const [customerListFilter, setCustomerListFilter] = useState<ICustomer[]>([])
     const [loading, setLoading] = useState(true)
     const [filterInput, setFilterInput] = useState('')
 
@@ -49,28 +56,26 @@ const Company = () => {
 
     //Carrega a lista
     useEffect(() => {
-        setEmpresaListFilter(empresaList)
-    }, [empresaList])
+        setCustomerListFilter(customerList)
+    }, [customerList])
 
     useEffect(() => {
-
         closeModal()
-
     }, [respModal])
 
-    const handleInsert = async (confimado: boolean, data: ICompany) => {
+    const handleInsert = async (confimado: boolean, data: ICustomer) => {
         setRespModal(!respModal)
 
         if (confimado) {
 
             //faz requisicao de Insert (POST)
-            var response = await companyService.insertCompany(data)
+            var response = await customerService.insertCustomer(data)
             //console.log('response: ' + response);
             if (response > 0) {
 
                 data.id = response;
                 //Adiciono o card na LISTA
-                setEmpresaList([...empresaList, data])
+                setCustomerList([...customerList, data])
                 //console.log('Operação realizada com sucesso!');
                 toast.success('Operação realizada com sucesso!')
                 return
@@ -88,13 +93,15 @@ const Company = () => {
     //Funcao de Busca da Lista por Filtro
     const filterCompanyAll = () => {
         if (filterInput !== '') {
-            const res = empresaList.filter(
+            const res = customerList.filter(
                 (item) =>
                     item.name.toLowerCase().includes(filterInput.toLowerCase()) ||
-                    item.site.toLowerCase().includes(filterInput.toLowerCase()) ||
-                    item.telefone.toLowerCase().includes(filterInput.toLowerCase())
+                    item.district.toLowerCase().includes(filterInput.toLowerCase()) ||
+                    item.city.toLowerCase().includes(filterInput.toLowerCase()) ||
+                    item.cell1.toLowerCase().includes(filterInput.toLowerCase()) ||
+                    item.cell2.toLowerCase().includes(filterInput.toLowerCase())
             )
-            setEmpresaListFilter(res)
+            setCustomerListFilter(res)
             return
         }
 
@@ -106,14 +113,14 @@ const Company = () => {
         setFilterInput('')
         setLoading(true)
 
-        var response = await companyService.getAllCompany(1)
+        var response = await customerService.getAllCustomer(1)
         // if (response.status === 400) {
         //     console.log('Erro:', response.statusText)
         //     setLoading(false)
         //     return
         // }
-        setEmpresaList(response)
-        setEmpresaListFilter(response)
+        setCustomerList(response)
+        setCustomerListFilter(response)
         setLoading(false)
         //if (inputRef.current) inputRef.current.focus()
     }
@@ -177,25 +184,23 @@ const Company = () => {
             {!loading && (
                 <div className="flex flex-col w-full justify-between mb-5">
                     <div className="grid grid-cols-4 gap-4">
-                        {empresaListFilter.map((item) => (
-                            <Card key={item.id} item={item} empresaList={empresaList} setEmpresaList={setEmpresaList} />
+                        {customerListFilter.map((item) => (
+                            <CardCustomer key={item.id} item={item} productList={customerList} setProductList={setCustomerList} />
                         ))}
                     </div>
                 </div>
             )}
 
-            <ModalForm
-                title="Empresa"
+            <ModalFormCustomer
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 onConfirmed={handleInsert}
                 dataSource={dataSource}
-                children={""}
                 isCloseEsc={false}
                 isCloseOnOverlay={false}
-            ></ModalForm>
+            ></ModalFormCustomer>
         </>
     )
 }
 
-export default Company
+export default Customers

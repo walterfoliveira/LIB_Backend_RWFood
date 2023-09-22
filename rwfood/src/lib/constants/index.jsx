@@ -29,12 +29,6 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         icon: <HiOutlineCube size={28} />
     },
     {
-        key: 'orders',
-        label: 'Pedidos',
-        path: '/orders',
-        icon: <HiOutlineShoppingCart size={28} />
-    },
-    {
         key: 'customers',
         label: 'Clientes',
         path: '/customers',
@@ -64,6 +58,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         label: 'Garçon',
         path: '/waiter',
         icon: <HiOutlineUser size={28} />
+    },
+    {
+        key: 'orders',
+        label: 'Pedidos',
+        path: '/orders',
+        icon: <HiOutlineShoppingCart size={28} />
     }
 ]
 

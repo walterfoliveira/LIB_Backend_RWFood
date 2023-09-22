@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Moment from 'moment'
 import toast from 'react-hot-toast'
-import ModalFormProduct from '../modal/ModalFormProduct'
+import ModalFormCustomer from '../modal/ModalFormCustomer'
 import ModalDialog from '../modal/ModalDialog'
-import { FaCamera, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
-import { HiOutlinePhone, HiMail, HiOutlineIdentification, HiInformationCircle, HiClipboardList, HiCurrencyDollar, HiTrendingUp } from 'react-icons/hi'
-import productService from '../../services/productService'
-import { IProductCategory } from '../../interfaces/product'
+import { FaInfoCircle, FaUserFriends, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
+import { HiOutlinePhone, HiOfficeBuilding, HiUserGroup, HiInformationCircle, HiClipboardList, HiCurrencyDollar, HiTrendingUp } from 'react-icons/hi'
+import customerService from '../../services/customerService'
+import { ICustomer } from '../../interfaces/customer'
+import mask from 'biblioteca-mascaras'
 
 
 //https://react-icons.github.io/react-icons/icons?name=hi
@@ -14,12 +15,12 @@ import { IProductCategory } from '../../interfaces/product'
 //https://tailwindcss.com/docs/background-color
 
 type Props = {
-  item: IProductCategory;
-  productList: IProductCategory[];
-  setProductList: React.Dispatch<React.SetStateAction<IProductCategory[]>>;
+  item: ICustomer;
+  productList: ICustomer[];
+  setProductList: React.Dispatch<React.SetStateAction<ICustomer[]>>;
 }
 
-const CardProduct = ({ item, productList, setProductList }: Props) => {
+const CardCustomer = ({ item, productList, setProductList }: Props) => {
 
   const [respModal, setRespModal] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -33,26 +34,12 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
   localLocale.format('LL') // dimanche 15 juillet 2012 11:01
   const formatDate2 = localLocale.format('DD/MMM/YYYY')
 
-  //Para formatar Valor
-  const amount1 = dataSource.amount1.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  })
+  const lastPedido = dataSource.lastSale > 0 ? `Ult.Pedido: ${dataSource.lastSale.toString().padStart(5, '0')}` : "Sem Pedido"
 
-  const amount2 = dataSource.amount2.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  })
-
-  var image1 = dataSource.image1;
-  if (image1 === null)
-    image1 = ""
-
-
-  // totalPago.toLocaleString('pt-BR', {
-  //     style: 'currency',
-  //     currency: 'BRL',
-  //   })
+  const openLastSales = (order: number) => {
+    if (order > 0)
+      toast.loading(`Pedido ${order.toString().padStart(5, '0')} sendo impresso!`)
+  }
 
   const openModalDialog = () => {
     setModalDialogIsOpen(true)
@@ -75,11 +62,11 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
 
     if (confimado) {
       //faz requisicao de Delete 
-      var response = await productService.deleteProductById(1, dataSource.id)
+      var response = await customerService.deleteCustomerById(1, dataSource.id)
       //console.log('response: ' + response);
       if (response) {
         //remover o item da lista 
-        const newListItem: IProductCategory[] = productList.filter((ls) => ls.id !== item.id);
+        const newListItem: ICustomer[] = productList.filter((ls) => ls.id !== item.id);
         setProductList(newListItem);
 
         //console.log('Operação realizada com sucesso!');
@@ -92,18 +79,18 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
     }
   }
 
-  const handleEdit = async (confimado: boolean, data: IProductCategory | null) => {
+  const handleEdit = async (confimado: boolean, data: ICustomer | null) => {
     setRespModal(!respModal);
 
     if (confimado) {
       //console.log('data: ' + JSON.stringify(data));
 
       //faz requisicao de Update (PUT) 
-      var response = await productService.updateProduct(data as IProductCategory)
+      var response = await customerService.updateCustomer(data as ICustomer)
       //console.log('response: ' + response);
       if (response === dataSource.id) {
         //atualiza o State: dataSource
-        setDataSource(data as IProductCategory);
+        setDataSource(data as ICustomer);
 
         //console.log('Operação realizada com sucesso!');
         toast.success('Operação realizada com sucesso!')
@@ -122,32 +109,19 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
     <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
 
 
-      {/* <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">
-        <img
+      <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-0">
+        {/* <img
           alt="user 1"
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
           className="relative inline-block h-12 w-12 rounded-full border-2 border-blue object-cover object-center hover:z-10 focus:z-10"
-        />
-      </div> */}
-
-      <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">
-        {image1 === '' && <FaCamera size={36} className="text-2x1 text-gray-400" />}
-        {image1 !== '' &&
-          <img
-            alt="user 1"
-            src={`http://bkend.rwconsultoria.com.br:7171/rwfood/company/1/product/${dataSource.image1}`}
-            className="relative inline-block h-12 w-12 rounded-full border-2 border-blue object-cover object-center hover:z-10 focus:z-10"
-          />
-        }
-
+        /> */}
+        <HiUserGroup size={36} className="text-2x1 text-gray-400" />
       </div>
 
-      <div className="text-right p-4">
+      <div className="text-right p-3 mt-2">
         {/* <span className="text-xs text-gray-500 font-semibold tracking-widest uppercase">{dataSource.category}</span> */}
-        <h1 className="text-x font-bold text-gray-700 font-semibold tracking-widest uppercase">{dataSource.category}</h1>
+        <h1 onClick={() => openLastSales(dataSource.lastSale)} className="text-x font-bold text-gray-700 font-semibold tracking-widest ">{lastPedido}</h1>
       </div>
-
-
 
 
       <div className="border-t border-gray-200 z-20 w-full mt-2"></div>
@@ -160,34 +134,34 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
                         alt="Modern building architecture"
                     />
                 </div> */}
-        <div className="p-2">
+        <div className="p-4">
           <div >
 
             <h1 className="flex flex-row text-xl font-bold text-gray-700 font-semibold mb-2 ml-1">{dataSource.name}</h1>
 
             <div className="flex flex-row items-center text-slate-500 mb-1">
               <div>
-                <HiInformationCircle fontSize={23} />
+                <HiOfficeBuilding fontSize={23} />
               </div>
-              <div className="ml-1">{dataSource.description}</div>
+              <div className="ml-1">{dataSource.address}</div>
             </div>
 
             <div className="flex flex-row items-center text-slate-500 mb-1">
               <div>
-                <HiCurrencyDollar fontSize={23} />
+                <HiInformationCircle fontSize={23} />
               </div>
-              {dataSource.amount2 > 0 && <div className="ml-1">{`G: ${amount1} | B: ${amount2}`}</div>}
-              {dataSource.amount2 <= 0 && <div className="ml-1">{`G: ${amount1}`}</div>}
-
+              <div className="ml-1">{dataSource.complement}</div>
             </div>
 
-            <div className="flex flex-row items-center text-slate-500 mb-3">
+            <div className="flex flex-row items-center text-slate-500 mb-1">
               <div>
-                <HiClipboardList fontSize={23} />
+                <HiOutlinePhone fontSize={23} />
               </div>
-              {dataSource.code2 !== '' && <div className="ml-1">{`CodRef: ${dataSource.code1} ${' | '} ${dataSource.code2}`}</div>}
-              {!dataSource.code2 && <div className="ml-1">{`CodRef: ${dataSource.code1}`}</div>}
+              {dataSource.cell2 !== "" && <div className="ml-1">{`${mask.Phone(dataSource.cell1 as string)} | ${mask.Phone(dataSource.cell2 as string)}`}</div>}
+              {dataSource.cell2 === "" && <div className="ml-1">{`G: ${mask.Phone(dataSource.cell1 as string)}`}</div>}
+
             </div>
+
 
             {/* {dataSource.stock === 1 &&
               <div className="flex flex-row items-center text-slate-500 mb-3">
@@ -201,7 +175,7 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
 
 
           </div>
-          <div className="flex flex-row text-slate-500">
+          <div className="flex flex-row text-slate-500 mt-3">
 
             <div onClick={openModal} className="has-tooltip border-2 border-gray-200 rounded-full h-9 w-9 flex items-center justify-center bg-gray-100 hover:bg-gray-200 mr-3">
               <FaPencilAlt size={16} className="text-2xl text-gray-400" />
@@ -220,15 +194,14 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
 
       </div>
 
-
-      <ModalFormProduct
+      <ModalFormCustomer
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleEdit}
         dataSource={dataSource}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-      ></ModalFormProduct>
+      ></ModalFormCustomer>
 
       <ModalDialog
         title="Aviso de Sistema"
@@ -264,5 +237,5 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
   )
 }
 
-export default CardProduct
+export default CardCustomer
 

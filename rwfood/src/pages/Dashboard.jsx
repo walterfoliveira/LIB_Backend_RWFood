@@ -13,7 +13,6 @@ export default function Dashboard() {
     useEffect(() => {
         getEntregadorAll()
         getProductAll()
-        toast.success('Seja Bem-vido(a).')
     }, [])
 
     const getEntregadorAll = async () => {
@@ -26,7 +25,8 @@ export default function Dashboard() {
 
     const getProductAll = async () => {
         var response = await productService.getAllProduct(1)
-        console.log('[getProductAll]: ' + JSON.stringify(response))
+        //console.log('[getProductAll]: ' + JSON.stringify(response))
+        toast.success('Seja Bem-vido(a).')
     }
 
     return (

@@ -16,6 +16,7 @@ const Products = () => {
         idCompany: 1,
         idCategory: 1,
         status: 1,
+        stock: 0,
         name: '',
         description: '',
         code1: '',
