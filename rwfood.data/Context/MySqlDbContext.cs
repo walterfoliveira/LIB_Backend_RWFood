@@ -273,6 +273,76 @@ namespace rwfood.data.Context
                     .HasColumnName("pass");
             });
 
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.ToTable("customer", "rwfood");
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("id");
+
+                entity.Property(e => e.IdCompany)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("idCompany");
+
+                entity.Property(e => e.Status)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("status");
+
+                entity.Property(e => e.Impost)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("impost");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("createdAt");
+
+                entity.Property(e => e.Updated)
+                    .HasColumnType("datetime")
+                    .HasColumnName("updated");
+
+                entity.Property(e => e.Birthday)
+                    .HasColumnType("datetime")
+                    .HasColumnName("birthday");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Cell1)
+                    .HasMaxLength(20)
+                    .HasColumnName("cell1");
+
+                entity.Property(e => e.Cell2)
+                    .HasMaxLength(20)
+                    .HasColumnName("cell2");
+
+                entity.Property(e => e.Document)
+                    .HasMaxLength(20)
+                    .HasColumnName("document");
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(100)
+                    .HasColumnName("address");
+
+                entity.Property(e => e.District)
+                    .HasMaxLength(50)
+                    .HasColumnName("district");
+
+                entity.Property(e => e.Complement)
+                    .HasMaxLength(50)
+                    .HasColumnName("complement");
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(50)
+                    .HasColumnName("city");
+
+                entity.Property(e => e.PostalCode)
+                    .HasMaxLength(10)
+                    .HasColumnName("postalCode");
+
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

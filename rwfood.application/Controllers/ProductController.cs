@@ -19,5 +19,15 @@ namespace rwfood.application.Controllers
             this.configuration = _configuration;
             this.nameController = System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType.Name;
         }
+
+        [HttpPatch("ProductByCategory")]
+        public virtual async Task<ActionResult<IEnumerable<ProductCustomDto>>> GetProductByCategory(int idCompany)
+        {
+            return await Task.Run(() =>
+            {
+                var response = this.classeService.GetProdutoCategory(idCompany);
+                return new ActionResult<IEnumerable<ProductCustomDto>>(response);
+            });
+        }
     }
 }

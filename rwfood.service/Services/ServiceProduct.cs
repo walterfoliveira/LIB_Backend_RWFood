@@ -13,5 +13,10 @@ namespace rwfood.service.Services
         {
             this.repositoryProduct = _repositoryProduct;
         }
+
+        public IEnumerable<ProductCustomDto> GetProdutoCategory(int _idCompany)
+        {
+            return this.repositoryProduct.SelectProdutoCategory(_idCompany);
+        }
     }
 }

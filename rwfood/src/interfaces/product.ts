@@ -16,7 +16,7 @@ export interface IProduct {
     amount4: number
 }
 
-export interface IProductList {
+export interface IProductCategory {
     id: number
     idCompany: number
     idCategory: number

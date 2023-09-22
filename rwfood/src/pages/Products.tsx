@@ -5,13 +5,13 @@ import { FaSync, FaFolderPlus, FaFilter } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 import CardProduct from '../components/card/CardProduct'
-import { IProduct } from '../interfaces/product'
+import { IProduct, IProductCategory } from '../interfaces/product'
 import productService from '../services/productService'
-import ModalForm from '../components/modal/ModalFormCompany'
+import ModalFormProduct from '../components/modal/ModalFormProduct'
 
 const Products = () => {
 
-    const initState: IProduct = {
+    const initState: IProductCategory = {
         id: 0,
         idCompany: 1,
         idCategory: 1,
@@ -26,11 +26,11 @@ const Products = () => {
         amount2: 0,
         amount3: 0,
         amount4: 0,
-        createdAt: ''
-
+        createdAt: '',
+        category: '',
     }
 
-    const [dataSource, setDataSource] = useState<IProduct>(initState);
+    const [dataSource, setDataSource] = useState<IProductCategory>(initState);
 
     //Trata o Modal
     const openModal = () => {
@@ -40,8 +40,8 @@ const Products = () => {
 
     const inputRef = useRef(null)
 
-    const [productList, setProductList] = useState<IProduct[]>([])
-    const [productListFilter, setProductListFilter] = useState<IProduct[]>([])
+    const [productList, setProductList] = useState<IProductCategory[]>([])
+    const [productListFilter, setProductListFilter] = useState<IProductCategory[]>([])
     const [loading, setLoading] = useState(true)
     const [filterInput, setFilterInput] = useState('')
 
@@ -62,7 +62,7 @@ const Products = () => {
         closeModal()
     }, [respModal])
 
-    const handleInsert = async (confimado: boolean, data: IProduct) => {
+    const handleInsert = async (confimado: boolean, data: IProductCategory) => {
         setRespModal(!respModal)
 
         if (confimado) {
@@ -96,6 +96,7 @@ const Products = () => {
                 (item) =>
                     item.name.toLowerCase().includes(filterInput.toLowerCase()) ||
                     item.description.toLowerCase().includes(filterInput.toLowerCase()) ||
+                    item.category.toLowerCase().includes(filterInput.toLowerCase()) ||
                     item.code1.toLowerCase().includes(filterInput.toLowerCase()) ||
                     item.code2.toLowerCase().includes(filterInput.toLowerCase())
             )
@@ -111,7 +112,7 @@ const Products = () => {
         setFilterInput('')
         setLoading(true)
 
-        var response = await productService.getAllProduct(1)
+        var response = await productService.getAllProductCategory(1)
         // if (response.status === 400) {
         //     console.log('Erro:', response.statusText)
         //     setLoading(false)
@@ -189,16 +190,14 @@ const Products = () => {
                 </div>
             )}
 
-            {/* <ModalForm
-                title="Empresa"
+            <ModalFormProduct
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 onConfirmed={handleInsert}
                 dataSource={dataSource}
-                children={""}
                 isCloseEsc={false}
                 isCloseOnOverlay={false}
-            ></ModalForm> */}
+            ></ModalFormProduct>
         </>
     )
 }

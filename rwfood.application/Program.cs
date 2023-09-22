@@ -49,6 +49,7 @@ builder.Services.AddScoped<IRepositoryComplement, RepositoryComplement>();
 builder.Services.AddScoped<IRepositoryPerson, RepositoryPerson>();
 builder.Services.AddScoped<IRepositoryProduct, RepositoryProduct>();
 builder.Services.AddScoped<IRepositoryUsers, RepositoryUsers>();
+builder.Services.AddScoped<IRepositoryCustomer, RepositoryCustomer>();
 
 //Servicos
 builder.Services.AddScoped<IServiceCompany, ServiceCompany>();
@@ -57,6 +58,7 @@ builder.Services.AddScoped<IServiceComplement, ServiceComplement>();
 builder.Services.AddScoped<IServicePerson, ServicePerson>();
 builder.Services.AddScoped<IServiceProduct, ServiceProduct>();
 builder.Services.AddScoped<IServiceUsers, ServiceUsers>();
+builder.Services.AddScoped<IServiceCustomer, ServiceCustomer>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(s =>

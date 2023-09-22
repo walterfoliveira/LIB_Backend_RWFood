@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Moment from 'moment'
 import toast from 'react-hot-toast'
-import ModalForm from '../modal/ModalFormCompany'
+import ModalFormProduct from '../modal/ModalFormProduct'
 import ModalDialog from '../modal/ModalDialog'
 import { FaInfoCircle, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
-import { HiOutlinePhone, HiMail, HiOutlineIdentification } from 'react-icons/hi'
+import { HiOutlinePhone, HiMail, HiOutlineIdentification, HiInformationCircle, HiClipboardList, HiCurrencyDollar } from 'react-icons/hi'
 import productService from '../../services/productService'
-import { IProduct } from '../../interfaces/product'
+import { IProductCategory } from '../../interfaces/product'
 
 
 //https://react-icons.github.io/react-icons/icons?name=hi
@@ -14,9 +14,9 @@ import { IProduct } from '../../interfaces/product'
 //https://tailwindcss.com/docs/background-color
 
 type Props = {
-  item: IProduct;
-  productList: IProduct[];
-  setProductList: React.Dispatch<React.SetStateAction<IProduct[]>>;
+  item: IProductCategory;
+  productList: IProductCategory[];
+  setProductList: React.Dispatch<React.SetStateAction<IProductCategory[]>>;
 }
 
 const CardProduct = ({ item, productList, setProductList }: Props) => {
@@ -34,6 +34,17 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
   const formatDate2 = localLocale.format('DD/MMM/YYYY')
 
   //Para formatar Valor
+  const amount1 = dataSource.amount1.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  })
+
+  const amount2 = dataSource.amount2.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  })
+
+
   // totalPago.toLocaleString('pt-BR', {
   //     style: 'currency',
   //     currency: 'BRL',
@@ -64,7 +75,7 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
       //console.log('response: ' + response);
       if (response) {
         //remover o item da lista 
-        const newListItem: IProduct[] = productList.filter((ls) => ls.id !== item.id);
+        const newListItem: IProductCategory[] = productList.filter((ls) => ls.id !== item.id);
         setProductList(newListItem);
 
         //console.log('Operação realizada com sucesso!');
@@ -77,18 +88,18 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
     }
   }
 
-  const handleEdit = async (confimado: boolean, data: IProduct | null) => {
+  const handleEdit = async (confimado: boolean, data: IProductCategory | null) => {
     setRespModal(!respModal);
 
     if (confimado) {
       //console.log('data: ' + JSON.stringify(data));
 
       //faz requisicao de Update (PUT) 
-      var response = await productService.updateProduct(data as IProduct)
+      var response = await productService.updateProduct(data as IProductCategory)
       //console.log('response: ' + response);
       if (response === dataSource.id) {
         //atualiza o State: dataSource
-        setDataSource(data as IProduct);
+        setDataSource(data as IProductCategory);
 
         //console.log('Operação realizada com sucesso!');
         toast.success('Operação realizada com sucesso!')
@@ -105,6 +116,8 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
 
   return (
     <div className="max-w-md space-x-0 bg-white rounded-xl shadow-md overflow-hidden shadow-md hover:scale-105 transition transform duration-300 cursor-pointer">
+
+
       <div className="rounded-full z-30 p-1 inline-block absolute mx-4 mt-1">
         <img
           alt="user 1"
@@ -114,8 +127,12 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
       </div>
 
       <div className="text-right p-4">
-        <span className="text-xs text-gray-500 font-semibold tracking-widest uppercase">{formatDate2}</span>
+        {/* <span className="text-xs text-gray-500 font-semibold tracking-widest uppercase">{dataSource.category}</span> */}
+        <h1 className="text-x font-bold text-gray-700 font-semibold tracking-widest uppercase">{dataSource.category}</h1>
       </div>
+
+
+
 
       <div className="border-t border-gray-200 z-20 w-full mt-2"></div>
 
@@ -134,28 +151,29 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
 
             <div className="flex flex-row items-center text-slate-500 mb-1">
               <div>
-                <HiOutlinePhone fontSize={23} />
+                <HiInformationCircle fontSize={23} />
               </div>
               <div className="ml-1">{dataSource.description}</div>
             </div>
 
             <div className="flex flex-row items-center text-slate-500 mb-1">
               <div>
-                <HiOutlineIdentification fontSize={23} />
+                <HiCurrencyDollar fontSize={23} />
               </div>
-              <div className="ml-1">{dataSource.code1}</div>
+              {dataSource.amount2 > 0 && <div className="ml-1">{`G: ${amount1} | B: ${amount2}`}</div>}
+              {dataSource.amount2 <= 0 && <div className="ml-1">{`G: ${amount1}`}</div>}
+
             </div>
 
-            <div className="flex flex-row items-center text-slate-500 mb-5">
+            <div className="flex flex-row items-center text-slate-500 mb-3">
               <div>
-                <HiMail fontSize={23} />
+                <HiClipboardList fontSize={23} />
               </div>
-              <div>
-                <a href="#" className="block text-lg leading-tight font-medium text-slate-500 ml-1">
-                  {dataSource.code2}
-                </a>
-              </div>
+              {dataSource.code2 !== '' && <div className="ml-1">{`CodRef: ${dataSource.code1} ${' | '} ${dataSource.code2}`}</div>}
+              {!dataSource.code2 && <div className="ml-1">{`CodRef: ${dataSource.code1}`}</div>}
             </div>
+
+
           </div>
           <div className="flex flex-row text-slate-500">
 
@@ -177,16 +195,14 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
       </div>
 
 
-      {/* <ModalForm
-        title="Empresa"
+      <ModalFormProduct
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onConfirmed={handleEdit}
         dataSource={dataSource}
         isCloseEsc={false}
         isCloseOnOverlay={false}
-      >
-      </ModalForm> */}
+      ></ModalFormProduct>
 
       <ModalDialog
         title="Aviso de Sistema"
