@@ -133,24 +133,11 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.id > 0 ? formik.values.id.toString().padStart(3, '0') : formik.values.id}
+                  disabled={true}
                 />
 
 
               </div>
-              <div className="-mt-3">
-                {/* <Select id="level" label="Nivel" options={["Atendente", "Gerente", "Administrador", "Master"]} value={levelSt} setValue={setLevelSt} /> */}
-
-                <label htmlFor="level" className="text-gray-700 text-slate-500 font-bold ml-4 mt-4">Categoria</label>
-                <select id="level" name="level" defaultValue="Selecionar" value={-1} className='bg-gray-200 border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1 ml-4'>
-                  <option value="-1">Selecionar</option>
-                  <option value="0">Pizza</option>
-                  <option value="1">Brotinho</option>
-                  <option value="2">Bebidas</option>
-                  <option value="3">Destilados</option>
-                </select>
-
-              </div>
-
 
             </div>
 
@@ -161,13 +148,14 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
                   Telefone 1
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="cell1"
                   name="cell1"
                   type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.cell1}
+                  autoFocus={true}
                 />
                 {formik.touched.cell1 && formik.errors.cell1 ? (
                   <div className="text-orange-400 font-semibold">{formik.errors.cell1}</div>
@@ -182,7 +170,7 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
                   Telefone 2
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="cell2"
                   name="cell2"
                   type="text"
@@ -199,7 +187,7 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
               Nome
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="name"
               name="name"
               type="text"
@@ -215,7 +203,7 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
               Endereço
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="address"
               name="address"
               type="text"
@@ -234,7 +222,7 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
                   Bairro
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="district"
                   name="district"
                   type="text"
@@ -253,7 +241,7 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
                   Cidade
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="city"
                   name="city"
                   type="text"
@@ -272,7 +260,7 @@ const ModalFormCustomer = ({ isOpen, dataSource, onRequestClose, onConfirmed, is
               Ponto de Referência
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="complement"
               name="complement"
               type="text"

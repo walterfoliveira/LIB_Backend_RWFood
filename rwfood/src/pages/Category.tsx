@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
+import { GlobalContext } from '../contexts/GlobalContext'
 
 import Loading from '../components/Loading'
 import CustomButton from '../components/CustomButton'
@@ -12,6 +13,7 @@ import categoryService from '../services/categoryService'
 import CardSimple from '../components/card/CardSimple'
 
 const Category = () => {
+  const globalContext = useContext(GlobalContext)
 
   const initState: ICategory = {
     id: 0,
@@ -66,7 +68,7 @@ const Category = () => {
       const newModel: ICategory = { id: 0, status: 1, idCompany: 1, name: data.name, createdAt: '' }
 
       //faz requisicao de Insert (POST)      
-      var response = await categoryService.insertCategory(newModel)
+      const response = await categoryService.insertCategory(newModel)
       //console.log('response: ' + response);
       if (response > 0) {
 
@@ -75,15 +77,18 @@ const Category = () => {
 
         //Adiciono o card na LISTA
         setItemList([...itemList, newModel])
-        //console.log('Operação realizada com sucesso!');
-        toast.success('Operação realizada com sucesso!')
-        return
+
+        //Atualiza context: category
+        globalContext?.setCategory([...itemList, newModel]);
       }
 
-      toast.error('Falha ao executar essa operação!')
+      //console.log('Operação realizada com sucesso!');
+      toast.success('Operação realizada com sucesso!')
+      return
     }
-  }
 
+    toast.error('Falha ao executar essa operação!')
+  }
 
   const closeModal = () => {
     setDataSource((dataSource) => initState)

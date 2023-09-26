@@ -6,7 +6,7 @@ import ModalDialog from '../modal/ModalDialog'
 import { FaCamera, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import { HiOutlinePhone, HiMail, HiOutlineIdentification, HiInformationCircle, HiClipboardList, HiCurrencyDollar, HiTrendingUp } from 'react-icons/hi'
 import productService from '../../services/productService'
-import { IProductCategory } from '../../interfaces/product'
+import { IProduct, IProductCategory } from '../../interfaces/product'
 
 
 //https://react-icons.github.io/react-icons/icons?name=hi
@@ -18,6 +18,7 @@ type Props = {
   productList: IProductCategory[];
   setProductList: React.Dispatch<React.SetStateAction<IProductCategory[]>>;
 }
+
 
 const CardProduct = ({ item, productList, setProductList }: Props) => {
 
@@ -92,18 +93,22 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
     }
   }
 
-  const handleEdit = async (confimado: boolean, data: IProductCategory | null) => {
+  const handleEdit = async (confimado: boolean, data: IProductCategory) => {
     setRespModal(!respModal);
 
     if (confimado) {
       //console.log('data: ' + JSON.stringify(data));
 
       //faz requisicao de Update (PUT) 
-      var response = await productService.updateProduct(data as IProductCategory)
+      //const dataModel = data as 
+      const editModelProduct: IProduct = { id: data.id, idCompany: data.idCompany, idCategory: data.idCategory, status: data.status, stock: data.stock, name: data.name, description: data.description, code1: data.code1, code2: data.code2, image1: data.image1, image2: data.image2, amount1: data.amount1, amount2: data.amount2, amount3: data.amount3, amount4: data.amount4, createdAt: data.createdAt }
+
+      //var response = await productService.updateProduct(data as IProductCategory)
+      var response = await productService.updateProduct(editModelProduct)
       //console.log('response: ' + response);
       if (response === dataSource.id) {
-        //atualiza o State: dataSource
-        setDataSource(data as IProductCategory);
+        //atualiza o State: dataSource        
+        setDataSource(data);
 
         //console.log('Operação realizada com sucesso!');
         toast.success('Operação realizada com sucesso!')
@@ -154,12 +159,12 @@ const CardProduct = ({ item, productList, setProductList }: Props) => {
 
       <div className="md:flex">
         {/* <div className="md:shrink-0">
-                    <img
-                        className="h-48 w-full object-cover md:h-full md:w-48"
-                        src="https://source.unsplash.com/100x100?macbook"
-                        alt="Modern building architecture"
-                    />
-                </div> */}
+          <img
+            className="h-48 w-full object-cover md:h-full md:w-48"
+            src="https://source.unsplash.com/100x100?macbook"
+            alt="Modern building architecture"
+          />
+        </div> */}
         <div className="p-2">
           <div >
 

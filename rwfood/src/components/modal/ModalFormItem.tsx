@@ -120,6 +120,7 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.id}
+              disabled={true}
 
             // value={formik.values.id.toString().padStart(3, '0')}
             />
@@ -128,13 +129,14 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
               Nome
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-2"
               id="name"
               name="name"
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
+              autoFocus={true}
             />
             {formik.touched.name && formik.errors.name ? (
               <div className="text-orange-400 font-semibold">{formik.errors.name}</div>
@@ -147,7 +149,7 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
                   Celular
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-2"
                   id="cell"
                   name="cell"
                   type="text"
@@ -165,7 +167,7 @@ const ModalFormItem = ({ isOpen, dataSource, onRequestClose, onConfirmed, isClos
                   Doc. CPF
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:line-blue-500 text-gray-700 w-full mb-2"
                   id="document"
                   name="document"
                   type="text"

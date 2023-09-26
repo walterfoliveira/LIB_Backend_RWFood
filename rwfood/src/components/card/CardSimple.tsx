@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Moment from 'moment'
 import toast from 'react-hot-toast'
 import ModalFormItem from '../../components/modal/ModalFormItem'
@@ -10,6 +10,7 @@ import {
 
 } from 'react-icons/hi'
 
+import { GlobalContext } from '../../contexts/GlobalContext'
 import { IItem } from "../../interfaces/company";
 import { IComplement } from '../../interfaces/complement'
 import { ICategory } from '../../interfaces/category'
@@ -31,6 +32,8 @@ type Props = {
 }
 
 const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
+
+  const globalContext = useContext(GlobalContext)
 
   const [respModal, setRespModal] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -90,6 +93,10 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
           if (isItem === 2) {
             const newListItem: ICategory[] = itemList.filter((ls) => ls.id !== item.id);
             setItemList(newListItem);
+            //category
+            globalContext?.setCategory(newListItem)
+            //console.log('[Context: Categoria]: ' + JSON.stringify(listCategoryCxt?.category))
+
           }
 
         //console.log('Operação realizada com sucesso!');
@@ -125,6 +132,11 @@ const CardSimple = ({ item, itemList, setItemList, isItem }: Props) => {
       if (response === dataSource.id) {
         //atualiza o State: dataSource
         setDataSource(editModel as IComplement | ICategory);
+
+        //category
+        if (isItem === 2) {
+          //listCategoryCxt?.setCategory()
+        }
 
         //console.log('Operação realizada com sucesso!');
         toast.success('Operação realizada com sucesso!')

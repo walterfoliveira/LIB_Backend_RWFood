@@ -13,8 +13,8 @@ export class UsersService {
         this.apiService = apiService
     }
 
-    public getProfile() {
-        return this.apiService.get<IUser>('Users/1/id/1')
+    public getProfile(idCompany: number, idUser: number) {
+        return this.apiService.get<IUser>(`Users/${idCompany}/id/${idUser}`)
     }
 
     public getAllUser(idCompany: number) {

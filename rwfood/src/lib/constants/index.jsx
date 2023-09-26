@@ -92,10 +92,16 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
         path: '/settings',
         icon: <HiOutlineCog size={28} />
     },
+    // {
+    //     key: 'support',
+    //     label: 'Suporte',
+    //     path: '/support',
+    //     icon: <HiOutlineQuestionMarkCircle size={28} />
+    // },
     {
-        key: 'support',
-        label: 'Suporte',
-        path: '/support',
-        icon: <HiOutlineQuestionMarkCircle size={28} />
+        key: 'profile',
+        label: 'Perfil',
+        path: '/profile',
+        icon: <HiOutlineUser size={28} />
     }
 ]

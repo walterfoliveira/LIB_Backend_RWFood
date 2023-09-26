@@ -8,6 +8,7 @@ import Category from './pages/Category'
 import Person from './pages/Person'
 import DeliveryMan from './pages/DeliveryMan'
 import Users from './pages/Users'
+import Profile from './pages/Profile'
 
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom'
 import Customers from './pages/Customers'
@@ -31,6 +32,7 @@ function App() {
                     <Route path="waiter" element={<Person typePage={2} />} />
                     <Route path="users" element={<Users />} />
                     <Route path="customers" element={<Customers />} />
+                    <Route path="profile" element={<Profile />} />
                 </Route>
                 <Route path="/register" element={<Register />} />
             </Routes>

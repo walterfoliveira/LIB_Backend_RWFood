@@ -121,6 +121,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.id > 0 ? formik.values.id.toString().padStart(3, '0') : formik.values.id}
+                  disabled={true}
                 />
 
 
@@ -144,13 +145,14 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               Nome
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="name"
               name="name"
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
+              autoFocus={true}
             />
             {formik.touched.name && formik.errors.name ? (
               <div className="text-orange-400 font-semibold">{formik.errors.name}</div>
@@ -160,7 +162,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               Sobre Nome
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="surname"
               name="surname"
               type="text"
@@ -176,7 +178,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               Doc. CPF
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="document"
               name="document"
               type="text"
@@ -192,7 +194,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               Celular
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="cell"
               name="cell"
               type="text"
@@ -208,7 +210,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
               E-mail
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="mail"
               name="mail"
               type="email"
@@ -227,7 +229,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
                   Senha
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="pass"
                   name="pass"
                   type="password"
@@ -246,7 +248,7 @@ const ModalFormUser = ({ title, isOpen, dataSource, onRequestClose, onConfirmed,
                   Confirma Senha
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-2"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="passConfirm"
                   name="passConfirm"
                   type="password"

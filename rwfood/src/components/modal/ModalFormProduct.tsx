@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Select from 'react-select'
 import ReactModal from 'react-modal';
 import mask from 'biblioteca-mascaras'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { IProductCategory } from "../../interfaces/product";
 import { FaPlusCircle, FaPencilAlt } from 'react-icons/fa'
+import { GlobalContext } from '../../contexts/GlobalContext'
 
 interface ModalCrudProps {
   isOpen: boolean;
@@ -15,8 +17,48 @@ interface ModalCrudProps {
   onConfirmed: (confimado: boolean, data: IProductCategory) => void;
 }
 
+interface IOptionProps {
+  value: number;
+  label: string;
+}
 
 const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isCloseEsc, isCloseOnOverlay }: ModalCrudProps) => {
+  const globalContext = useContext(GlobalContext)
+
+  const [optionKeySelected, setOptionKeySelected] = useState<null | number>(dataSource.idCategory)
+  const [optionLabelSelected, setOptionLabekSelected] = useState<string>(dataSource.category)
+
+
+  const [selected, setSelected] = useState(null);
+
+  const handleChangeSelect = (item: number, itemValue: string) => {
+    setOptionKeySelected(item);
+    setOptionLabekSelected(itemValue);
+    //console.log(`Option selected:`, optionKeySelected);
+  };
+
+
+  const optItems = globalContext?.category.map((item) => {
+    return {
+      value: item.id,
+      label: item.name
+    }
+  }) as IOptionProps[]
+
+  //Adiciona item SELECIONAR = 0
+  //optItems.unshift(options)
+
+  const SelectCustom = () => (
+    <Select
+      className='w-64 ml-3 -mt-6 rounded appearance-none py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+      options={optItems}
+      onChange={(item) => handleChangeSelect(item?.value as number, item?.label as string)}
+    //onChange={(item) => setOptionKeySelected(item?.value as number)}
+    //onChange={handleChange} 
+    //autoFocus={true}
+
+    />
+  )
 
   function onCloseModal() {
     onRequestClose()
@@ -45,11 +87,11 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
     validationSchema: Yup.object({
       name: Yup.string()
         .min(3, 'Minimo de caracteres aceitável é 3')
-        .max(50, 'Máximo de caracteres aceitável é 50')
+        .max(100, 'Máximo de caracteres aceitável é 100')
         .required('O campo é obrigatório'),
       description: Yup.string()
         .min(3, 'Minimo de caracteres aceitável é 3')
-        .max(50, 'Máximo de caracteres aceitável é 50')
+        .max(100, 'Máximo de caracteres aceitável é 100')
         .required('O campo é obrigatório'),
       code1: Yup.string().required("Campo é obrigatório"),
       amount1: Yup.string().required("Campo é obrigatório"),
@@ -59,7 +101,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
       //alert(JSON.stringify(values, null, 2))
       //console.log('values: ' + JSON.stringify(values, null, 2));
 
-      const newState: IProductCategory = { ...dataSource, name: values.name, description: values.description, code1: values.code1, code2: values.code2, amount1: values.amount1, amount2: values.amount2, amount3: values.amount3, amount4: values.amount4, }
+      const newState: IProductCategory = { ...dataSource, idCategory: optionKeySelected as number, category: optionLabelSelected, name: values.name, description: values.description, code1: values.code1, code2: values.code2, amount1: values.amount1, amount2: values.amount2, amount3: values.amount3, amount4: values.amount4, }
       //console.log('newState: ' + JSON.stringify(newState));
       onConfirmed(true, newState)
     }
@@ -119,37 +161,25 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
                   Identificador
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:2/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-32 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
                   id="id"
                   name="id"
                   type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.id > 0 ? formik.values.id.toString().padStart(3, '0') : formik.values.id}
+                  disabled={true}
                 />
 
-
               </div>
-              <div className="-mt-3">
-                {/* <Select id="level" label="Nivel" options={["Atendente", "Gerente", "Administrador", "Master"]} value={levelSt} setValue={setLevelSt} /> */}
-
-                <label htmlFor="level" className="text-gray-700 text-slate-500 font-bold ml-4 mt-4">Categoria</label>
-                <select id="level" name="level" defaultValue="Selecionar" value={-1} className='bg-gray-200 border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1 ml-4'>
-                  <option value="-1">Selecionar</option>
-                  <option value="0">Pizza</option>
-                  <option value="1">Brotinho</option>
-                  <option value="2">Bebidas</option>
-                  <option value="3">Destilados</option>
-                </select>
-
+              <div className="mt-6">
+                <label htmlFor="amount2" className="block text-gray-700 text-slate-500 font-bold mb-4 ml-5">
+                  Categoria do Produto: {optionKeySelected} - {optionLabelSelected}
+                </label>
+                <SelectCustom />
               </div>
 
-              <div>
-
-                {/* <label htmlFor="id" className="block text-gray-700 text-slate-500 font-bold mt-4">
-                  Identificador
-                </label> */}
-
+              <div className="mt-8 ml-5">
                 <label className="flex items-center space-x-2">
                   <input type="checkbox"
 
@@ -163,9 +193,8 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
                     id="flexCheckIndeterminate" />
 
 
-                  <span className="text-gray-700">Estoque</span>
+                  <span className="text-gray-700">Estoque controlado</span>
                 </label>
-
 
               </div>
 
@@ -178,7 +207,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
                   Codigo 1
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="code1"
                   name="code1"
                   type="text"
@@ -199,7 +228,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
                   Codigo 2
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full:1/3 py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="code2"
                   name="code2"
                   type="text"
@@ -216,7 +245,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
               Nome
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="name"
               name="name"
               type="text"
@@ -232,7 +261,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
               Composição do Produto
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
               id="description"
               name="description"
               type="text"
@@ -251,7 +280,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
                   Valor Grande
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="amount1"
                   name="amount1"
                   type="number"
@@ -270,7 +299,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
                   Valor Grande
                 </label>
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-300 rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-1"
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:outline-blue-400 focus:outline-blue-500 text-gray-700 w-full mb-1"
                   id="amount2"
                   name="amount2"
                   type="number"
@@ -286,7 +315,7 @@ const ModalFormProduct = ({ isOpen, dataSource, onRequestClose, onConfirmed, isC
             </div>
 
 
-            <div className="flex justify-end items-center">{/*footer */}
+            <div className="flex justify-end items-center mt-4">{/*footer */}
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
                 Confirmar
               </button>
