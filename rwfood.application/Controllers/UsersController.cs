@@ -19,5 +19,17 @@ namespace rwfood.application.Controllers
             this.configuration = _configuration;
             this.nameController = System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType.Name;
         }
+
+        [HttpGet("{idCompany}/{mail}/{password}")]
+        public virtual async Task<ActionResult<UsersDto>> GetLogin(int idCompany,string mail, string password)
+        {
+            return await Task.Run(() =>
+            {
+                var response = this.classeService.GetLogin(idCompany, mail, password);
+                return new ActionResult<UsersDto>(response);
+            });
+        }
+
+
     }
 }

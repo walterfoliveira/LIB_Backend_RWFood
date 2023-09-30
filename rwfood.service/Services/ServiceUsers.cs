@@ -13,5 +13,10 @@ namespace rwfood.service.Services
         {
             this.repositoryUsers = _repositoryUsers;
         }
+
+        public UsersDto GetLogin(int _idCompany, string _email, string _password)
+        {
+            return this.repositoryUsers.SelectLogin(_idCompany, _email, _password);
+        }
     }
 }

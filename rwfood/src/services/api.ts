@@ -1,7 +1,7 @@
 //import axios from 'axios'
 import axios, { AxiosError, AxiosResponse, Method } from 'axios'
 import { formatErrorMessage } from '../facades/errorFormater'
-//import { getToken } from '../facades/localStorage';
+import { getToken } from '../facades/localStorage'
 
 //BaseURL: http://bkend.rwconsultoria.com.br:20021/api/v1/api/
 //Resource: //ListAll: Users/1 -->> 1ºparametro : Company
@@ -45,8 +45,8 @@ export class ApiService {
                 method,
                 timeout: 30000,
                 headers: {
-                    'Content-type': 'application/json'
-                    //'authorization': `Bearer ${getToken()}`
+                    'Content-type': 'application/json',
+                    authorization: `Bearer ${getToken()}`
                 },
                 params: method === 'GET' ? data : null,
                 data: method !== 'GET' ? data : null

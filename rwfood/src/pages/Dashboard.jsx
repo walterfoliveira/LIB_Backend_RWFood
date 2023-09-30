@@ -25,13 +25,13 @@ export default function Dashboard() {
     const getProfile = async (idCompany, idUser) => {
         var response = await userService.getProfile(idCompany, idUser)
         globalContext?.setUser(response)
-        console.log('[getProfile]: ' + JSON.stringify(response))
+        //console.log('[getProfile]: ' + JSON.stringify(response))
     }
 
     const getCategoriaAll = async () => {
         var response = await categoryService.getAllCategory(1)
         globalContext?.setCategory(response)
-        console.log('[getCategoriaAll]: ' + JSON.stringify(response))
+        //console.log('[getCategoriaAll]: ' + JSON.stringify(response))
     }
 
     const getEntregadorAll = async () => {

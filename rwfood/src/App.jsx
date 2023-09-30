@@ -9,9 +9,14 @@ import Person from './pages/Person'
 import DeliveryMan from './pages/DeliveryMan'
 import Users from './pages/Users'
 import Profile from './pages/Profile'
+import Login from './pages/Login'
 
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom'
 import Customers from './pages/Customers'
+import { useState, useEffect } from 'react'
+
+import autheticationService from './services/authenticationService'
+import { clearStorage, getToken, saveToken } from './facades/localStorage'
 
 /*Para usar parametro na pagina
 
@@ -19,10 +24,28 @@ https://reactrouter.com/en/main/hooks/use-params
 */
 
 function App() {
+    const [logged, setLogged] = useState(true)
+
+    useEffect(() => {
+        getAuthenticationToken(1, 'pizzaria', '1122')
+    }, [])
+
+    const getAuthenticationToken = async (idCompany, userName, passWord) => {
+        var token = getToken()
+        if ((token === '') | (token === null)) {
+            const response = await autheticationService.getAuth(idCompany, userName, passWord)
+            //globalContext?.setUser(response)
+            token = response.token
+            saveToken(token)
+        }
+
+        console.log('[getAuthenticationToken]: ' + token)
+    }
+
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Layout />}>
+                <Route path="/" element={logged ? <Layout /> : <Login />}>
                     <Route index element={<Dashboard />} />
                     <Route path="products" element={<Products />} />
                     <Route path="company" element={<Company />} />
@@ -35,9 +58,19 @@ function App() {
                     <Route path="profile" element={<Profile />} />
                 </Route>
                 <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </Router>
     )
 }
 
 export default App
+{
+    /* 
+https://reactrouter.com/en/main/hooks/use-navigate
+<Route path="contacts/:id" element={<Contact />} />
+<Route
+  path="contacts/:id/edit"
+  element={<EditContact />}
+/> */
+}

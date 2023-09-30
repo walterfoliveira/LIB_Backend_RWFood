@@ -26,6 +26,7 @@ namespace rwfood.data.Context
         public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Authentication> Authentication { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -280,6 +281,10 @@ namespace rwfood.data.Context
                     .HasMaxLength(20)
                     .HasColumnName("document");
 
+                entity.Property(e => e.Image1)
+                    .HasMaxLength(100)
+                    .HasColumnName("image1");
+
                 entity.Property(e => e.Mail)
                     .HasMaxLength(100)
                     .HasColumnName("mail");
@@ -357,6 +362,31 @@ namespace rwfood.data.Context
                     .HasMaxLength(10)
                     .HasColumnName("postalCode");
 
+            });
+
+            modelBuilder.Entity<Authentication>(entity =>
+            {
+                entity.ToTable("authentication", "rwfood");
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("id");
+
+                entity.Property(e => e.IdCompany)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("idCompany");
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(100)
+                    .HasColumnName("username");
+
+                entity.Property(e => e.PassWord)
+                    .HasMaxLength(20)
+                    .HasColumnName("password");
+
+                entity.Property(e => e.Role)
+                    .HasMaxLength(20)
+                    .HasColumnName("role");
             });
 
             OnModelCreatingPartial(modelBuilder);

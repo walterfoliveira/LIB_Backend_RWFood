@@ -12,6 +12,7 @@ const initialValues: IUser = {
   name: '',
   surname: '',
   document: '',
+  image1: '',
   cell: '',
   mail: '',
   pass: '',

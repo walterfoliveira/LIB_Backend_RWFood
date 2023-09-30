@@ -23,6 +23,7 @@ const Users = () => {
     mail: '',
     cell: '',
     document: '',
+    image1: '',
     pass: '',
     surname: '',
     updated: '',

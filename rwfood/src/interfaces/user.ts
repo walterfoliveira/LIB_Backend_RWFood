@@ -9,37 +9,22 @@ export interface IUser {
     surname: string
     cell: string
     document: string
+    image1: string
     mail: string
     pass: string
 }
 
-export interface IUserCreate {
-    name: string
-    email: string
-    password: string
-    roles: string[]
+export interface IAuthenticationUser {
+    token: string
+    user: IAuthUser
 }
 
-export interface IDisableTwoFa {
-    pin: string
-    userIdentificator: string
-}
-
-export interface IResetPassword {
-    pin: string
-    userIdentificator: string
-}
-
-export interface IChangeUserEmail {
-    pin: string
-    userIdentificator?: string
-    userEmail: string
-}
-
-export interface IUserCreateResponse {
-    email: string
-    qrCode: string
-    secret: string
+export interface IAuthUser {
+    id?: number
+    idCompany: number
+    role?: string
+    userName: string
+    passWord: string
 }
 
 export enum RoleEnum {

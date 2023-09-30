@@ -50,6 +50,7 @@ builder.Services.AddScoped<IRepositoryPerson, RepositoryPerson>();
 builder.Services.AddScoped<IRepositoryProduct, RepositoryProduct>();
 builder.Services.AddScoped<IRepositoryUsers, RepositoryUsers>();
 builder.Services.AddScoped<IRepositoryCustomer, RepositoryCustomer>();
+builder.Services.AddScoped<IRepositoryAuthentication, RepositoryAuthentication>();
 
 //Servicos
 builder.Services.AddScoped<IServiceCompany, ServiceCompany>();
@@ -59,6 +60,7 @@ builder.Services.AddScoped<IServicePerson, ServicePerson>();
 builder.Services.AddScoped<IServiceProduct, ServiceProduct>();
 builder.Services.AddScoped<IServiceUsers, ServiceUsers>();
 builder.Services.AddScoped<IServiceCustomer, ServiceCustomer>();
+builder.Services.AddScoped<IServiceAuthentication, ServiceAuthentication>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(s =>
@@ -129,6 +131,7 @@ app.UseSwagger(c =>
 {
     c.SerializeAsV2 = true;
 });
+
 app.UseSwaggerUI(c =>
 {
     c.InjectStylesheet("/swagger-ui/custom.css");

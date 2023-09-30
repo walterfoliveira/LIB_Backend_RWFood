@@ -58,13 +58,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         label: 'Garçon',
         path: '/waiter',
         icon: <HiOutlineUser size={28} />
-    },
-    {
-        key: 'orders',
-        label: 'Pedidos',
-        path: '/orders',
-        icon: <HiOutlineShoppingCart size={28} />
     }
+    // {
+    //     key: 'orders',
+    //     label: 'Pedidos',
+    //     path: '/orders',
+    //     icon: <HiOutlineShoppingCart size={28} />
+    // }
 ]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
