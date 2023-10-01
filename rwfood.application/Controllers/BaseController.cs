@@ -1,4 +1,5 @@
 ﻿using log4net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using rwfood.domain.Dto;
@@ -27,14 +28,9 @@ namespace rwfood.application.Controllers
         }
 
         [HttpGet("{idCompany}")]
+        [Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<IEnumerable<D>>> Get(int idCompany)
         {
-            //if (limit == null || limit == 0)
-            //    limit = this.recordsPerRequest;
-
-            //if (offset == null)
-            //    offset = 0;
-
             return await Task.Run(() =>
             {
                 //var registros = this.genericService.GetAll(_idCompany, null, null).Count();
@@ -44,13 +40,15 @@ namespace rwfood.application.Controllers
             });
         }
 
-        [HttpGet("{idCompany}/id/{id}")]
+        [HttpGet("{idCompany}/{id}")]
+        [Authorize(Roles = "ERP")]
         public virtual D GetById(int idCompany, int id)
         {
             return this.genericService.GetById(idCompany, id);
         }
 
         [HttpPut]
+        [Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<int>> Put([FromBody] D dtoObject)
         {
             if (dtoObject == null)
@@ -72,6 +70,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<int>> Post([FromBody] D dtoObject)
         {
             if (dtoObject == null)
@@ -92,7 +91,8 @@ namespace rwfood.application.Controllers
             });
         }
 
-        [HttpDelete("{idCompany}/id/{id}")]
+        [HttpDelete("{idCompany}/{id}")]
+        [Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<bool>> Delete(int idCompany, int id)
         {
             if (id == 0)

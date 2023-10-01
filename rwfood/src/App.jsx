@@ -26,9 +26,14 @@ https://reactrouter.com/en/main/hooks/use-params
 function App() {
     const [logged, setLogged] = useState(true)
 
-    useEffect(() => {
-        getAuthenticationToken(1, 'pizzaria', '1122')
-    }, [])
+    // useEffect(() => {
+    //     getAuthenticationToken(1, 'pizzaria', '1122')
+    //     const token = getToken()
+    //     if (!token) {
+    //         // history.push('/login')
+    //         setLogged(false)
+    //     }
+    // }, [])
 
     const getAuthenticationToken = async (idCompany, userName, passWord) => {
         var token = getToken()
@@ -41,6 +46,8 @@ function App() {
 
         console.log('[getAuthenticationToken]: ' + token)
     }
+
+    getAuthenticationToken(1, 'pizzaria', '1122')
 
     return (
         <Router>

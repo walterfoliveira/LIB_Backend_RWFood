@@ -1,6 +1,10 @@
 using log4net;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using rwfood.data.Context;
 using rwfood.data.Repository;
@@ -8,6 +12,7 @@ using rwfood.domain.Interfaces.Repositories;
 using rwfood.domain.Interfaces.Services;
 using rwfood.service.Services;
 using System.Configuration;
+using System.Text;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
@@ -110,14 +115,34 @@ builder.Services.AddSwaggerGen(s =>
     s.IncludeXmlComments(xmlPath);
 });
 
+var key = Encoding.ASCII.GetBytes(SettingsSecret.Secret);
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Logging.AddConsole();
 
-string caminhoLog = $"{Directory.GetCurrentDirectory()}\\Logs\\{DateTime.Now.ToString("dd-MM-yyyy")}";
-string nomeArquivo = $"Log_{DateTime.Now.ToString("ddMMyyyy_HHmmss")}.txt";
+//string caminhoLog = $"{Directory.GetCurrentDirectory()}\\Logs\\{DateTime.Now.ToString("dd-MM-yyyy")}";
+//string nomeArquivo = $"Log_{DateTime.Now.ToString("ddMMyyyy_HHmmss")}.txt";
 
-if (!Directory.Exists(caminhoLog))
-    Directory.CreateDirectory(caminhoLog);
+//if (!Directory.Exists(caminhoLog))
+//    Directory.CreateDirectory(caminhoLog);
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

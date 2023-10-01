@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Ocsp;
 using rwfood.domain.Dto;
 using rwfood.domain.Interfaces.Services;
+using rwfood.service.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -20,8 +21,6 @@ namespace rwfood.application.Controllers
         readonly IServiceAuthentication classeService;
         readonly IConfiguration configuration;
         readonly string nameController;
-
-        
 
         public AuthenticationController(IServiceAuthentication _classeService, ILog _logger, IConfiguration _configuration)
         {
@@ -77,10 +76,9 @@ namespace rwfood.application.Controllers
         }
 
         public static string GenerateToken(string userName, string role)
-        {
-            string Secret = "EVRfedaf7d8863b48e197b9287d492b708eRW";
+        {            
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Secret);
+            var key = Encoding.ASCII.GetBytes(SettingsSecret.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

@@ -12,14 +12,34 @@ import productService from '../services/productService'
 import categoryService from '../services/categoryService'
 import userService from '../services/userService'
 
+import { getToken } from '../facades/localStorage'
+
 export default function Dashboard() {
+    //const history = useHistory()
     const globalContext = useContext(GlobalContext)
+
+    // useEffect(() => {
+    //     const token = getToken()
+
+    //     if (!token) {
+    //         history.push('/login')
+    //         return
+    //     }
+
+    //     getProfile(1, 2)
+    //     getCategoriaAll()
+
+    //     toast.success('Seja Bem-vido(a).')
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
     useEffect(() => {
         getProfile(1, 2)
         getCategoriaAll()
         getEntregadorAll()
         getProductAll()
+
+        toast.success('Seja Bem-vido(a).')
     }, [])
 
     const getProfile = async (idCompany, idUser) => {
@@ -45,7 +65,6 @@ export default function Dashboard() {
     const getProductAll = async () => {
         var response = await productService.getAllProduct(1)
         //console.log('[getProductAll]: ' + JSON.stringify(response))
-        toast.success('Seja Bem-vido(a).')
     }
 
     return (
