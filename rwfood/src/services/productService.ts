@@ -11,7 +11,7 @@ export class ProductService {
     }
 
     public getProduct(idCompany: number, id: number) {
-        return this.apiService.get<IProduct>(`Product/${idCompany}/id/${id}`)
+        return this.apiService.get<IProduct>(`Product/${idCompany}/${id}`)
     }
 
     public getAllProduct(id: number) {
@@ -23,7 +23,7 @@ export class ProductService {
     }
 
     public deleteProductById(idCompany: number, id: number) {
-        return this.apiService.del<boolean>(`Product/${idCompany}/id/${id}`, {})
+        return this.apiService.del<boolean>(`Product/${idCompany}/${id}`, {})
     }
 
     public insertProduct(model: IProduct) {

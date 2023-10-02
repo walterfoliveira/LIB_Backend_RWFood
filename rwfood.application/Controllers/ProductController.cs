@@ -1,4 +1,5 @@
 ﻿using log4net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using rwfood.domain.Dto;
@@ -21,6 +22,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpPatch("ProductByCategory")]
+        //[Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<IEnumerable<ProductCustomDto>>> GetProductByCategory(int idCompany)
         {
             return await Task.Run(() =>

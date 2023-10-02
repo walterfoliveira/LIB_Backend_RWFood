@@ -3,7 +3,6 @@ import { GlobalContext } from '../contexts/GlobalContext'
 
 export default function DashboardStatsGrid() {
     const globalContext = useContext(GlobalContext)
-    console.log('globalContext - [User]', globalContext?.user)
 
     return (
 
@@ -27,7 +26,7 @@ export default function DashboardStatsGrid() {
                     <div className="relative">
                         <div className="w-48 h-48 bg-gray-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                             <svg xmlns="http://www.w3.org/2000/svg" className="fill-gray-500 hover:fill-gray-700 h-24 w-24" viewBox="0 0 20 20" fill="bg-blue-400" >
-                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                             </svg>
                         </div>
                     </div>
@@ -47,11 +46,11 @@ export default function DashboardStatsGrid() {
                 </div>
 
                 <div className="mt-20 text-center border-b pb-12">
-                    <h1 className="text-4xl font-medium text-gray-700">Jessica Jones, <span className="font-light text-gray-500">27</span></h1>
-                    <p className="font-light text-gray-600 mt-3">Bucharest, Romania</p>
+                    <h1 className="text-4xl font-medium text-gray-700">{globalContext?.user?.name}, <span className="font-light text-gray-500">27</span></h1>
+                    <p className="font-light text-gray-600 mt-3">{globalContext?.user?.cell}</p>
 
-                    <p className="mt-8 text-gray-500">Solution Manager - Creative Tim Officer</p>
-                    <p className="mt-2 text-gray-500">University of Computer Science</p>
+                    <p className="mt-8 text-gray-500">Documento - {globalContext?.user?.document}</p>
+                    <p className="mt-2 text-gray-500">E-mail - {globalContext?.user?.mail}</p>
                 </div>
 
                 <div className="mt-12 flex flex-col justify-center">

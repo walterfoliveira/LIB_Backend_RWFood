@@ -11,7 +11,7 @@ export class CustomersService {
     }
 
     public getCustomer(idCompany: number, id: number) {
-        return this.apiService.get<ICustomer>(`Customer/${idCompany}/id/${id}`)
+        return this.apiService.get<ICustomer>(`Customer/${idCompany}/${id}`)
     }
 
     public getAllCustomer(id: number) {
@@ -19,7 +19,7 @@ export class CustomersService {
     }
 
     public deleteCustomerById(idCompany: number, id: number) {
-        return this.apiService.del<boolean>(`Customer/${idCompany}/id/${id}`, {})
+        return this.apiService.del<boolean>(`Customer/${idCompany}/${id}`, {})
     }
 
     public insertCustomer(model: ICustomer) {

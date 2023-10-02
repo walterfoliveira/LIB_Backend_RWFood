@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import DashboardStatsGrid from '../components/DashboardStatsGrid'
 import TransactionChart from '../components/TransactionChart'
 import RecentOrders from '../components/RecentOrders'
@@ -16,37 +17,22 @@ import { getToken } from '../facades/localStorage'
 
 export default function Dashboard() {
     //const history = useHistory()
+
+    const navigate = useNavigate()
     const globalContext = useContext(GlobalContext)
 
-    // useEffect(() => {
-    //     const token = getToken()
-
-    //     if (!token) {
-    //         history.push('/login')
-    //         return
-    //     }
-
-    //     getProfile(1, 2)
-    //     getCategoriaAll()
-
-    //     toast.success('Seja Bem-vido(a).')
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
-
     useEffect(() => {
-        getProfile(1, 2)
-        getCategoriaAll()
-        getEntregadorAll()
-        getProductAll()
+        const tokenJWT = getToken()
+        console.log('tokenJWT', tokenJWT)
 
-        toast.success('Seja Bem-vido(a).')
+        if (tokenJWT !== null) {
+            getCategoriaAll()
+            getEntregadorAll()
+            getProductAll()
+
+            toast.success('Seja Bem-vido(a).')
+        } else navigate('/login')
     }, [])
-
-    const getProfile = async (idCompany, idUser) => {
-        var response = await userService.getProfile(idCompany, idUser)
-        globalContext?.setUser(response)
-        //console.log('[getProfile]: ' + JSON.stringify(response))
-    }
 
     const getCategoriaAll = async () => {
         var response = await categoryService.getAllCategory(1)

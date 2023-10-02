@@ -11,7 +11,7 @@ export class CompanyService {
     }
 
     public getCompany(idCompany: number, id: number) {
-        return this.apiService.get<ICompany>(`Company/${idCompany}/id/${id}`)
+        return this.apiService.get<ICompany>(`Company/${idCompany}/${id}`)
     }
 
     public getAllCompany(id: number) {
@@ -19,7 +19,7 @@ export class CompanyService {
     }
 
     public deleteCompanyById(idCompany: number, id: number) {
-        return this.apiService.del<boolean>(`Company/${idCompany}/id/${id}`, {})
+        return this.apiService.del<boolean>(`Company/${idCompany}/${id}`, {})
     }
 
     public insertCompany(model: ICompany) {

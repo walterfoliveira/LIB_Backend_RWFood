@@ -22,7 +22,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpGet("{idCompany}/{mail}/{password}")]
-        [Authorize(Roles = "ERP")]
+        //[Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<UsersDto>> GetLogin(int idCompany,string mail, string password)
         {
             return await Task.Run(() =>

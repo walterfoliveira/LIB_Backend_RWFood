@@ -5,7 +5,7 @@ import { FaSync, FaFolderPlus, FaFilter } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 import CardProduct from '../components/card/CardProduct'
-import { IProduct, IProductCategory } from '../interfaces/product'
+import { IProductCategory } from '../interfaces/product'
 import productService from '../services/productService'
 import ModalFormProduct from '../components/modal/ModalFormProduct'
 

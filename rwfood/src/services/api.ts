@@ -56,7 +56,7 @@ export class ApiService {
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 const err = error as AxiosError
-                //console.log(err.response?.data)
+                console.log(err.response?.data)
 
                 if (err.response?.status === 401) {
                     window.location.href = '/login'

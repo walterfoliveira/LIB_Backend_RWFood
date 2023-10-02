@@ -13,8 +13,13 @@ export class UsersService {
         this.apiService = apiService
     }
 
+    //http://bkend.rwconsultoria.com.br:20021/api/v1/api/Users/1/walter%40rwconsultoria.com.br/1122
+    public getLogin(idCompany: number, mail: string, password: string) {
+        return this.apiService.get<IUser>(`Users/${idCompany}/${mail}/${password}`)
+    }
+
     public getProfile(idCompany: number, idUser: number) {
-        return this.apiService.get<IUser>(`Users/${idCompany}/id/${idUser}`)
+        return this.apiService.get<IUser>(`Users/${idCompany}/${idUser}`)
     }
 
     public getAllUser(idCompany: number) {
@@ -22,7 +27,7 @@ export class UsersService {
     }
 
     public deleteUserById(idCompany: number, id: number) {
-        return this.apiService.del<boolean>(`Users/${idCompany}/id/${id}`, {})
+        return this.apiService.del<boolean>(`Users/${idCompany}/${id}`, {})
     }
 
     public insertUser(model: IUser) {

@@ -11,7 +11,7 @@ export class PersonService {
     }
 
     public getPerson(idCompany: number, id: number) {
-        return this.apiService.get<IPerson>(`Person/${idCompany}/id/${id}`)
+        return this.apiService.get<IPerson>(`Person/${idCompany}/${id}`)
     }
 
     public getAllPerson(id: number) {
@@ -19,7 +19,7 @@ export class PersonService {
     }
 
     public deletePersonById(idCompany: number, id: number) {
-        return this.apiService.del<boolean>(`Person/${idCompany}/id/${id}`, {})
+        return this.apiService.del<boolean>(`Person/${idCompany}/${id}`, {})
     }
 
     public insertPerson(model: IPerson) {

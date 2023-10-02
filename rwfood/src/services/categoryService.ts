@@ -11,7 +11,7 @@ export class CategoryService {
     }
 
     public getCategory(idCompany: number, id: number) {
-        return this.apiService.get<ICategory>(`Category/${idCompany}/id/${id}`)
+        return this.apiService.get<ICategory>(`Category/${idCompany}/${id}`)
     }
 
     public getAllCategory(id: number) {
@@ -19,7 +19,7 @@ export class CategoryService {
     }
 
     public deleteCategoryById(idCompany: number, id: number) {
-        return this.apiService.del<boolean>(`Category/${idCompany}/id/${id}`, {})
+        return this.apiService.del<boolean>(`Category/${idCompany}/${id}`, {})
     }
 
     public insertCategory(model: ICategory) {

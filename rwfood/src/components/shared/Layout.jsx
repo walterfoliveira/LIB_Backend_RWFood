@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import { Toaster } from 'react-hot-toast'
 
+import { getToken } from '../../facades/localStorage'
+import { useNavigate } from 'react-router-dom'
+
 export default function Layout() {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const tokenJWT = getToken()
+        ///console.log('tokenJWT', tokenJWT)
+
+        if (tokenJWT === null) {
+            navigate('/login')
+        }
+    }, [])
+
     return (
         <div className="bg-neutral-100 h-screen w-screen overflow-hidden flex flex-row">
             <Sidebar />

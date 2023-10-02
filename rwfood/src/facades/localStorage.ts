@@ -8,4 +8,5 @@ export const getToken = () => {
 
 export const clearStorage = () => {
     localStorage.clear()
+    console.log('clearStorage')
 }

@@ -11,7 +11,7 @@ export class ComplementService {
     }
 
     public getComplement(idCompany: number, id: number) {
-        return this.apiService.get<IComplement>(`Complement/${idCompany}/id/${id}`)
+        return this.apiService.get<IComplement>(`Complement/${idCompany}/${id}`)
     }
 
     public getAllComplement(id: number) {
@@ -19,7 +19,7 @@ export class ComplementService {
     }
 
     public deleteComplementById(idCompany: number, id: number) {
-        return this.apiService.del<boolean>(`Complement/${idCompany}/id/${id}`, {})
+        return this.apiService.del<boolean>(`Complement/${idCompany}/${id}`, {})
     }
 
     public insertComplement(model: IComplement) {

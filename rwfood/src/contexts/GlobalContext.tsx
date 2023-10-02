@@ -23,6 +23,7 @@ type ContextType = {
   category: ICategory[];
   setCategory: (cat: ICategory[]) => void;
   user: IUser | null,
+  //tokenAuth: string | null,
   setUser: (u: IUser) => void,
   login: (user: IUser, token: string) => void;
   logout: () => void;

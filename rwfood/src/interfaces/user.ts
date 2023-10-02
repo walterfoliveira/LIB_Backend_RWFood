@@ -19,6 +19,11 @@ export interface IAuthenticationUser {
     user: IAuthUser
 }
 
+export interface ILoginUser {
+    mail: string
+    pass: string
+}
+
 export interface IAuthUser {
     id?: number
     idCompany: number

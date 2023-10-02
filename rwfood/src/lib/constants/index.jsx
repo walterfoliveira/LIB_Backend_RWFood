@@ -10,6 +10,7 @@ import {
     HiOutlineOfficeBuilding,
     HiOutlineTruck,
     HiOutlineUser,
+    HiOutlineLogout,
     HiOutlineClipboardList
 } from 'react-icons/hi'
 
@@ -103,5 +104,14 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
         label: 'Perfil',
         path: '/profile',
         icon: <HiOutlineUser size={28} />
+    }
+]
+
+export const DASHBOARD_SIDEBAR_BOTTOM_LOGOUT = [
+    {
+        key: 'login',
+        label: 'Sair',
+        path: '/login',
+        icon: <HiOutlineLogout size={28} />
     }
 ]

@@ -26,28 +26,13 @@ https://reactrouter.com/en/main/hooks/use-params
 function App() {
     const [logged, setLogged] = useState(true)
 
-    // useEffect(() => {
-    //     getAuthenticationToken(1, 'pizzaria', '1122')
-    //     const token = getToken()
-    //     if (!token) {
-    //         // history.push('/login')
-    //         setLogged(false)
-    //     }
-    // }, [])
-
-    const getAuthenticationToken = async (idCompany, userName, passWord) => {
+    useEffect(() => {
         var token = getToken()
-        if ((token === '') | (token === null)) {
-            const response = await autheticationService.getAuth(idCompany, userName, passWord)
-            //globalContext?.setUser(response)
-            token = response.token
-            saveToken(token)
+        if (token !== null) {
+            setLogged(true)
+            console.log('[getAuthenticationToken]: ' + token)
         }
-
-        console.log('[getAuthenticationToken]: ' + token)
-    }
-
-    getAuthenticationToken(1, 'pizzaria', '1122')
+    }, [])
 
     return (
         <Router>

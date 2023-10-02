@@ -28,7 +28,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpGet("{idCompany}")]
-        [Authorize(Roles = "ERP")]
+        //[Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<IEnumerable<D>>> Get(int idCompany)
         {
             return await Task.Run(() =>
@@ -41,14 +41,14 @@ namespace rwfood.application.Controllers
         }
 
         [HttpGet("{idCompany}/{id}")]
-        [Authorize(Roles = "ERP")]
+        //[Authorize(Roles = "ERP")]
         public virtual D GetById(int idCompany, int id)
         {
             return this.genericService.GetById(idCompany, id);
         }
 
         [HttpPut]
-        [Authorize(Roles = "ERP")]
+        //[Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<int>> Put([FromBody] D dtoObject)
         {
             if (dtoObject == null)
@@ -70,7 +70,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "ERP")]
+        //[Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<int>> Post([FromBody] D dtoObject)
         {
             if (dtoObject == null)
@@ -92,7 +92,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpDelete("{idCompany}/{id}")]
-        [Authorize(Roles = "ERP")]
+        //[Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<bool>> Delete(int idCompany, int id)
         {
             if (id == 0)
