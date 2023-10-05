@@ -14,6 +14,7 @@ import categoryService from '../services/categoryService'
 import userService from '../services/userService'
 
 import { getToken } from '../facades/localStorage'
+import { SignalRContext } from '../contexts/SignalRContext'
 
 export default function Dashboard() {
     //const history = useHistory()
@@ -21,9 +22,19 @@ export default function Dashboard() {
     const navigate = useNavigate()
     const globalContext = useContext(GlobalContext)
 
+    const [messages, setMessage] = useState([])
+
+    // SignalRContext.useSignalREffect(
+    //     'ReceiveMessage', // Your Event Key
+    //     (message) => {
+    //         setMessage([...messages, message])
+    //         console.log('[useSignalREffect]', JSON.stringify(message))
+    //     }
+    // )
+
     useEffect(() => {
         const tokenJWT = getToken()
-        console.log('tokenJWT', tokenJWT)
+        //console.log('Dashboard-tokenJWT', tokenJWT)
 
         if (tokenJWT !== null) {
             getCategoriaAll()

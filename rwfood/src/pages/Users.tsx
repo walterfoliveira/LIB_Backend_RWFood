@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import Card from '../components/card/Card'
 
 import Loading from '../components/Loading'
 import CustomButton from '../components/CustomButton'
@@ -10,9 +9,9 @@ import { IUser } from '../interfaces/user'
 import userService from '../services/userService'
 import CardUser from '../components/card/CardUser'
 import ModalFormUser from '../components/modal/ModalFormUser'
+import PrivateRoute from './PrivateRoute'
 
 const Users = () => {
-
 
   const initState: IUser = {
     id: 0,
@@ -126,6 +125,7 @@ const Users = () => {
 
   return (
     <>
+      <PrivateRoute />
       {!loading && (
         <div className="flex justify-between items-center justify-center ml-0 mr-0 mb-5">
           <div className="w-full flex flex-row text-2xl text-gray-700 ">

@@ -32,7 +32,7 @@ namespace rwfood.application.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Authenticate(UserAuth userAuth)
+        public async Task<ActionResult<dynamic>> Authenticate(UserAuthToken userAuth)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace rwfood.application.Controllers
         }
     }
 
-    public class UserAuth: BaseDTO
+    public class UserAuthToken: BaseDTO
     {
         public string UserName { get; set; }
         public string PassWord { get; set; }        

@@ -8,6 +8,7 @@ import CardProduct from '../components/card/CardProduct'
 import { IProductCategory } from '../interfaces/product'
 import productService from '../services/productService'
 import ModalFormProduct from '../components/modal/ModalFormProduct'
+import PrivateRoute from './PrivateRoute'
 
 const Products = () => {
 
@@ -127,6 +128,7 @@ const Products = () => {
 
     return (
         <>
+            <PrivateRoute />
             {!loading && (
                 <div className="flex justify-between items-center justify-center ml-0 mr-0 mb-5">
                     <div className="w-full flex flex-row text-2xl text-gray-700 ">

@@ -10,6 +10,7 @@ import { IComplement } from '../interfaces/complement'
 import { IItem } from "../interfaces/company";
 import complementService from '../services/complementService'
 import CardSimple from '../components/card/CardSimple'
+import PrivateRoute from './PrivateRoute'
 
 const Complement = () => {
 
@@ -118,6 +119,7 @@ const Complement = () => {
 
   return (
     <>
+      <PrivateRoute />
       {/* filtro */}
       {!loading && (
         <div className="flex justify-between items-center justify-center ml-0 mr-0 mb-5">

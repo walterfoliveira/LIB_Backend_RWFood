@@ -10,6 +10,7 @@ import { IPerson } from '../interfaces/person'
 import { IItem } from "../interfaces/company";
 import personService from '../services/personService'
 import CardPerson from '../components/card/CardPerson'
+import PrivateRoute from './PrivateRoute'
 
 type Props = {
   typePage: number;
@@ -127,6 +128,7 @@ const Person = ({ typePage }: Props) => {
 
   return (
     <>
+      <PrivateRoute />
       {/* filtro */}
       {!loading && (
         <div className="flex justify-between items-center justify-center ml-0 mr-0 mb-5">

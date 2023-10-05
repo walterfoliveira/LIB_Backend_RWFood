@@ -30,7 +30,7 @@ function App() {
         var token = getToken()
         if (token !== null) {
             setLogged(true)
-            console.log('[getAuthenticationToken]: ' + token)
+            //console.log('[getAuthenticationToken]: ' + token)
         }
     }, [])
 

@@ -2,6 +2,7 @@
 import axios, { AxiosError, AxiosResponse, Method } from 'axios'
 import { formatErrorMessage } from '../facades/errorFormater'
 import { getToken } from '../facades/localStorage'
+import { URL_BASE } from '../lib/constants'
 
 //BaseURL: http://bkend.rwconsultoria.com.br:20021/api/v1/api/
 //Resource: //ListAll: Users/1 -->> 1ºparametro : Company
@@ -23,7 +24,10 @@ export class ApiService {
     }
 
     public async post<T>(url: string, body: any): Promise<T> {
+        // console.log('[url]: ' + url)
+        // console.log('[post]: ' + JSON.stringify(body))
         const response = await this.request('POST', url, body)
+        //console.log('[request]: ' + JSON.stringify(response))
         return response.data
     }
 
@@ -40,7 +44,8 @@ export class ApiService {
     private async request<T = any>(method: Method, url: string, data: any = null): Promise<AxiosResponse<T>> {
         try {
             const response = await axios.request({
-                baseURL: 'http://bkend.rwconsultoria.com.br:20021/api/v1/api/', //process.env.REACT_APP_API_URL,
+                //baseURL: 'http://bkend.rwconsultoria.com.br:20021/api/v1/api/', //process.env.REACT_APP_API_URL,
+                baseURL: URL_BASE,
                 url,
                 method,
                 timeout: 30000,
@@ -56,13 +61,18 @@ export class ApiService {
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 const err = error as AxiosError
-                console.log(err.response?.data)
+                //console.log(err.response?.data)
 
                 if (err.response?.status === 401) {
+                    const pageLogin = `${window.location.href.toString()}/login`
+                    console.log('Erro Page: 401', pageLogin)
                     window.location.href = '/login'
                 }
 
-                // console.log(err.response?.data)
+                if (err?.response) {
+                    console.log('Erro', err.response)
+                }
+
                 if (!err?.response) {
                     console.log('No Server Response')
                 } else if (err.response?.status === 400) {

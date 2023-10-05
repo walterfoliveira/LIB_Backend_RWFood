@@ -22,7 +22,7 @@ namespace rwfood.application.Controllers
         }
 
         [HttpPatch("ProductByCategory")]
-        //[Authorize(Roles = "ERP")]
+        [Authorize(Roles = "ERP")]
         public virtual async Task<ActionResult<IEnumerable<ProductCustomDto>>> GetProductByCategory(int idCompany)
         {
             return await Task.Run(() =>

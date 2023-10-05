@@ -1,4 +1,5 @@
-import { IUser } from '../interfaces/user'
+import { getToken } from '../facades/localStorage'
+import { IUser, IToken, ILoginUser } from '../interfaces/user'
 
 import apiService, { ApiService } from './api'
 
@@ -15,7 +16,14 @@ export class UsersService {
 
     //http://bkend.rwconsultoria.com.br:20021/api/v1/api/Users/1/walter%40rwconsultoria.com.br/1122
     public getLogin(idCompany: number, mail: string, password: string) {
-        return this.apiService.get<IUser>(`Users/${idCompany}/${mail}/${password}`)
+        const model: ILoginUser = { idCompany: idCompany, mail: mail, password: password }
+        //console.log('[getLogin]: ' + JSON.stringify(model))
+        return this.apiService.post<IUser>(`Users/login`, model)
+    }
+
+    public getAuth() {
+        const model: IToken = { token: getToken() as string }
+        return this.apiService.post<IUser>(`Users/login`, model)
     }
 
     public getProfile(idCompany: number, idUser: number) {
@@ -23,6 +31,7 @@ export class UsersService {
     }
 
     public getAllUser(idCompany: number) {
+        //console.log('getAllUser: [token]: ' + getToken())
         return this.apiService.get<IUser[]>(`Users/${idCompany}`)
     }
 
@@ -37,31 +46,15 @@ export class UsersService {
         model.createdAt = today.toISOString()
         model.updated = today.toISOString()
 
-        console.log('[IUser]: ' + JSON.stringify(model))
+        //console.log('[IUser]: ' + JSON.stringify(model))
 
         return this.apiService.post<number>('Users', model)
     }
 
     public updateUser(model: IUser) {
-        console.log('[IUser]: ' + JSON.stringify(model))
+        //console.log('[IUser]: ' + JSON.stringify(model))
         return this.apiService.put<number>('Users', model)
     }
-
-    // public create(model: IUserCreate) {
-    //   return this.apiService.post<IUserCreateResponse>('admin/create', model);
-    // }
-
-    // public disableTwoFa(model: IDisableTwoFa) {
-    //   return this.apiService.post<{ message: string }>('admin/disable-two-fa', model);
-    // }
-
-    // public resetPassword(model: IResetPassword) {
-    //   return this.apiService.post<{ newPassword: string }>('admin/reset-password', model);
-    // }
-
-    // public changeUserEmail(model: IChangeUserEmail) {
-    //   return this.apiService.post('admin/change-email', model);
-    // }
 }
 
 const usersService = new UsersService(apiService)

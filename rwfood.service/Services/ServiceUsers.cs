@@ -14,9 +14,22 @@ namespace rwfood.service.Services
             this.repositoryUsers = _repositoryUsers;
         }
 
-        public UsersDto GetLogin(int _idCompany, string _email, string _password)
+        public UsersDto GetAuth(string _token)
         {
-            return this.repositoryUsers.SelectLogin(_idCompany, _email, _password);
+            return this.repositoryUsers.SelectAuth(_token);
+        }
+
+        public UsersDto GetLogin(int _idCompany, string _token, string _email, string _password)
+        {
+            var entity = this.repositoryUsers.SelectLogin(_idCompany, _email, _password);
+            if (!string.IsNullOrEmpty(_token))
+            {
+                entity.Updated = DateTime.Now;
+                entity.TokenJWT = _token;
+                this.repositoryUsers.Update(entity);
+            }
+
+            return entity;
         }
     }
 }

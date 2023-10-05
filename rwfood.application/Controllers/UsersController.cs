@@ -21,17 +21,43 @@ namespace rwfood.application.Controllers
             this.nameController = System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType.Name;
         }
 
-        [HttpGet("{idCompany}/{mail}/{password}")]
-        //[Authorize(Roles = "ERP")]
-        public virtual async Task<ActionResult<UsersDto>> GetLogin(int idCompany,string mail, string password)
+        [HttpPost("Login")]
+        [Authorize(Roles = "ERP")]
+        public virtual async Task<ActionResult<UsersDto>> PostLogin([FromBody] UserLogin userLogin)
+        {
+            var token = Request.Headers.Authorization.Count() > 0 ?
+                                    (Request.Headers.Authorization).ToString().Replace("Bearer ", string.Empty) : string.Empty;
+            
+            return await Task.Run(() =>
+            {
+                var response = this.classeService.GetLogin(userLogin.IdCompany, token, userLogin.Mail, userLogin.Password);
+                return new ActionResult<UsersDto>(response);
+            });
+        }
+
+        [HttpPost("Auth")]
+        [Authorize(Roles = "ERP")]
+        public virtual async Task<ActionResult<UsersDto>> PostUserAuth([FromBody] UserAuth userAuth)
         {
             return await Task.Run(() =>
             {
-                var response = this.classeService.GetLogin(idCompany, mail, password);
+                var response = this.classeService.GetAuth(userAuth.Token);
                 return new ActionResult<UsersDto>(response);
             });
         }
 
 
     }
+
+    public class UserLogin : BaseDTO
+    {
+        public string Mail { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class UserAuth
+    {
+        public string Token { get; set; }
+    }
+
 }

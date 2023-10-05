@@ -6,22 +6,30 @@ import toast, { Toaster } from 'react-hot-toast'
 import * as Yup from 'yup'
 import autheticationService from '../services/authenticationService'
 import userService from '../services/userService'
-import { clearStorage, saveToken } from '../facades/localStorage'
+import { clearStorage } from '../facades/localStorage'
 import { GlobalContext } from '../contexts/GlobalContext'
+import { IUser } from '../interfaces/user';
 
-interface Props {
-  idCompany: number;
-  userName: string;
-  passWord: string;
+const initialValues: IUser = {
+  id: 0,
+  idCompany: 0,
+  status: 1,
+  createdAt: '',
+  updated: '',
+  name: '',
+  surname: '',
+  document: '',
+  image1: '',
+  cell: '',
+  mail: '',
+  pass: '',
+  level: 0,
 }
 
 const Login = () => {
   const globalContext = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const [token, setToken] = useState<string | null>(null);
-  const [mail, setMail] = useState<string>('');
-  const [pass, setPass] = useState<string>('');
   const [login, setLogin] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -40,8 +48,8 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      mail: mail,
-      password: pass,
+      mail: '',
+      password: '',
     },
     validationSchema: Yup.object({
       mail: Yup.string()
@@ -51,18 +59,17 @@ const Login = () => {
 
     }),
     onSubmit: async (values) => {
-      setLogin(true);
+      setLogin(false);
 
-      //Pegar o token JST
+      //Pegar o token JWT
       const jwtToken = await getAuth(1, 'pizzaria', '1122')
       if (jwtToken !== '' || jwtToken !== null) {
-        setToken(jwtToken);
         //console.log('[token]: ' + jwtToken)
+        globalContext?.login(initialValues, jwtToken);
 
         //Tenta fazer o Login
         const userLogin = await getLogin(1, values.mail, values.password)
         if (userLogin) {
-          console.log('[userLogin]: ' + JSON.stringify(userLogin, null, 2))
           globalContext?.login(userLogin, jwtToken)
           formik.resetForm();
 
@@ -71,6 +78,7 @@ const Login = () => {
         }
         else {
           toast.error('Usuário e/ou senha incorreto!')
+          formik.resetForm();
           setLogin(false);
         }
 
@@ -124,6 +132,7 @@ const Login = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.mail}
                     autoFocus={true}
+                    placeholder='Digite seu e-mail'
                   />
                   {formik.touched.mail && formik.errors.mail ? (
                     <div className="text-rose-400 font-semibold">{formik.errors.mail}</div>
@@ -141,6 +150,7 @@ const Login = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
+                    placeholder='Digite sua senha'
                   />
                   {formik.touched.password && formik.errors.password ? (
                     <div className="text-rose-400 font-semibold">{formik.errors.password}</div>

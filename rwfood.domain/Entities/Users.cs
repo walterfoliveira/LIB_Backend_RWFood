@@ -17,6 +17,7 @@ namespace rwfood.domain.Entities
         public string Cell { get; set; }
         public string Document { get; set; }
         public string? Image1 { get; set; }
+        public string? TokenJWT { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? Updated { get; set; }
     }

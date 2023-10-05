@@ -11,6 +11,7 @@ import { ICategory } from '../interfaces/category'
 import { IItem } from "../interfaces/company";
 import categoryService from '../services/categoryService'
 import CardSimple from '../components/card/CardSimple'
+import PrivateRoute from './PrivateRoute'
 
 const Category = () => {
   const globalContext = useContext(GlobalContext)
@@ -123,6 +124,8 @@ const Category = () => {
 
   return (
     <>
+      <PrivateRoute />
+
       {/* filtro */}
       {!loading && (
         <div className="flex justify-between items-center justify-center ml-0 mr-0 mb-5">

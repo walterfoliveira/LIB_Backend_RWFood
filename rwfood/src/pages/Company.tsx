@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 
 import companyService from '../services/companyService'
 import ModalForm from '../components/modal/ModalFormCompany'
+import PrivateRoute from './PrivateRoute'
 
 const Company = () => {
 
@@ -120,6 +121,7 @@ const Company = () => {
 
     return (
         <>
+            <PrivateRoute />
             {!loading && (
                 <div className="flex justify-between items-center justify-center ml-0 mr-0 mb-5">
                     <div className="w-full flex flex-row text-2xl text-gray-700 ">

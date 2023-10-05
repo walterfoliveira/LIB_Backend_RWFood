@@ -8,6 +8,7 @@ import CardCustomer from '../components/card/CardCustomer'
 import customerService from '../services/customerService'
 import { ICustomer } from '../interfaces/customer'
 import ModalFormCustomer from '../components/modal/ModalFormCustomer'
+import PrivateRoute from './PrivateRoute'
 
 const Customers = () => {
 
@@ -127,6 +128,7 @@ const Customers = () => {
 
     return (
         <>
+            <PrivateRoute />
             {!loading && (
                 <div className="flex justify-between items-center justify-center ml-0 mr-0 mb-5">
                     <div className="w-full flex flex-row text-2xl text-gray-700 ">

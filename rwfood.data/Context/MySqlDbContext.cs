@@ -290,8 +290,12 @@ namespace rwfood.data.Context
                     .HasColumnName("mail");
 
                 entity.Property(e => e.Pass)
-                    .HasMaxLength(100)
+                    .HasMaxLength(20)
                     .HasColumnName("pass");
+
+                entity.Property(e => e.TokenJWT)
+                    .HasMaxLength(100)
+                    .HasColumnName("tokenJWT");
             });
 
             modelBuilder.Entity<Customer>(entity =>

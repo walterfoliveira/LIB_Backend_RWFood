@@ -14,14 +14,19 @@ export interface IUser {
     pass: string
 }
 
+export interface IToken {
+    token: string | null
+}
+
 export interface IAuthenticationUser {
     token: string
     user: IAuthUser
 }
 
 export interface ILoginUser {
+    idCompany: number
     mail: string
-    pass: string
+    password: string
 }
 
 export interface IAuthUser {
