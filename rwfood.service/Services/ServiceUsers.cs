@@ -22,7 +22,7 @@ namespace rwfood.service.Services
         public UsersDto GetLogin(int _idCompany, string _token, string _email, string _password)
         {
             var entity = this.repositoryUsers.SelectLogin(_idCompany, _email, _password);
-            if (!string.IsNullOrEmpty(_token))
+            if (entity != null)
             {
                 entity.Updated = DateTime.Now;
                 entity.TokenJWT = _token;

@@ -27,7 +27,7 @@ namespace rwfood.application.Controllers
         {
             var token = Request.Headers.Authorization.Count() > 0 ?
                                     (Request.Headers.Authorization).ToString().Replace("Bearer ", string.Empty) : string.Empty;
-            
+
             return await Task.Run(() =>
             {
                 var response = this.classeService.GetLogin(userLogin.IdCompany, token, userLogin.Mail, userLogin.Password);

@@ -71,6 +71,7 @@ const Login = () => {
         const userLogin = await getLogin(1, values.mail, values.password)
         if (userLogin) {
           globalContext?.login(userLogin, jwtToken)
+
           formik.resetForm();
 
           setLogin(false);
@@ -120,7 +121,7 @@ const Login = () => {
               {/* <form className="mt-6"> */}
               <form className='bg-white rounded  pt-6 pb-8 mt-6 mb-4' onSubmit={formik.handleSubmit}>
                 <div className="mb-2">
-                  <label htmlFor="name" className="block text-gray-700 text-slate-500 font-bold">
+                  <label htmlFor="mail" className="block text-gray-700 text-slate-500 font-bold">
                     E-mail
                   </label>
                   <input

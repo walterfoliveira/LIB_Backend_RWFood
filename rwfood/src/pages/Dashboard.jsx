@@ -7,21 +7,20 @@ import BuyerProfilePieChart from '../components/BuyerProfilePieChart'
 import PopularProducts from '../components/PopularProducts'
 import toast from 'react-hot-toast'
 
-import { GlobalContext } from '../contexts/GlobalContext'
 import personService from '../services/personService'
 import productService from '../services/productService'
 import categoryService from '../services/categoryService'
-import userService from '../services/userService'
+import { GlobalContext } from '../contexts/GlobalContext'
 
 import { getToken } from '../facades/localStorage'
-import { SignalRContext } from '../contexts/SignalRContext'
+import Loading from '../components/Loading'
 
 export default function Dashboard() {
     //const history = useHistory()
 
     const navigate = useNavigate()
     const globalContext = useContext(GlobalContext)
-
+    const [autorized, setAutorized] = useState(false)
     const [messages, setMessage] = useState([])
 
     // SignalRContext.useSignalREffect(
@@ -40,15 +39,18 @@ export default function Dashboard() {
             getCategoriaAll()
             getEntregadorAll()
             getProductAll()
+            setAutorized(true)
 
-            toast.success('Seja Bem-vido(a).')
-        } else navigate('/login')
+            toast.success(`Seja Bem-vido(a) ${globalContext?.user.surname}.`)
+        } else {
+            globalContext?.logout()
+            navigate('/login')
+        }
     }, [])
 
     const getCategoriaAll = async () => {
         var response = await categoryService.getAllCategory(1)
         globalContext?.setCategory(response)
-        //console.log('[getCategoriaAll]: ' + JSON.stringify(response))
     }
 
     const getEntregadorAll = async () => {
@@ -65,16 +67,21 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="flex flex-col gap-4">
-            <DashboardStatsGrid />
-            <div className="flex flex-row gap-4 w-full">
-                <TransactionChart />
-                <BuyerProfilePieChart />
-            </div>
-            <div className="flex flex-row gap-4 w-full">
-                <RecentOrders />
-                <PopularProducts />
-            </div>
-        </div>
+        <>
+            {!autorized && <Loading label="Carregando" />}
+            {autorized && (
+                <div className="flex flex-col gap-4">
+                    <DashboardStatsGrid />
+                    <div className="flex flex-row gap-4 w-full">
+                        <TransactionChart />
+                        <BuyerProfilePieChart />
+                    </div>
+                    <div className="flex flex-row gap-4 w-full">
+                        <RecentOrders />
+                        <PopularProducts />
+                    </div>
+                </div>
+            )}
+        </>
     )
 }

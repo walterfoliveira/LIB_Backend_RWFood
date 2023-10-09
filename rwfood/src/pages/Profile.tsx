@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../contexts/GlobalContext'
-import { getToken } from '../facades/localStorage'
-import { useNavigate } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 
 

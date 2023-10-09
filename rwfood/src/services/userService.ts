@@ -23,7 +23,8 @@ export class UsersService {
 
     public getAuth() {
         const model: IToken = { token: getToken() as string }
-        return this.apiService.post<IUser>(`Users/login`, model)
+        console.log('getAuth: [token]: ' + JSON.stringify(model))
+        return this.apiService.post<IUser>(`Users/Auth`, model)
     }
 
     public getProfile(idCompany: number, idUser: number) {

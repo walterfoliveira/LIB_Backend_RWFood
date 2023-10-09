@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect, useContext } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { FaRegAddressCard } from 'react-icons/fa'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -20,7 +20,7 @@ import {
 } from 'react-icons/hi'
 
 import classNames from 'classnames'
-import Inputsearch from './Inputsearch'
+import { GlobalContext } from '../../contexts/GlobalContext'
 
 // key: 'dashboard',
 // label: 'Dashboard',
@@ -28,6 +28,7 @@ import Inputsearch from './Inputsearch'
 // icon: <HiOutlineViewGrid />
 
 export default function Header() {
+    const globalContext = useContext(GlobalContext)
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const [rota, setRota] = useState('')
@@ -50,6 +51,15 @@ export default function Header() {
             }
         })
     }, [pathName])
+
+    const handleSair = () => {
+        globalContext?.logout()
+        navigate('/login')
+    }
+
+    const handleMessage = () => {
+        navigate('/messages')
+    }
 
     return (
         <div className="bg-gray-200 h-16 px-4 flex items-center justify-between border-1 border-slate-100">
@@ -85,8 +95,13 @@ export default function Header() {
                             >
                                 <Popover.Panel className="absolute right-0 z-10 mt-2.5 transform w-80">
                                     <div className="bg-white rounded-sm shadow-md ring-1 ring-black ring-opacity-5 px-2 py-2.5">
-                                        <strong className="text-gray-700 font-medium">Messages</strong>
-                                        <div className="mt-2 py-1 text-sm">This is messages panel.</div>
+                                        <strong className="text-gray-700 font-medium">Mensagens</strong>
+                                        <div
+                                            onClick={() => handleMessage()}
+                                            className="hover:cursor-pointer mt-2 py-1 text-sm"
+                                        >
+                                            Nenhuma mensagem.
+                                        </div>
                                     </div>
                                 </Popover.Panel>
                             </Transition>
@@ -99,7 +114,7 @@ export default function Header() {
                             <Popover.Button
                                 className={classNames(
                                     open && 'bg-gray-100',
-                                    'group inline-flex items-center rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100'
+                                    'group inline-flex items-center rounded-sm p-1.5 text-gray-700 cursor-pointer focus:outline-none active:bg-gray-100'
                                 )}
                             >
                                 <HiOutlineBell fontSize={24} />
@@ -115,8 +130,13 @@ export default function Header() {
                             >
                                 <Popover.Panel className="absolute right-0 z-10 mt-2.5 transform w-80">
                                     <div className="bg-white rounded-sm shadow-md ring-1 ring-black ring-opacity-5 px-2 py-2.5">
-                                        <strong className="text-gray-700 font-medium">Notifications</strong>
-                                        <div className="mt-2 py-1 text-sm">This is notification panel.</div>
+                                        <strong className="text-gray-700 font-medium">Notificações</strong>
+                                        <div
+                                            onClick={() => handleMessage()}
+                                            className="hover:cursor-pointer mt-2 py-1 text-sm"
+                                        >
+                                            Nenhuma notificação.
+                                        </div>
                                     </div>
                                 </Popover.Panel>
                             </Transition>
@@ -158,7 +178,7 @@ export default function Header() {
                                     </div>
                                 )}
                             </Menu.Item>
-                            <Menu.Item>
+                            {/* <Menu.Item>
                                 {({ active }) => (
                                     <div
                                         onClick={() => navigate('/settings')}
@@ -170,10 +190,11 @@ export default function Header() {
                                         Configuração
                                     </div>
                                 )}
-                            </Menu.Item>
+                            </Menu.Item> */}
                             <Menu.Item>
                                 {({ active }) => (
                                     <div
+                                        onClick={() => handleSair()}
                                         className={classNames(
                                             active && 'bg-gray-100',
                                             'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'

@@ -83,16 +83,16 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
     },
     {
         key: 'messages',
-        label: 'Menssagens',
+        label: 'Mensagens',
         path: '/messages',
         icon: <HiOutlineAnnotation size={28} />
     },
-    {
-        key: 'settings',
-        label: 'Configuração',
-        path: '/settings',
-        icon: <HiOutlineCog size={28} />
-    },
+    // {
+    //     key: 'settings',
+    //     label: 'Configuração',
+    //     path: '/settings',
+    //     icon: <HiOutlineCog size={28} />
+    // },
     // {
     //     key: 'support',
     //     label: 'Suporte',

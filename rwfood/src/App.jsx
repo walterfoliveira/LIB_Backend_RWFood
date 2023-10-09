@@ -17,6 +17,7 @@ import { useState, useEffect } from 'react'
 
 import autheticationService from './services/authenticationService'
 import { clearStorage, getToken, saveToken } from './facades/localStorage'
+import Messages from './pages/Messages'
 
 /*Para usar parametro na pagina
 
@@ -48,6 +49,7 @@ function App() {
                     <Route path="users" element={<Users />} />
                     <Route path="customers" element={<Customers />} />
                     <Route path="profile" element={<Profile />} />
+                    <Route path="messages" element={<Messages />} />
                 </Route>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
