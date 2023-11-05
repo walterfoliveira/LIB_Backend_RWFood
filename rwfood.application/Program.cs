@@ -1,11 +1,14 @@
 using log4net;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using rwfood.application.Hubs;
+using rwfood.application.Hubs.users;
 using rwfood.data.Context;
 using rwfood.data.Repository;
 using rwfood.domain.Interfaces.Repositories;
@@ -138,6 +141,45 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Logging.AddConsole();
 
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ClientPermission", política =>
+    {
+        política.AllowAnyHeader()
+            .AllowAnyMethod()
+            //.WithOrigins()
+            .WithOrigins("http://localhost:3000", "http://rwfood.rwconsultoria.com.br:7071")
+            .AllowCredentials();
+    });
+});
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("ClientPermission", política =>
+//    {
+//        política.AllowAnyHeader()
+//            .AllowAnyMethod()
+//            .WithOrigins("http://localhost:3000")
+//            .AllowCredentials();
+//    });
+//});
+
+
+//Cors
+//builder.Services.AddCors(opt =>
+//{
+//    opt.AddPolicy("homPol", pol => pol.WithOrigins(Configuration["AllowedHostsHom"].Split(';'))
+//                                      .AllowAnyHeader()
+//                                      .AllowAnyMethod());
+//    opt.AddPolicy("prdPol", pol => pol.WithOrigins(Configuration["AllowedHostsPrd"].Split(';'))
+//                                      .AllowAnyHeader()
+//                                      .AllowAnyMethod());
+//});
+
+
+
 //string caminhoLog = $"{Directory.GetCurrentDirectory()}\\Logs\\{DateTime.Now.ToString("dd-MM-yyyy")}";
 //string nomeArquivo = $"Log_{DateTime.Now.ToString("ddMMyyyy_HHmmss")}.txt";
 
@@ -166,11 +208,16 @@ app.UseSwaggerUI(c =>
 });
 
 app.UseDeveloperExceptionPage();
+
 app.UseRouting();
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+//app.UseCors(x => x
+//    .AllowAnyOrigin()
+//    .AllowAnyMethod()
+//    .AllowAnyHeader());
+
+app.UseCors("ClientPermission");
+//app.UseCors("homPol");
+//app.UseCors("prdPol");
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -179,9 +226,18 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
+
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
+    endpoints.MapHub<UserClient>("/UserClient", options =>
+    {
+        options.TransportSendTimeout = TimeSpan.FromMinutes(10);
+        options.Transports = HttpTransportType.WebSockets;
+    });
+
+    //endpoints.MapHub<MessageHub>("/offers");
 });
 
 app.Run();

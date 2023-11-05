@@ -30,7 +30,7 @@ const Login = () => {
   const globalContext = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const [login, setLogin] = useState<boolean | null>(null);
+  const [login, setLogin] = useState<boolean>(false);
 
   useEffect(() => {
     clearStorage();
@@ -74,25 +74,21 @@ const Login = () => {
 
           formik.resetForm();
 
-          setLogin(false);
+          //setLogin(false);
           navigate('/')
         }
         else {
           toast.error('Usuário e/ou senha incorreto!')
           formik.resetForm();
-          setLogin(false);
         }
 
       }
       else {
         toast.error('Erro ao criar credenciais!')
-        setLogin(false);
       }
 
     }
   })
-
-
 
   return (
     <div className="h-full">

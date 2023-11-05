@@ -5,6 +5,10 @@ export const formatErrorMessage = (err: AxiosError) => {
         return 'Network error, verify your internet connection'
     }
 
+    if (err.response?.status === 401) {
+        return 'Erro de Login'
+    }
+
     // if (Array.isArray(err?.response?.data?.message)) {
     //   return err.response.data.message[0];
     // }

@@ -1,7 +1,7 @@
 //import axios from 'axios'
 import axios, { AxiosError, AxiosResponse, Method } from 'axios'
 import { formatErrorMessage } from '../facades/errorFormater'
-import { getToken } from '../facades/localStorage'
+import { clearStorage, getToken } from '../facades/localStorage'
 import { URL_BASE } from '../lib/constants'
 
 //BaseURL: http://bkend.rwconsultoria.com.br:20021/api/v1/api/
@@ -61,28 +61,11 @@ export class ApiService {
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 const err = error as AxiosError
-                //console.log(err.response?.data)
 
                 if (err.response?.status === 401) {
-                    const pageLogin = `${window.location.href.toString()}/login`
-                    console.log('Erro Page: 401', pageLogin)
+                    clearStorage()
                     window.location.href = '/login'
                 }
-
-                if (err?.response) {
-                    console.log('Erro', err.response)
-                }
-
-                if (!err?.response) {
-                    console.log('No Server Response')
-                } else if (err.response?.status === 400) {
-                    console.log('Missing Username or Password')
-                } else if (err.response?.status === 401) {
-                    console.log('Unauthorized')
-                } else {
-                    console.log('Login Failed')
-                }
-
                 throw formatErrorMessage(err)
             } else {
                 throw new Error('different error than axios')

@@ -1,0 +1,59 @@
+Ajustes portal: RWFood
+
+
+
+Gerar token
+https://localhost:7113/api/Authentication/login
+
+{"idCompany": 1, "username": "pizzaria", "password": "1122"}
+
+-Upload das imagen: Produto, Company
+-Login :  https://www.loginradius.com/blog/engineering/guest-post/modern-login-signup-form-tailwindcss-react/
+          https://tailwind-elements.com/docs/standard/forms/login-form/
+		  https://kosmicke.medium.com/reactjs-servi%C3%A7os-b90037e5790f
+		  https://www.freecodecamp.org/portuguese/news/tutorial-de-react-router-como-usar-render-redirect-switch-link-e-mais-com-exemplos-de-codigo/
+		  https://www.youtube.com/watch?v=7u4Bvdhbl4M
+		  https://blog.rocketseat.com.br/reactjs-autenticacao/
+		  https://dev.to/sanjayttg/jwt-authentication-in-react-with-react-router-1d03   ***
+		  https://github.com/sanjay-arya/react-auth-demo ***
+		https://habr.com/en/articles/485764/
+		  
+-Table : https://larainfo.com/blogs/react-tailwind-css-table-example
+-Ajustar Select2 >>>> https://www.youtube.com/watch?v=UFn4obu0grw
+
+Navigate: https://reactrouter.com/en/main/hooks/use-navigate
+
+COntext: https://www.twitch.tv/fdaciuk/video/1425277176
+
+walter@rwconsultoria.com.br
+
+
+
+RESOLVIDO
+-Colocar Formik nos form
+-Ajustar card : edit/insert - Entregador/Garçon
+-Fazer GET no Dashboard  (Coloquei Entregador )
+-Usuario ajustar : Edit ***ajustar campo de NIVEL
+-Ajustar a mascara nos campos
+
+22/09
+-Cadastro do produto 
+-Imagens: produto, company
+-Cadastro de Cliente
+CAMINHO IMAGENS:
+http://bkend.rwconsultoria.com.br:7171/rwfood/company/1/product/moto.jpg
+http://bkend.rwconsultoria.com.br:7171/rwfood/company/1/product/amor.png
+http://bkend.rwconsultoria.com.br:7171/rwfood/company/1/product/amor2.png
+
+http://bkend.rwconsultoria.com.br:7171/rwfood/company/PizzaBrazuca.png
+http://bkend.rwconsultoria.com.br:7171/rwfood/company/semfoto.png
+
+
+
+
+
+Select formik
+https://www.youtube.com/watch?v=gWSw_50TZmA
+
+validacao ao clicar
+https://formik.org/docs/tutorial#a-simple-newsletter-signup-form

@@ -21,25 +21,17 @@ export default function Dashboard() {
     const navigate = useNavigate()
     const globalContext = useContext(GlobalContext)
     const [autorized, setAutorized] = useState(false)
-    const [messages, setMessage] = useState([])
-
-    // SignalRContext.useSignalREffect(
-    //     'ReceiveMessage', // Your Event Key
-    //     (message) => {
-    //         setMessage([...messages, message])
-    //         console.log('[useSignalREffect]', JSON.stringify(message))
-    //     }
-    // )
 
     useEffect(() => {
         const tokenJWT = getToken()
         //console.log('Dashboard-tokenJWT', tokenJWT)
 
-        if (tokenJWT !== null) {
+        if (tokenJWT !== null && tokenJWT !== '' && globalContext?.user?.id !== 0) {
             getCategoriaAll()
             getEntregadorAll()
             getProductAll()
             setAutorized(true)
+            console.log('Dashboard-setAutorized')
 
             toast.success(`Seja Bem-vido(a) ${globalContext?.user.surname}.`)
         } else {
@@ -50,6 +42,7 @@ export default function Dashboard() {
 
     const getCategoriaAll = async () => {
         var response = await categoryService.getAllCategory(1)
+        //console.log('[getCategoriaAll]: ' + JSON.stringify(response))
         globalContext?.setCategory(response)
     }
 

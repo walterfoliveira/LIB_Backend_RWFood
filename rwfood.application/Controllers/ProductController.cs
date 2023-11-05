@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using rwfood.application.Hubs;
 using rwfood.domain.Dto;
 using rwfood.domain.Interfaces.Services;
 
@@ -18,6 +20,7 @@ namespace rwfood.application.Controllers
         {
             this.classeService = _classeService;
             this.configuration = _configuration;
+
             this.nameController = System.Reflection.MethodInfo.GetCurrentMethod().DeclaringType.Name;
         }
 
@@ -27,7 +30,7 @@ namespace rwfood.application.Controllers
         {
             return await Task.Run(() =>
             {
-                var response = this.classeService.GetProdutoCategory(idCompany);
+                var response = this.classeService.GetProdutoCategory(idCompany);               
                 return new ActionResult<IEnumerable<ProductCustomDto>>(response);
             });
         }

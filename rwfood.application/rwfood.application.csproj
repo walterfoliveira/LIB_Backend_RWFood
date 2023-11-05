@@ -29,4 +29,8 @@
     <ProjectReference Include="..\rwfood.service\rwfood.service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hubs\orders\" />
+  </ItemGroup>
+
 </Project>

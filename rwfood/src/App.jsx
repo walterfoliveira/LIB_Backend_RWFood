@@ -25,20 +25,13 @@ https://reactrouter.com/en/main/hooks/use-params
 */
 
 function App() {
-    const [logged, setLogged] = useState(true)
-
-    useEffect(() => {
-        var token = getToken()
-        if (token !== null) {
-            setLogged(true)
-            //console.log('[getAuthenticationToken]: ' + token)
-        }
-    }, [])
+    //https://blog.logrocket.com/using-hooks-react-router/
 
     return (
         <Router>
             <Routes>
-                <Route path="/" element={logged ? <Layout /> : <Login />}>
+                {/* <Route path="/" element={logged ? <Layout /> : <Login />}> */}
+                <Route path="/" element={<Layout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="products" element={<Products />} />
                     <Route path="company" element={<Company />} />
@@ -61,6 +54,10 @@ function App() {
 export default App
 {
     /* 
+
+https://blog.logrocket.com/using-hooks-react-router/
+
+
 https://reactrouter.com/en/main/hooks/use-navigate
 <Route path="contacts/:id" element={<Contact />} />
 <Route

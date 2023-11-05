@@ -48,6 +48,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         logout: () => {
           setUser(initialValues);
           clearStorage();
+
         }
       }}>{children}
     </GlobalContext.Provider>

@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
-import { FaRegAddressCard } from 'react-icons/fa'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { DASHBOARD_SIDEBAR_LINKS, DASHBOARD_SIDEBAR_BOTTOM_LINKS } from '../../lib/constants'
