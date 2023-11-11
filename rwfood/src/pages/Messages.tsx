@@ -20,19 +20,13 @@ const Messages = () => {
 
   useEffect(() => {
     const connection = new HubConnectionBuilder()
-      //.withUrl('https://localhost:44389/ChatHub', {
-      .withUrl('https://localhost:7113/UserClient', {
-        //.withUrl('http://bkend.rwconsultoria.com.br:20021/UserClient', {
+      //.withUrl('https://localhost:7113/UserClient', {
+      .withUrl('http://bkend.rwconsultoria.com.br:20021/api/v1/UserClient', {
         skipNegotiation: true,
         transport: HttpTransportType.WebSockets,
       })
       .withAutomaticReconnect()
       .build();
-
-    // connection.Closed += async (error) => {
-    //   await Delay(new Random().Next(0, 5) * 1000);
-    //   await connection.StartAsync();
-    // };
 
     connection
       .start()

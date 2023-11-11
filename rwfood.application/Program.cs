@@ -143,17 +143,28 @@ builder.Logging.AddConsole();
 
 builder.Services.AddSignalR();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("ClientPermission", política =>
-    {
-        política.AllowAnyHeader()
-            .AllowAnyMethod()
-            //.WithOrigins()
-            .WithOrigins("http://localhost:3000", "http://rwfood.rwconsultoria.com.br:7071")
-            .AllowCredentials();
-    });
-});
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("ClientPermission", política =>
+//    {
+//        política.AllowAnyHeader()
+//            .AllowAnyMethod()
+//            //.WithOrigins()
+//            .WithOrigins("http://localhost:3000", "http://rwfood.rwconsultoria.com.br:7071")
+//            .AllowCredentials();
+//    });
+//});
+
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+            builder =>
+            {
+                builder.AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .SetIsOriginAllowed((host) => true)
+                       .AllowCredentials();
+            }));
+
+
 
 //builder.Services.AddCors(options =>
 //{
@@ -215,9 +226,13 @@ app.UseRouting();
 //    .AllowAnyMethod()
 //    .AllowAnyHeader());
 
-app.UseCors("ClientPermission");
+//app.UseCors("ClientPermission");
 //app.UseCors("homPol");
 //app.UseCors("prdPol");
+
+app.UseCors("CorsPolicy");
+
+
 
 app.UseAuthentication();
 app.UseAuthorization();

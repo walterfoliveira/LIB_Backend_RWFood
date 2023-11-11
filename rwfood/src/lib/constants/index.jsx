@@ -14,8 +14,8 @@ import {
     HiOutlineClipboardList
 } from 'react-icons/hi'
 
-//export const URL_BASE = 'http://bkend.rwconsultoria.com.br:20021/api/v1/api/'
-export const URL_BASE = 'https://localhost:7113/api/'
+export const URL_BASE = 'http://bkend.rwconsultoria.com.br:20021/api/v1/api/'
+//export const URL_BASE = 'https://localhost:7113/api/'
 
 export const DASHBOARD_SIDEBAR_LINKS = [
     {
